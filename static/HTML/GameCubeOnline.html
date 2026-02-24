@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GameCubeOnline</title>
+    <link rel="icon" href="/static/Images/gamecubecontrollerfavicon.png" type="image/png">
+    <link rel="stylesheet" href="/static/CSS/GameCubeOnline.css">
+</head>
+<body>  
+    <!--<span id="PostDebug"></span>-->
+    <div id="WholePage"> 
+        
+        <div id="GameCubeControllerVideoWrapper"> 
+            <img id = "VideoFrames" /> <!-- img is vetter than svg image for streaming--> 
+            <svg id="GameCubeControllerPanel"  viewBox ="0 0 873 150"> 
+                <rect id= "GameCubeControlPanelRect"                width="830" height="50" x="35"  y="0" rx="10" ry="10" fill="indigo" style="stroke-width:5;stroke:indigo"  />
+                <rect id= "VolumeSliderRect"                        width="210" height="20" x="80"  y="17" rx="10" ry="10" fill="dimgray" style="stroke-width:4;stroke:rgb(87, 87, 87)"  />
+                <circle id = "VolumeSliderCircle"                                     r="8" cx="90" cy="27" fill=" gainsboro" />
+                <rect  id="VolumeButton"                            width="25" height="25"  x="45"   y="15" rx="6" ry="6" fill="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"/>
+                <rect  id="WindowSizeModifierButton"                width="25" height="25"  x="825" y="15" rx="6" ry="6" fill="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"/>
+                <image id="VolumeButtonPic" href="/static/Images/volumeOff.png"                                     x="47"   y="17" height="22" width="22"/>  
+                <image id="WindowSizeModifierButtonPic" href="/static/Images/windowMaximize.png"                             x="827" y="17" height="20" width="20"/>
+                <rect id = "SwitchRect"                               width = "70" height="10"  x="335" y="22"  rx="4" ry="4" fill="gray" style="stroke-width:8;stroke:rgb(87, 87, 87)"/>
+                <circle id= "SwitchCircle3"                                             r="6"   cx="398" cy="27" fill ="gray"/>
+                <circle id= "SwitchCircle2"                                             r="6"   cx="370" cy="27" fill ="gray"/>
+                <circle id= "SwitchCircle1"                                             r="6"   cx="342" cy="27" fill ="gray"/> 
+                <rect id = "ErrorRect"                                width = "810" height="30" x="45" y="10" rx="12" ry="12"fill="lightcoral"style="stroke-width:8;stroke: black" visibility="hidden" /> 
+
+            </svg> 
+        </div>    
+       
+        <div id="GameCubeControllerWrapper" >
+            <svg id="GameCubeController" viewBox =" 0 0 1100 1100">
+                
+                <circle id= "LeftTrigger"           r="55" cx="320" cy="360" fill="gray" opacity="0.8" visibility="hidden"/>
+                <circle id= "RightTrigger"          r="55" cx="650" cy="360" fill="gray" opacity="0.8" visibility="hidden"/>
+
+                <image id="GameCubeControllerImage" height="1000" width="1000" href="/static/Images/gamecubecontroller.png" /> 
+                
+                <rect id= "DPadUp"                  width="24" height="24" x="401" y="550" rx="3" ry="3" fill="gray" opacity="0.8"  visibility="hidden"/>
+                <rect id= "DPadDown"                width="24" height="24" x="401" y="598" rx="3" ry="3" fill="gray" opacity="0.8" visibility="hidden"/>
+                <rect id= "DPadLeft"                width="24" height="24" x="378" y="574" rx="2" ry="2" fill="gray" opacity="0.8" visibility="hidden"/>
+                <rect id= "DPadRight"               width="24" height="24" x="425" y="574" rx="2" ry="2" fill="gray" opacity="0.8" visibility="hidden"/>
+
+                
+                <rect id= "XButton"                 width="25" height="48" x="690" y="443" rx="13" ry="13" fill="gray" opacity="0.8" visibility="hidden"/>
+                <rect id= "YButton"                 width="48" height="25" x="616" y="389" rx="13" ry="13" fill="gray" opacity="0.8" visibility="hidden"/>
+                <ellipse id= "ZButton"              rx="27" ry="7" cx="650" cy="345" fill="gray" opacity="0.8" visibility="hidden"  transform="rotate(29 640 355)" />
+                
+
+                <circle id= "AButton"               r="30" cx="640" cy="467" fill="gray" opacity="0.8" visibility="hidden"/>
+                <circle id= "BButton"               r="15" cx="588" cy="509" fill="gray" opacity="0.8" visibility="hidden"/>
+                <circle id= "StartButton"           r="12" cx="488" cy="467" fill="gray" opacity="0.8" visibility="hidden"/>
+
+                <circle id= "MainStick"             r="30" cx="336" cy="467" data-max-cx= "351" data-min-cx= "321"  data-max-cy="482" data-min-cy="452" fill="gray" opacity="0.8" visibility="hidden"/>
+                <circle id= "CStick"                r="13" cx="565" cy="581" data-max-cx= "580" data-min-cx= "550" data-max-cy="596" data-min-cy="566" fill="gray" opacity="0.8" visibility="hidden"/>
+                
+                <image class = "overlay"            height="1000" width="1000" href="/static/Images/gamecubecontrolleroverlay.png"  visibility="hidden" filter ="url(#BorderOverlay)"/> 
+
+                <rect id= "DPadUpKey"               class = "overlay" width="45" height="45"    x="65"  y="715" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "DPadDownKey"             class = "overlay" width="45" height="45"    x="65"  y="805" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "DPadLeftKey"             class = "overlay" width="45" height="45"    x="20"  y="760" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "DPadRightKey"            class = "overlay" width="45" height="45"    x="110" y="760" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "MainStickUpKey"          class = "overlay" width="45" height="45"    x="65"  y="500" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "MainStickDownKey"        class = "overlay" width="45" height="45"    x="65"  y="590" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "MainStickLeftKey"        class = "overlay" width="45" height="45"    x="20"  y="545" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "MainStickRightKey"       class = "overlay" width="45" height="45"    x="110" y="545" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "CStickUpKey"             class = "overlay" width="45" height="45"    x="880" y="715" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "CStickDownKey"           class = "overlay" width="45" height="45"    x="880" y="805" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "CStickLeftKey"           class = "overlay" width="45" height="45"    x="835" y="760" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "CStickRightKey"          class = "overlay" width="45" height="45"    x="925" y="760" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "LeftTriggerKey"          class = "overlay" width="45" height="45"    x="110" y="215" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "RightTriggerKey"         class = "overlay" width="45" height="45"    x="835" y="215" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "ZButtonKey"              class = "overlay" width="45" height="45"    x="835" y="265" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "YButtonKey"              class = "overlay" width="45" height="45"    x="835" y="320" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "XButtonKey"              class = "overlay" width="45" height="45"    x="835" y="445" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "AButtonKey"              class = "overlay" width="45" height="45"    x="835" y="550" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "BButtonKey"              class = "overlay" width="45" height="45"    x="835" y="655" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                <rect id= "StartButtonKey"          class = "overlay" width="45" height="45"    x="470" y="230" rx="6" ry="6"   fill ="gainsboro" style="stroke-width:4;stroke:rgb(87, 87, 87)"     visibility="hidden"/>
+                
+                <rect id= "OverlayToggleRect"                         width="45" height="20"    x="435" y="415" rx="10"ry="10"  fill ="gray"      style="stroke-width:4;stroke:rgb(87, 87, 87)"/> 
+                <circle id ="OverlayToggleCircle"                                   r="8"       cx="445"cy="425"                fill="gainsboro"/>  
+                
+                <circle id ="ResetCircle"                                           r="10"      cx="520"cy="426"                fill="darkred"    style="stroke-width:4;stroke:rgb(87, 87, 87)"/>   
+
+                
+            </svg> 
+        </div> 
+    </div>
+
+    <script type="module" src="/static/Javascript/GameCubeOnline.js"> </script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+#WholePage{ 
+    display: grid; 
+    grid-template-columns: 1fr 1fr;  
+    gap:2.5%;
+}
+#GameCubeControllerWrapper{ 
+    grid-column: 2;  
+}  
+
+#GameCubeControllerVideoWrapper{ 
+    display:grid;
+    grid-template-rows: 4fr 1fr ; 
+    gap:1.5% 
+}
+#GameCubeControllerPanel{ 
+    width:100%; 
+    grid-row: 2;
+}
+#VideoFrames{  
+    grid-row: 1;
+    box-shadow: 25px 0px 10px rgba(0, 0, 0, 0.2); /*x-shift, y-shift, blur*/
+    border-radius: 25px;  
+    border: 15px solid indigo ; 
+    width: 100%; 
+    height:100%
+}
+html, body {
+  overflow: hidden; /* Hide and disable scrollbar*/
+  background-color: rgb(118, 108, 128);
+} 
+
+
+
+
