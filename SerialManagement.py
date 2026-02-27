@@ -1,12 +1,29 @@
 import serial  
 import serial.tools.list_ports
 import time
+import queue 
+import threading
+import asyncio
 
 BAUDRATE=9600 
 IDN_COMMAND='#' 
 IDN="GCN_ADAPTOR" 
 TIMEOUT=1 
 WRITE_TIMEOUT=1
+class SerialWrapper: 
+    def __init__(self, aSerialConnection: serial.Serial): 
+        self.mySerialConnection=aSerialConnection 
+        self.mySerialQueue =queue.Queue(maxsize=10)   
+        theThread = threading.Thread(target=self.startWrite, daemon=True)
+        theThread.start()
+
+    def put(self, aBytes):  
+        if(self.mySerialQueue.full()):  self.mySerialQueue.get()
+        self.mySerialQueue.put(aBytes) 
+
+    def startWrite(self): 
+        while True:
+            self.mySerialConnection.write(self.mySerialQueue.get())
 
 class SerialManager: 
     def __init__(self): 
@@ -34,8 +51,8 @@ class SerialManager:
                 try: theSerialConnection.write(IDN_COMMAND.encode("utf-8"))   
                 except: continue
                 theResponse = theSerialConnection.readline().decode('utf-8').strip() 
-                if theResponse==IDN: self.mySerialConnections.append(theSerialConnection) 
-                    
+                if theResponse==IDN: self.mySerialConnections.append(SerialWrapper(theSerialConnection)) 
+
     def getSerialConnectionsAmt(self): 
         return len(self.mySerialConnections) 
     

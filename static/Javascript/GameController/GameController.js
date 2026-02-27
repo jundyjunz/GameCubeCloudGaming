@@ -1,47 +1,68 @@
 import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
 import { InteractiveHtmlElementSingleton } from "/static/Javascript/InteractiveHtmlElement/InteractiveHtmlElementSingleton.js"; 
-import { MultiToggle } from "/static/Javascript/InteractiveHtmlElement/MultiToggle.js";
-import { ErrorBar } from "/static/Javascript/InteractiveHtmlElement/ErrorBar.js";
 import { BuilderWarning } from "/static/Javascript/BuilderWarning.js";
+
 
 export class GameController{  
     #myGameControllerPacketDispatch;  
-    #myInterval; 
     #myController;   
-    #myControllerCount; 
-    #mySerialConnectionsRoute; 
-    #myPostPacketRoute; 
-
+    #myMaxControllerCount; 
+    #myWebSocket; 
+    #myEncoder;
+    #myIsSerialConnectionRouteSet;
     constructor(aGameControllerDispatch){
         this.#myGameControllerPacketDispatch= aGameControllerDispatch
-        this.#myInterval=null;  
         this.#myController=null;
-        this.#myControllerCount=0;   
-        this.#mySerialConnectionsRoute=null; 
-        this.#myPostPacketRoute=null;
-    }   
-    setSerialConnectionsRoute(aSerialConnectionsRoute){ 
-        this.#mySerialConnectionsRoute=aSerialConnectionsRoute; 
-        return this; 
-
-    }
-
-    setPostPacketRoute(aPostPacketRoute){ 
-        this.#myPostPacketRoute=aPostPacketRoute; 
-        return this;
-    }
-
-    setInit(aInterval){  
-        
-        (new BuilderWarning(!this.#mySerialConnectionsRoute)).setRequired(this.setSerialConnectionsRoute).enforce();
-        (new BuilderWarning(!this.#myPostPacketRoute)).setRequired(this.setPostPacketRoute).enforce();
-
-        this.#myInterval=aInterval;  
-        RESTapiHelpers.RESTGet(this.#mySerialConnectionsRoute,(aData)=>{this.#myControllerCount=aData.count});
+        this.#myWebSocket=null; 
+        this.#myEncoder = new TextEncoder(); 
+        this.#myIsSerialConnectionRouteSet=false;
         this.#listenForKeyDown(); 
         this.#listenForKeyUp();
-        this.#publishPacket(); 
+    }      
+    setInit(){ 
+        (new BuilderWarning(this.#myIsSerialConnectionRouteSet==false)).setRequired(this.setSerialConnectionsRoute).enforce();
         return this;
+    }
+    setSerialConnectionsRoute=(aSerialConnectionsRoute)=>{ 
+        RESTapiHelpers.RESTGet(aSerialConnectionsRoute,(aData)=>{this.#myMaxControllerCount=aData.count});
+        this.#myIsSerialConnectionRouteSet=true; 
+        return this;
+    }
+    getMaxControllerCount=()=>this.#myMaxControllerCount;
+    
+    // aStall cycle is in milliseconds
+    // promises hold results of an async function --> microtask queue 
+    // stall basically throws a settimeout to the microtask queue.
+    // https://www.w3schools.com/jsref/met_win_settimeout.asp --> settimeout allows a function to be executed once the stallcycle has finished. 
+    // https://www.w3schools.com/js/js_promise.asp --> (resolve, reject) a function to execute when the resolve is sucessful and reject vice versa.  
+    // example:
+    // const result = await new Promise(resolve => resolve(5));
+    // console.log(result); // 5 
+    // --> resolve marks the promise as fulfilled, and stores the value 
+    // --> reject marks the promise as unfulfilled and the error reason is storred instead
+    /*
+        typically do something like this: 
+        new Promise((aResolve, aReject)=>{ 
+            if(x==0)aResolve(x);  
+            else aReject(x);
+        }); 
+
+    */
+    async #stall(aStallCycle){await new Promise((aResolve) => setTimeout(aResolve, aStallCycle));}
+    killWebSocket=()=>{if(this.#myWebSocket) this.#myWebSocket.close(1000, `Closed Connection to Controller #${this.#myController}`);} 
+    async sendBytesFunc(){  
+        while(this.#myWebSocket.readyState === WebSocket.OPEN){
+            let thePacket=this.#myGameControllerPacketDispatch.getPacket();
+            if(thePacket.length==0){ await this.#stall(8); continue;}
+            this.#myWebSocket.send(this.#myEncoder.encode(thePacket));  
+            await this.#stall(8) // await required here or microtask queue never finishes
+        }
+    }
+    
+    updateWebSocket(aWebSocketRoute){
+        this.killWebSocket();
+        this.#myWebSocket = new WebSocket(aWebSocketRoute);  
+        this.#myWebSocket.onopen=async()=>{await this.sendBytesFunc();};
     }
 
     #listenForKeyDown(){document.addEventListener("keydown",(aEvent)=>{this.#ListenForKeyPressEvent(aEvent.code, true, "visible");})} 
@@ -76,27 +97,5 @@ export class GameController{
         if(theNewXCoord<=theMaxXCoord && theNewXCoord>= theMinXCoord)theKeyStateElement.setAttribute("cx", theNewXCoord ); 
         if(theNewYCoord<=theMaxYCoord && theNewYCoord>= theMinYCoord)theKeyStateElement.setAttribute("cy", theNewYCoord); 
     }
-
- 
-    #publishPacket(){  
-        setInterval(()=>{ 
-            let thePacket=this.#myGameControllerPacketDispatch.getPacket();
-            if(thePacket.length==0)return;
-            this.#updateControllerId();  
-            let theErrorBar=InteractiveHtmlElementSingleton.getElementByType(ErrorBar);
-            if(this.#myController==null) theErrorBar.enableError(`There are currently ${this.#myControllerCount} connected controllers! \n Please select a controller!`); 
-            if(this.#myController>=this.#myControllerCount) theErrorBar.enableError(`There are currently ${this.#myControllerCount} connected controllers! \n You are playing on controller #${this.#myController+1} which does not exist!`);
-            theErrorBar.disableError();
-            this.#postPacket(thePacket); 
-            //document.getElementById("PostDebug").textContent=thePacket;
-        }, this.#myInterval); 
-    } 
-
-    #updateControllerId=()=>{this.#myController = InteractiveHtmlElementSingleton.getElementByType(MultiToggle).getToggleState();}
-
-    #postPacket(aPacket){ 
-        if(!this.#myPostPacketRoute) throw new Error("A Route for Posting Serial Data has Not yet Been Initialized! please use setPostPacketRoute() on your GameController Object!");
-        RESTapiHelpers.RESTPost(`${this.#myPostPacketRoute}${this.#myController}`, { myData: aPacket }); 
-    }
-    
+  
 }   

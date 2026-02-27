@@ -4,16 +4,21 @@ class Capture:
     def __init__(self, aDefaultPacket):
         self.mySubscribers={}
         self.myFrameQueues=[]
-        self.myDefaultPacket=aDefaultPacket
+        self.myDefaultPacket=aDefaultPacket 
+        self.myCurrentClientId=0
 
-    def subscribe(self, aClientId):  
+    def subscribe(self):  
         self.myFrameQueues.append(queue.Queue(maxsize=10))
-        self.mySubscribers[aClientId]=len(self.myFrameQueues)-1
+        self.mySubscribers[self.myCurrentClientId]=len(self.myFrameQueues)-1 
+        theReturnClientId=self.myCurrentClientId 
+        self.myCurrentClientId+=1
+        return theReturnClientId
 
     def unsubscribe(self, aClientId):  
         del self.myFrameQueues[-1] 
         del self.mySubscribers[aClientId]
         self.reassignSubscriberQueues()
+        return aClientId
 
     def reassignSubscriberQueues(self):
         theIndex=0 

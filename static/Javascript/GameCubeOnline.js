@@ -7,7 +7,9 @@ import { ErrorBar } from "/static/Javascript/InteractiveHtmlElement/ErrorBar.js"
 import { SwitchButton } from "/static/Javascript/InteractiveHtmlElement/SwitchButton.js";
 
 import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
-import { VideoPlayer } from "/static/Javascript/VideoPlayer.js";
+import { AudioPlayer } from "/static/Javascript/MediaPlayer/AudioPlayer.js";
+import { VideoPlayer } from "/static/Javascript/MediaPlayer/VideoPlayer.js";
+
 
 import { GameControllerPacket } from "/static/Javascript/GameController/GameControllerPacket.js";
 import { GamecubeControllerPacketDispatch } from "/static/Javascript/GameController/GameControllerPacketDispatch.js";  
@@ -16,22 +18,28 @@ import { GameController } from "/static/Javascript/GameController/GameController
 document.addEventListener( "DOMContentLoaded", (event)=>{ 
 
     // any objects that have a setinit function for the builder pattern, those MUST go last in the builder chain.
+   
+
     let theVideoFramesId ="VideoFrames";
     let theVolumeButtonId="VolumeButton";
     let theWholePageId="WholePage"; 
     let theGameCubeControllerVideoWrapperId ="GameCubeControllerVideoWrapper"; 
-    let theVideoPlayer; 
-
-
-    RESTapiHelpers.RESTGet("/subscribe", (aData)=>{ 
-        theVideoPlayer = (new VideoPlayer(`/frame_data/${aData.clientId}`, theVideoFramesId)) 
-                        .setWebSocketOpenMessage("Audio is Now Connected :)") 
-                        .setWebSocketCloseMessage("Audio has Now Closed :(") 
+    let theAudioPlayer;  
+    RESTapiHelpers.RESTGet("/subscribe_audio", (aData)=>{ 
+        console.log(`AudioPlayer Subscribed at: ${aData.audioClientId}`);
+        theAudioPlayer = (new AudioPlayer(`/audio_data/${aData.audioClientId}`)) 
                         .setInitialVolume(0)
                         .setAudioTimeBuffer(0.1)
-                        .setAudioPlayer(`/audio/${aData.clientId}`, "/audio_metadata")
-                        .setInit(); 
-    });
+                        .setPlayer( "/audio_metadata") 
+                        .setInit();});  
+
+    RESTapiHelpers.RESTGet("/subscribe_video", (aData)=>{ 
+        console.log(`VideoPlayer Subscribed at: ${aData.videoClientId}`); 
+        (new VideoPlayer(`/frame_data/${aData.videoClientId}`)) 
+        .setCanvasElem(theVideoFramesId) 
+        .setPlayer() 
+        .setInit();});
+
 
     
     let theDispatchMap = new Map([
@@ -68,7 +76,9 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
                                             .setTextSettings("tahoma", 8, "bold") 
                                             .setOverlayClass("overlay") 
                                             .setInit();
-
+    let theController = new GameController(theGameControllerPacketDispatch) 
+                            .setSerialConnectionsRoute("/serial_connections_ct") 
+                            .setInit();
     
     let theSetOverlays=(aState)=>{document.querySelectorAll(".overlay").forEach((aElement)=>{aElement.setAttribute("visibility",aState);});}
     let theSetFullScreen=()=>{ 
@@ -82,44 +92,26 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
         document.getElementById(theGameCubeControllerVideoWrapperId).style.display="grid";
         document.exitFullscreen();};
     let theTurnOnAudio=()=>{ 
-        theVideoPlayer.turnOnAudioPlayer();
+        theAudioPlayer.turnOnAudioPlayer();
         let theSlider=InteractiveHtmlElementSingleton.getElementByType(Slider) 
         if(theSlider.getSliderRatio()!=0)return; 
         theSlider.setSliderPosition100(); 
-        theVideoPlayer.setVolume(1);}; 
+        theAudioPlayer.setVolume(1);}; 
     let theTurnOffAudio=()=>{ 
-        theVideoPlayer.turnOffAudioPlayer();
+        theAudioPlayer.turnOffAudioPlayer();
         InteractiveHtmlElementSingleton.getElementByType(Slider).setSliderPosition0(); 
-        theVideoPlayer.setVolume(0);}; 
+        theAudioPlayer.setVolume(0);}; 
     let theChangeButtonBasedOnVolume=(aRatio)=>{ 
-        theVideoPlayer.setVolume(aRatio);
-        if(aRatio==0){ 
-            InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedTrue();
-            theVideoPlayer.turnOffAudioPlayer();
-        } 
-        else{ 
-            InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedFalse(); 
-            theVideoPlayer.turnOnAudioPlayer();
-        }};
+        theAudioPlayer.setVolume(aRatio);
+        if(aRatio==0){InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedTrue(); theAudioPlayer.turnOffAudioPlayer();} 
+        else{InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedFalse(); theAudioPlayer.turnOnAudioPlayer();}}; 
+    let theSetController = (aControllerID)=>{ 
+        let theMaxControllerCount=theController.getMaxControllerCount();
+        if(aControllerID==null) {theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, ()=>{theController.killWebSocket();}); return;  }
+        if(aControllerID>=theMaxControllerCount){theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID+1} which does not exist!`,()=>{theController.killWebSocket();}); return;}
+        theErrorBar.disableError();
+        theController.updateWebSocket(`/serial_post/${aControllerID}`);};
 
-    InteractiveHtmlElementSingleton.registerElement(
-    (new MultiToggle()) 
-    .setButton((new SwitchButton("SwitchCircle1")) 
-    .setColorOnMouseOut("gray") 
-    .setColorOnMouseOver("lightgreen") 
-    .setInit()) //togglestate for each button should be initialized
-    .setButton((new SwitchButton("SwitchCircle2")) 
-    .setColorOnMouseOut("gray") 
-    .setColorOnMouseOver("lightgreen") 
-    .setInit())
-    .setButton((new SwitchButton("SwitchCircle3")) 
-    .setColorOnMouseOut("gray") 
-    .setColorOnMouseOver("lightgreen")
-    .setInit()) 
-    .setAlias("MultiToggle")
-    .setInit());
-    
-   
     InteractiveHtmlElementSingleton.registerElement( 
     (new Toggle("OverlayToggleCircle"))
     .setColorOnMouseOut("gainsboro") 
@@ -137,14 +129,14 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     .setClickFunc(()=>{theGameControllerPacketDispatch.revertToDefaultDispatchMap();}) 
     .setAlias("ResetButton")
     .setInit());
-    
-    InteractiveHtmlElementSingleton.registerElement(
-    (new ErrorBar("ErrorRect")) 
+
+    let theErrorBar= (new ErrorBar("ErrorRect")) 
     .setColorOnMouseOut("lightcoral") 
     .setColorOnMouseOver("red")
     .setTextSettings("Trebuchet MS", 15, "bold", true) 
     .setAlias("ErrorBar")
-    .setInit());
+    .setInit();
+    InteractiveHtmlElementSingleton.registerElement(theErrorBar);
     
     InteractiveHtmlElementSingleton.registerElement(
     (new SwitchButton("WindowSizeModifierButton")) 
@@ -177,10 +169,24 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     .setButtonWhenSwitchedTrue(()=>{theTurnOffAudio();}, "static/Images/volumeOff.png") 
     .setAlias(theVolumeButtonId)
     .setInit());
+
+    InteractiveHtmlElementSingleton.registerElement(
+    (new MultiToggle()) 
+    .setButton((new SwitchButton("SwitchCircle1")) 
+    .setColorOnMouseOut("gray") 
+    .setColorOnMouseOver("lightgreen") 
+    .setInit()) //togglestate for each button should be initialized
+    .setButton((new SwitchButton("SwitchCircle2")) 
+    .setColorOnMouseOut("gray") 
+    .setColorOnMouseOver("lightgreen") 
+    .setInit())
+    .setButton((new SwitchButton("SwitchCircle3")) 
+    .setColorOnMouseOut("gray") 
+    .setColorOnMouseOver("lightgreen")
+    .setInit())  
+    .setFunc((aControllerID)=>{ theSetController(aControllerID);})
+    .setAlias("MultiToggle")
+    .setInit());
     
-    new GameController(theGameControllerPacketDispatch)
-    .setSerialConnectionsRoute("/serial_connections_ct")
-    .setPostPacketRoute("/serial_post/")
-    .setInit(35)
 });
 

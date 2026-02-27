@@ -12,22 +12,30 @@ from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager 
 from pydantic import BaseModel
 import uvicorn  
-from SerialManagement import SerialManager
+from SerialManagement import SerialManager 
+from Capture import Capture
 from HDMICapture import HDMICapture 
 from SoundCapture import SoundCapture   
 from SoundCapture import RulesetGuermox
-from CaptureCollection import CaptureCollection
 import asyncio 
 from starlette.websockets import WebSocketDisconnect
 
-class SerialData(BaseModel): 
-    myData:str 
-
 
 theSerialManager=SerialManager()
-theHDMICapture = HDMICapture(0, 515, 390, 45)  
+theHDMICapture = HDMICapture(0, 515, 390, 100) 
 theSoundCapture = SoundCapture(2, 4096, "float32", RulesetGuermox())
-theCaptureCollection= CaptureCollection([theHDMICapture, theSoundCapture])
+
+async def postStreamingData(aClientId:int, aWebSocket:WebSocket, aCapture:Capture, aCaptureRate : float): 
+    try:
+        await aWebSocket.accept() # accepting the handshake
+        while True:  
+            theData=aCapture.getFrame(aClientId)
+            if(theData):await aWebSocket.send_bytes(theData) # formatting the bytes in the protocol format
+            else: await asyncio.sleep(aCaptureRate) # since the function is async, wed like a little pause in between packets so they dont play in parallel
+    except WebSocketDisconnect:  
+        aCapture.unsubscribe(aClientId)
+        print (f"Client: {aClientId} Unsubscribed From {aCapture.__class__.__name__}.") 
+    except Exception as aError: print("The following unknown error has occured", aError)
 
 app = FastAPI()
 
@@ -38,11 +46,15 @@ app.mount("/static", StaticFiles(directory="static"), name="static" )
 async def root():  
     return FileResponse("static/HTML/GameCubeOnline.html") 
 
-@app.get("/subscribe")
-async def subscribe(): 
-    theClientId=theCaptureCollection.subscribeAll() 
-    return {"clientId": theClientId}
+@app.get("/subscribe_audio")
+async def subscribeAudio(): 
+    theClientId=theSoundCapture.subscribe() 
+    return {"audioClientId": theClientId}
 
+@app.get("/subscribe_video")
+async def subscribeVideo(): 
+    theClientId=theHDMICapture.subscribe() 
+    return {"videoClientId": theClientId}
 
 @app.get("/audio_metadata") 
 async def getSampleRate(): 
@@ -52,37 +64,44 @@ async def getSampleRate():
 async def getSerialConnectionsCount(): 
     return {"count":theSerialManager.getSerialConnectionsAmt()}
 
-@app.get("/frame_data/{aClientId}") 
-async def getFrameData(aClientId:int):  
-    #StreamingResponse Accepts a generator
-   
-    return StreamingResponse( 
-        theHDMICapture.getFrame(aClientId),  
-        media_type="multipart/x-mixed-replace; boundary=frame", # needs to know its multpart such that it can coninously stream
-        headers={ # TLDR: the data expires on use and is not stored anywhere. 
-            "Cache-Control": "no-cache, no-store, must-revalidate", # no cache --> must revalidate with server before storing, no store--> dont actually cache, must revaildate-->revalidate the data before use
-            "Pragma": "no-cache", # for legacy http support 
-            "Expires": "0", # makes stale immediately (how long the data lasts before dying) 
-        }) 
 
-@app.post("/serial_post/{aId}")
-async def postToSerial(aId:int, aData :SerialData):  
+
+@app.websocket("/serial_post/{aId}")
+async def postToSerial(aId:int,aWebSocket: WebSocket): 
+    await aWebSocket.accept() 
+    try: 
+        while True:  
+            theBytes=await aWebSocket.receive_bytes()
+            theSerialManager[aId].put(theBytes)
+            print(f"Keys {theBytes.decode('utf-8')} Were Pressed!")
+    except WebSocketDisconnect: print(f"Connection To Controller {aId} Disconnected.")
+    except Exception as aError: print("The following unknown error has occured", aError)
+
     # https://stackoverflow.com/questions/49005651/how-does-asyncio-actually-work 
     # Think of async as a generator 
     # think of await as a yield statement 
     
-    theSerialManager[aId].write(aData.myData.encode("utf-8")) 
-    '''
-    await asyncio.to_thread( 
-        theSerialManager[aId].write,
-        aData.myData.encode("utf-8")
-    ) 
-    '''
      
     return {"status": "ok"}  
 
-#https://blog.postman.com/how-do-websockets-work/ 
-''' 
+@app.websocket("/frame_data/{aClientId}") 
+async def postFrameData(aClientId:int, aWebSocket:WebSocket):  
+    await postStreamingData(aClientId, aWebSocket, theHDMICapture, 1/60)
+    #StreamingResponse Accepts a generator 
+    '''
+        async functions in python are known as couroutines (functions that can pause their execution) 
+        Async functions are put into an event loop 
+        when an await keyword is encountered it can do one of 2 things 
+            immediately finish and continue execution in the current function 
+            pause the function and jump to the next thing in the event loop 
+        so here, if the await for the event loop stalls too long, it will go on with the next thing in the event loop
+
+    '''
+@app.websocket("/audio_data/{aClientId}") 
+async def postAudio(aClientId: int ,aWebSocket:WebSocket): 
+    await postStreamingData(aClientId, aWebSocket, theSoundCapture, 0.001)
+    #https://blog.postman.com/how-do-websockets-work/ 
+    ''' 
     Websockets are a persistent bidirectional communication between server and client. 
     
     Unlike HTTP which is only initiated on request. 
@@ -110,20 +129,9 @@ async def postToSerial(aId:int, aData :SerialData):
         Payload length: Size of the message data
 
         Payload data: The actual message content"
-'''
-@app.websocket("/audio/{aClientId}") 
-async def postAudio(aClientId: int ,aWebSocket:WebSocket): 
-    try:
-        await aWebSocket.accept() # accepting the handshake
-        while True:  
-            theData=theSoundCapture.getFrame(aClientId)
-            if(theData):await aWebSocket.send_bytes(theData) # formatting the bytes in the protocol format
-            else: await asyncio.sleep(0.001) # since the function is async, wed like a little pause in between packets so they dont play in parallel
-    except WebSocketDisconnect:   
-        theCaptureCollection.unsubscibeAll(aClientId) 
-        print (f"Client: {aClientId} Unsubscribed.") 
-    except Exception as aError: 
-        print("The following unknown error has occured", aError)
+    '''
+
+
 
 if __name__ == '__main__':
     uvicorn.run(app, port=8000, host='0.0.0.0')

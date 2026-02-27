@@ -3,24 +3,22 @@ import { BuilderWarning } from "/static/Javascript/BuilderWarning.js";
 
 export class MultiToggle extends InteractiveHtmlElement {   
 
-    #mySwitchButtons 
-    #myCurrentToggleState
+    #mySwitchButtons; 
+    #myIsSetFuncSet;
     constructor(){  
         super();  
-        this.#myCurrentToggleState=null;
         this.#mySwitchButtons=[]
+        this.#myIsSetFuncSet=false;
+
     }    
 
     setButton(aButton){ 
         this.#mySwitchButtons.push(aButton);
         return this;
-    } 
+    }  
 
-    setInit(){ //should come last! 
-        super.setInit(); 
-        (new BuilderWarning(this.#mySwitchButtons==[])).setRequired(this.setButton).enforce("(Make Sure Each SwitchButton Has Called .setInit()!)");
-
-        for(let i=0; i< this.#mySwitchButtons.length; i++){ 
+    setFunc(aFunc){ 
+         for(let i=0; i< this.#mySwitchButtons.length; i++){ 
             
             let theSwitchButton = this.#mySwitchButtons[i];
             
@@ -29,16 +27,23 @@ export class MultiToggle extends InteractiveHtmlElement {
                 this.#setAllOtherSwitchButtonColorsOff(theSwitchButton);
                 this.#setAllOtherSwitchButtonIsFreezeMouseHoverFalse(theSwitchButton);  
                 this.#setAllOtherSwitchButtonStateFalse(theSwitchButton);
-                
-                this.#myCurrentToggleState=i; 
+                aFunc(i); 
             }); 
 
             theSwitchButton.setButtonWhenSwitchedTrue(()=>{ 
                 theSwitchButton.setToOffColor();  
                 theSwitchButton.setIsFreezeMouseHoverFalse();
-                this.#myCurrentToggleState=null;
+                aFunc(null);
             });
-        } 
+        }  
+        this.#myIsSetFuncSet=true;
+        return this;
+    }
+
+    setInit(){ //should come last! 
+        super.setInit(); 
+        (new BuilderWarning(this.#mySwitchButtons==[])).setRequired(this.setButton).enforce("(Make Sure Each SwitchButton Has Called .setInit()!)");
+        (new BuilderWarning(this.#myIsSetFuncSet==false)).setRequired(this.setFunc).enforce("(Make Sure You Have Called SetButton Beforehand!)");
         return this;
     }
 
@@ -54,5 +59,4 @@ export class MultiToggle extends InteractiveHtmlElement {
         super.setLockTrue(); 
     } 
 
-    getToggleState=()=>this.#myCurrentToggleState;
 }

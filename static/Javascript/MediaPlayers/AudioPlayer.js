@@ -1,50 +1,35 @@
 import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
 import { Helpers } from "/static/Javascript/Helpers/Helpers.js";
 import { BuilderWarning } from "/static/Javascript/BuilderWarning.js";
-
-export class VideoPlayer {  
+import { MediaPlayer } from "/static/Javascript/MediaPlayer/MediaPlayer.js";
+export class AudioPlayer extends MediaPlayer {  
+    
+    #myInitialVolume; 
+    #myAudioTimeBuffer; 
     #myAudioContext; 
-    #myWebsocket; 
     #myNextTimeStamp;
     #myAudioMetaData; 
     #myVolumeControl; 
-    #myWebSocketOpenMessage; 
-    #myWebSocketCloseMessage; 
-    #myInitialVolume; 
-    #myAudioTimeBuffer; 
-    #myAudioOnMessageHandler;
-    #myIsAudioPlayerSet;
 
-    constructor(aFrameSourceRoute, aVideoElemID) {  
-        this.#myAudioContext=null; 
-        this.#myWebsocket=null; 
+
+    constructor(aSourceRoute) {  
+        super(aSourceRoute);
+        this.#myAudioContext=null;  
         this.#myNextTimeStamp=null;
         this.#myAudioMetaData=null; 
         this.#myVolumeControl=null; 
-        this.#myWebSocketOpenMessage="The Audio Is Connected."; 
-        this.#myWebSocketCloseMessage="Error in Connecting To Audio"; 
         this.#myInitialVolume=0; 
         this.#myAudioTimeBuffer=0.1;  
-        this.#myAudioOnMessageHandler=null;
-        this.#myIsAudioPlayerSet=false;
-        document.getElementById(aVideoElemID).setAttribute("src", aFrameSourceRoute);
+        this.setWebSocketCloseMessage("Error in Connecting To Audio"); 
+        this.setWebSocketOpenMessage("The Audio Is Connected.");
     }  
     setInit(){ 
-        (new BuilderWarning(this.#myWebSocketOpenMessage=="The Audio Is Connected.")).setSuggested(this.setWebSocketOpenMessage).enforce();
-        (new BuilderWarning(this.#myWebSocketCloseMessage=="Error in Connecting To Audio")).setSuggested(this.setWebSocketCloseMessage).enforce();
+        super.setInit();
         (new BuilderWarning(this.#myAudioTimeBuffer==0.1)).setSuggested(this.setAudioTimeBuffer).enforce(`(${this.#myAudioTimeBuffer} Isn't a Bad Value. Adjust If Necessary.)`);
-        (new BuilderWarning(this.#myInitialVolume==0 )).setSuggested(this.setInitialVolume).enforce(`(${this.#myInitialVolume    } Isn't a Bad Value. Adjust If Necessary.)`);
-        (new BuilderWarning(this.#myIsAudioPlayerSet==false)).setSuggested(this.setAudioPlayer).enforce();
+        (new BuilderWarning(this.#myInitialVolume==0 )).setSuggested(this.setInitialVolume).enforce(`(${this.#myInitialVolume} Isn't a Bad Value. Adjust If Necessary.)`);
         return this;
     }
-    setWebSocketCloseMessage(aMessage){ 
-        this.#myWebSocketCloseMessage=aMessage; 
-        return this;
-    } 
-    setWebSocketOpenMessage(aMessage){
-        this.#myWebSocketOpenMessage=aMessage; 
-        return this;
-    } 
+  
     setInitialVolume(aVolume){ 
         this.#myInitialVolume=aVolume;
         return this;
@@ -60,30 +45,29 @@ export class VideoPlayer {
     }
     
     turnOnAudioPlayer(){
-        this.#myWebsocket.onmessage = this.#myAudioOnMessageHandler;
+        this.myWebSocket.onmessage = this.myMediaOnMessageHandler;
         this.#myAudioContext.resume();
     }  
 
     turnOffAudioPlayer(){ 
-        this.#myWebsocket.onmessage=null; 
+        this.myWebSocket.onmessage=null; 
         this.#myAudioContext.suspend();
     }
 
-    killAudioPlayer(){ 
-        this.#myWebsocket.close(1000, "Audio Streaming Stopped"); 
-    }
+    killWebSocket=()=>{super.killWebSocket(this.constructor.name);}
+ 
 
-    setAudioPlayer(aAudioSourceRoute, aAudioMetaDataSourceRoute) {
-        // Load metadata first 
+    setPlayer( aAudioMetaDataSourceRoute) {
+        // Load metadata first  
         RESTapiHelpers.RESTGet(aAudioMetaDataSourceRoute, (aData)=>{ 
             this.#myAudioMetaData = aData;
             this.#myNextTimeStamp = 0; // timestamps for when audio should be played
             this.#createAudioContext(this.#myAudioMetaData);
-            this.#createWebSocket(aAudioSourceRoute, this.#myWebSocketOpenMessage, this.#myWebSocketCloseMessage);
-            this.setVolume(this.#myInitialVolume,0); 
-            this.#myAudioOnMessageHandler=(aEvent) => {this.#playAudioChunk(aEvent.data);};
-        }); 
-        this.#myIsAudioPlayerSet=true;
+            super.createWebSocket();
+            this.setVolume(this.#myInitialVolume); 
+            this.myMediaOnMessageHandler=(aEvent) => {this.#playMediaChunk(aEvent.data);};
+        });  
+        this.myIsSetPlayer=true;
         return this; 
     } 
 
@@ -93,15 +77,8 @@ export class VideoPlayer {
         this.#myVolumeControl.connect(this.#myAudioContext.destination); // connect gain node to output desitination node
     } 
 
-    #createWebSocket(aAudioSourceRoute, aOpenMessage, aCloseMessage){ 
-        this.#myWebsocket = new WebSocket(aAudioSourceRoute); // sending the websocket handshake to the server and creating the connection
-        this.#myWebsocket.binaryType = "arraybuffer";
-        this.#myWebsocket.onopen = () => {console.log(aOpenMessage);};
-        this.#myWebsocket.onerror = (error) => {console.error(aCloseMessage);};
-    }
-   
-    #playAudioChunk(aBufferData) {
-        console.log("Received audio chunk:", aBufferData.byteLength, "bytes");
+    #playMediaChunk(aBufferData) {
+        console.log("Received Audio chunk:", aBufferData.byteLength, "bytes");
 
         //https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API
         //for the audiocontext webapi

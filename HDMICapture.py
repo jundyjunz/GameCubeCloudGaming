@@ -11,8 +11,8 @@ class HDMICapture(Capture):
         self.myImageQuality=aImageQuality
         self.myFrameWidth = aFrameWidth 
         self.myFrameHeight = aFrameHeight   
-        theThread = threading.Thread(target=self.beginFrameCollection, daemon=True ) #daemon indicates thread will die when program exits 
-        theThread.start()
+        self.myThread = threading.Thread(target=self.beginFrameCollection, daemon=True ) #daemon indicates thread will die when program exits 
+        self.myThread.start()
 
     def beginFrameCollection(self): 
         while True: 
@@ -21,17 +21,9 @@ class HDMICapture(Capture):
             theResizedFrame=cv.resize(theFrame, (self.myFrameWidth, self.myFrameHeight)) 
             theEncodedFrame=cv.imencode(".jpg",theResizedFrame, [cv.IMWRITE_JPEG_QUALITY, self.myImageQuality])[1]
             theFrameBytes = theEncodedFrame.tobytes()
+            super().publishToAllSubscribers(theFrameBytes) 
 
-            super().publishToAllSubscribers(( 
-                    b"--frame\r\n"
-                    b"Content-Type: image/jpeg\r\n\r\n" +
-                    theFrameBytes +
-                    b"\r\n"
-            )) 
-
-    def getFrame(self,aClientId): 
-        while True: 
-            yield super().getFrame(aClientId)
+   
     
 
     

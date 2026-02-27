@@ -30,11 +30,12 @@ export class ErrorBar extends InteractiveHtmlElement{
         this.#myIsTextCentered=aCenter;
         return this;
     }
-    enableError(aText){ 
+    enableError(aText, aFunc=()=>{}){ 
         if(this.myTextElem) this.myTextElem.remove();  
         this.setTextRectObject(aText, this.#myFontFamily, this.#myFontSize, this.#myFontWeight, this.#myIsTextCentered);
         this.myMainElem.setAttribute("visibility", "visible"); 
-        throw new Error(aText);
+        aFunc();
+        console.error(aText);
     } 
     disableError(){ 
         if(this.myTextElem) this.myTextElem.remove();  
