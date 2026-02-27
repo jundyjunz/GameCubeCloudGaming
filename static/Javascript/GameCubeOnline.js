@@ -7,8 +7,8 @@ import { ErrorBar } from "/static/Javascript/InteractiveHtmlElement/ErrorBar.js"
 import { SwitchButton } from "/static/Javascript/InteractiveHtmlElement/SwitchButton.js";
 
 import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
-import { AudioPlayer } from "/static/Javascript/MediaPlayer/AudioPlayer.js";
-import { VideoPlayer } from "/static/Javascript/MediaPlayer/VideoPlayer.js";
+import { AudioPlayer } from "/static/Javascript/MediaPlayers/AudioPlayer.js";
+import { VideoPlayer } from "/static/Javascript/MediaPlayers/VideoPlayer.js";
 
 
 import { GameControllerPacket } from "/static/Javascript/GameController/GameControllerPacket.js";

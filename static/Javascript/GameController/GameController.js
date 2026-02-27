@@ -53,9 +53,9 @@ export class GameController{
     async sendBytesFunc(){  
         while(this.#myWebSocket.readyState === WebSocket.OPEN){
             let thePacket=this.#myGameControllerPacketDispatch.getPacket();
-            if(thePacket.length==0){ await this.#stall(8); continue;}
+            if(thePacket.length==0){ await this.#stall(1); continue;}
             this.#myWebSocket.send(this.#myEncoder.encode(thePacket));  
-            await this.#stall(8) // await required here or microtask queue never finishes
+            await this.#stall(1) // await required here or microtask queue never finishes
         }
     }
     

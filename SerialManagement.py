@@ -18,8 +18,8 @@ class SerialWrapper:
         theThread.start()
 
     def put(self, aBytes):  
-        if(self.mySerialQueue.full()):  self.mySerialQueue.get()
-        self.mySerialQueue.put(aBytes) 
+        if(self.mySerialQueue.full()):  self.mySerialQueue.get_nowait()
+        self.mySerialQueue.put_nowait(aBytes) 
 
     def startWrite(self): 
         while True:
