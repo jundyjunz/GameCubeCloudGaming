@@ -1,7 +1,7 @@
 import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
 import { Helpers } from "/static/Javascript/Helpers/Helpers.js";
 import { BuilderWarning } from "/static/Javascript/BuilderWarning.js";
-import { MediaPlayer } from "/static/Javascript/MediaPlayer/MediaPlayer.js";
+import { MediaPlayer } from "/static/Javascript/MediaPlayers/MediaPlayer.js";
 export class AudioPlayer extends MediaPlayer {  
     
     #myInitialVolume; 

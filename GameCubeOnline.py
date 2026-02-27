@@ -20,9 +20,11 @@ from SoundCapture import RulesetGuermox
 import asyncio 
 from starlette.websockets import WebSocketDisconnect
 
+class SerialData(BaseModel): 
+    myData:str 
 
 theSerialManager=SerialManager()
-theHDMICapture = HDMICapture(0, 515, 390, 100) 
+theHDMICapture = HDMICapture(0, 515, 390, 80) 
 theSoundCapture = SoundCapture(2, 4096, "float32", RulesetGuermox())
 
 async def postStreamingData(aClientId:int, aWebSocket:WebSocket, aCapture:Capture, aCaptureRate : float): 
@@ -66,27 +68,25 @@ async def getSerialConnectionsCount():
 
 
 
-@app.websocket("/serial_post/{aId}")
-async def postToSerial(aId:int,aWebSocket: WebSocket): 
-    await aWebSocket.accept() 
-    try: 
-        while True:  
-            theBytes=await aWebSocket.receive_bytes()
-            theSerialManager[aId].put(theBytes)
-            print(f"Keys {theBytes.decode('utf-8')} Were Pressed!")
-    except WebSocketDisconnect: print(f"Connection To Controller {aId} Disconnected.")
-    except Exception as aError: print("The following unknown error has occured", aError)
-
+@app.post("/serial_post/{aId}")
+async def postToSerial(aId:int, aData :SerialData):  
     # https://stackoverflow.com/questions/49005651/how-does-asyncio-actually-work 
     # Think of async as a generator 
     # think of await as a yield statement 
     
+    theSerialManager[aId].put(aData.myData.encode("utf-8")) 
+    '''
+    await asyncio.to_thread( 
+        theSerialManager[aId].write,
+        aData.myData.encode("utf-8")
+    ) 
+    '''
      
     return {"status": "ok"}  
 
 @app.websocket("/frame_data/{aClientId}") 
 async def postFrameData(aClientId:int, aWebSocket:WebSocket):  
-    await postStreamingData(aClientId, aWebSocket, theHDMICapture, 1/60)
+    await postStreamingData(aClientId, aWebSocket, theHDMICapture, 1/45)
     #StreamingResponse Accepts a generator 
     '''
         async functions in python are known as couroutines (functions that can pause their execution) 

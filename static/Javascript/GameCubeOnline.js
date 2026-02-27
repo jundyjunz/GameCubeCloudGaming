@@ -7,8 +7,8 @@ import { ErrorBar } from "/static/Javascript/InteractiveHtmlElement/ErrorBar.js"
 import { SwitchButton } from "/static/Javascript/InteractiveHtmlElement/SwitchButton.js";
 
 import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
-import { AudioPlayer } from "/static/Javascript/MediaPlayer/AudioPlayer.js";
-import { VideoPlayer } from "/static/Javascript/MediaPlayer/VideoPlayer.js";
+import { AudioPlayer } from "/static/Javascript/MediaPlayers/AudioPlayer.js";
+import { VideoPlayer } from "/static/Javascript/MediaPlayers/VideoPlayer.js";
 
 
 import { GameControllerPacket } from "/static/Javascript/GameController/GameControllerPacket.js";
@@ -110,7 +110,7 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
         if(aControllerID==null) {theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, ()=>{theController.killWebSocket();}); return;  }
         if(aControllerID>=theMaxControllerCount){theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID+1} which does not exist!`,()=>{theController.killWebSocket();}); return;}
         theErrorBar.disableError();
-        theController.updateWebSocket(`/serial_post/${aControllerID}`);};
+        theController.updatePostRoute(`/serial_post/${aControllerID}`);};
 
     InteractiveHtmlElementSingleton.registerElement( 
     (new Toggle("OverlayToggleCircle"))

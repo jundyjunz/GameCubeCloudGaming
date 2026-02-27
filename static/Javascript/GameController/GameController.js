@@ -5,16 +5,13 @@ import { BuilderWarning } from "/static/Javascript/BuilderWarning.js";
 
 export class GameController{  
     #myGameControllerPacketDispatch;  
-    #myController;   
+    #myPostInterval;   
     #myMaxControllerCount; 
-    #myWebSocket; 
-    #myEncoder;
+
     #myIsSerialConnectionRouteSet;
     constructor(aGameControllerDispatch){
         this.#myGameControllerPacketDispatch= aGameControllerDispatch
-        this.#myController=null;
-        this.#myWebSocket=null; 
-        this.#myEncoder = new TextEncoder(); 
+        this.#myPostInterval=null;
         this.#myIsSerialConnectionRouteSet=false;
         this.#listenForKeyDown(); 
         this.#listenForKeyUp();
@@ -48,21 +45,14 @@ export class GameController{
         }); 
 
     */
-    async #stall(aStallCycle){await new Promise((aResolve) => setTimeout(aResolve, aStallCycle));}
-    killWebSocket=()=>{if(this.#myWebSocket) this.#myWebSocket.close(1000, `Closed Connection to Controller #${this.#myController}`);} 
-    async sendBytesFunc(){  
-        while(this.#myWebSocket.readyState === WebSocket.OPEN){
-            let thePacket=this.#myGameControllerPacketDispatch.getPacket();
-            if(thePacket.length==0){ await this.#stall(8); continue;}
-            this.#myWebSocket.send(this.#myEncoder.encode(thePacket));  
-            await this.#stall(8) // await required here or microtask queue never finishes
-        }
-    }
-    
-    updateWebSocket(aWebSocketRoute){
-        this.killWebSocket();
-        this.#myWebSocket = new WebSocket(aWebSocketRoute);  
-        this.#myWebSocket.onopen=async()=>{await this.sendBytesFunc();};
+
+    updatePostRoute(aPostRoute){
+        if(this.#myPostInterval) this.#myPostInterval.clearInterval(); 
+        this.#myPostInterval=setInterval(()=>{ 
+            let thePacket =this.#myGameControllerPacketDispatch.getPacket() 
+            if (thePacket=="")return;
+            RESTapiHelpers.RESTPost(aPostRoute, {myData:thePacket});
+        },35);
     }
 
     #listenForKeyDown(){document.addEventListener("keydown",(aEvent)=>{this.#ListenForKeyPressEvent(aEvent.code, true, "visible");})} 
