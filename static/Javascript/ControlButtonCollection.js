@@ -54,11 +54,11 @@ export class ControlButtonCollection{
 
         aButtonA.setAlias(theButtonBKeyCode) 
         .setKeyEventListeners(theButtonBKeyCode, theButtonBKeyFunc) 
-        .setNewText(theButtonBKeyCode)
+        .setNewText(this.#shortenKeyCodeIfPossible(theButtonBKeyCode))
 
         aButtonB.setAlias(theButtonAKeyCode)
         .setKeyEventListeners(theButtonAKeyCode, theButtonAKeyFunc)
-        .setNewText(theButtonAKeyCode)
+        .setNewText(this.#shortenKeyCodeIfPossible(theButtonAKeyCode))
     }
 
 

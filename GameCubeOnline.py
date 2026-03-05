@@ -20,9 +20,11 @@ from SoundCapture import RulesetGuermox
 import asyncio 
 from starlette.websockets import WebSocketDisconnect
 
-
+#seemingly biggest blockers were limiting the frame rate in the capture card thread and disabling print statements
 theSerialManager=SerialManager()
 theHDMICapture = HDMICapture(0,  350, 250, 90) 
+#theHDMICapture = HDMICapture(0,  650, 550, 100) 
+
 theSoundCapture = SoundCapture(2, 4096, RulesetGuermox())
 
 async def postStreamingData(aClientId:int, aWebSocket:WebSocket, aCapture:Capture, aCaptureRate : float): 
@@ -97,7 +99,7 @@ async def postToSerial(aId:int,aWebSocket: WebSocket):
 
 @app.websocket("/frame_data/{aClientId}") # FUTURE USE FOR GAME CONSOLE
 async def postFrameData(aClientId:int, aWebSocket:WebSocket):
-    await postStreamingData(aClientId, aWebSocket, theHDMICapture, 1/60)
+    await postStreamingData(aClientId, aWebSocket, theHDMICapture,0.0001)
 
     #StreamingResponse Accepts a generator 
     '''
@@ -113,7 +115,7 @@ async def postFrameData(aClientId:int, aWebSocket:WebSocket):
 
 @app.websocket("/audio_data/{aClientId}") 
 async def postAudio(aClientId: int ,aWebSocket:WebSocket): 
-    await postStreamingData(aClientId, aWebSocket, theSoundCapture, 1/60)
+    await postStreamingData(aClientId, aWebSocket, theSoundCapture,0.0001)
     #https://blog.postman.com/how-do-websockets-work/ 
     ''' 
     Websockets are a persistent bidirectional communication between server and client. 

@@ -27,6 +27,7 @@ StdString<INPUT_BUFFER_SIZE> theInputBuffer;
 typedef void (*PacketModifier)(Gamecube_Data_t*);
 
 Hashmap<char, PacketModifier, HASHMAP_SIZE> theDispatch;
+//https://github.com/SimpleControllers/SimpleControllersBuild-a-Box/blob/master/Simple_Controllers_-_Build-a-Box_-_Version_1.0.ino
 
 // we cannot bitpack. nicohoods library disables interrupts, which long story short means that the reciever flags get disabled  
 // ok fine you want more details? since the reciever flags get disabled, now the arduino cannot properly place bytes in the serial buffer, making it highly prone to corruption 
@@ -46,30 +47,30 @@ void setup() {
 
      
  
-    theDispatch.insert('a',[](Gamecube_Data_t* aPacket){aPacket->report.a=1; }); 
-    theDispatch.insert('b',[](Gamecube_Data_t* aPacket){aPacket->report.b=1; });
-    theDispatch.insert('x',[](Gamecube_Data_t* aPacket){aPacket->report.x=1; });
-    theDispatch.insert('y',[](Gamecube_Data_t* aPacket){aPacket->report.y=1; });
+    theDispatch.insert('a',[](Gamecube_Data_t* aPacket){aPacket->report.a=1;                }); 
+    theDispatch.insert('b',[](Gamecube_Data_t* aPacket){aPacket->report.b=1;                });
+    theDispatch.insert('x',[](Gamecube_Data_t* aPacket){aPacket->report.x=1;                });
+    theDispatch.insert('y',[](Gamecube_Data_t* aPacket){aPacket->report.y=1;                });
     
-    theDispatch.insert('l',[](Gamecube_Data_t* aPacket){aPacket->report.left=1; });
-    theDispatch.insert('r',[](Gamecube_Data_t* aPacket){aPacket->report.right=1; });
-    theDispatch.insert('z',[](Gamecube_Data_t* aPacket){aPacket->report.z=1; });
-    theDispatch.insert('s',[](Gamecube_Data_t* aPacket){aPacket->report.start=1; });
+    theDispatch.insert('l',[](Gamecube_Data_t* aPacket){aPacket->report.l=1;                });
+    theDispatch.insert('r',[](Gamecube_Data_t* aPacket){aPacket->report.r=1;                });
+    theDispatch.insert('z',[](Gamecube_Data_t* aPacket){aPacket->report.z=1;                });
+    theDispatch.insert('s',[](Gamecube_Data_t* aPacket){aPacket->report.start=1;            });
     
-    theDispatch.insert('U',[](Gamecube_Data_t* aPacket){aPacket->report.yAxis=STICK_POS;  });
-    theDispatch.insert('D',[](Gamecube_Data_t* aPacket){aPacket->report.yAxis=STICK_NEG;  });
-    theDispatch.insert('L',[](Gamecube_Data_t* aPacket){aPacket->report.xAxis=STICK_NEG;  });
-    theDispatch.insert('R',[](Gamecube_Data_t* aPacket){aPacket->report.xAxis=STICK_POS; });
+    theDispatch.insert('U',[](Gamecube_Data_t* aPacket){aPacket->report.yAxis=STICK_POS;    });
+    theDispatch.insert('D',[](Gamecube_Data_t* aPacket){aPacket->report.yAxis=STICK_NEG;    });
+    theDispatch.insert('L',[](Gamecube_Data_t* aPacket){aPacket->report.xAxis=STICK_NEG;    });
+    theDispatch.insert('R',[](Gamecube_Data_t* aPacket){aPacket->report.xAxis=STICK_POS;    });
 
-    theDispatch.insert('1',[](Gamecube_Data_t* aPacket){aPacket->report.dup=1;  });
-    theDispatch.insert('2',[](Gamecube_Data_t* aPacket){aPacket->report.dleft=1;  });
-    theDispatch.insert('3',[](Gamecube_Data_t* aPacket){aPacket->report.ddown=1;  });
-    theDispatch.insert('4',[](Gamecube_Data_t* aPacket){aPacket->report.dright=1; });   
+    theDispatch.insert('1',[](Gamecube_Data_t* aPacket){aPacket->report.dup=1;              });
+    theDispatch.insert('2',[](Gamecube_Data_t* aPacket){aPacket->report.dleft=1;            });
+    theDispatch.insert('3',[](Gamecube_Data_t* aPacket){aPacket->report.ddown=1;            });
+    theDispatch.insert('4',[](Gamecube_Data_t* aPacket){aPacket->report.dright=1;           });   
 
-    theDispatch.insert('5',[](Gamecube_Data_t* aPacket){aPacket->report.cyAxis=STICK_POS; });
-    theDispatch.insert('6',[](Gamecube_Data_t* aPacket){aPacket->report.cyAxis=STICK_NEG; });
-    theDispatch.insert('7',[](Gamecube_Data_t* aPacket){aPacket->report.cxAxis=STICK_NEG; });
-    theDispatch.insert('8',[](Gamecube_Data_t* aPacket){aPacket->report.cxAxis=STICK_POS; });
+    theDispatch.insert('5',[](Gamecube_Data_t* aPacket){aPacket->report.cyAxis=STICK_POS;   });
+    theDispatch.insert('6',[](Gamecube_Data_t* aPacket){aPacket->report.cyAxis=STICK_NEG;   });
+    theDispatch.insert('7',[](Gamecube_Data_t* aPacket){aPacket->report.cxAxis=STICK_NEG;   });
+    theDispatch.insert('8',[](Gamecube_Data_t* aPacket){aPacket->report.cxAxis=STICK_POS;   });
 
   GamecubeController1.read();
 } 
