@@ -22,8 +22,8 @@ class RulesetGuermox(Ruleset):
 
 class SoundCapture(Capture):
 
-    def __init__(self, aChannels, aBlockSize, aDtype, aRuleSet): 
-        super().__init__(b"")
+    def __init__(self, aChannels, aBlockSize, aRuleSet): 
+        super().__init__(aBlockSize*4*aChannels) #(x 4 for float32)
 
         self.myDevice=SoundCapture.getDevice(aRuleSet)  
 
@@ -35,7 +35,7 @@ class SoundCapture(Capture):
             samplerate=self.myDevice["default_samplerate"],
             channels=aChannels,  
             blocksize=aBlockSize,  
-            dtype=aDtype,
+            dtype="float32",
             callback=self.soundCaptureCallback
         )  
 
@@ -49,7 +49,29 @@ class SoundCapture(Capture):
         if theDevices==[]:  raise ValueError(f"No Valid Device of Type: {type(aRuleset).__name__} !") 
         return theDevices[0] 
     
-    def soundCaptureCallback(self, aInData, aFrames, aTime, aStatus): super().publishToAllSubscribers(bytes(aInData))
+    #https://jakevdp.github.io/blog/2014/05/05/introduction-to-the-python-buffer-protocol/ 
+    # indata is returned as an object that implements the Python buffer protocol.
+    #
+    # The buffer protocol is a c-level interface that allows objects to mess with eachother's underlying memory buffers.
+    #
+    # This is what the c-level code looks like under the hood
+    #
+    # typedef struct {
+    #     void *buf;
+    #     PyObject *obj;
+    #     Py_ssize_t len;
+    #     Py_ssize_t itemsize;
+    #     int readonly;
+    #     int ndim;
+    #     char *format;
+    #     Py_ssize_t *shape;
+    #     Py_ssize_t *strides;
+    #     Py_ssize_t *suboffsets;
+    #     void *internal;
+    # } Py_buffer;
+    #
+    # Libraries like numpy use this to create zero-copy array views, such as with np.frombuffer.
+    def soundCaptureCallback(self, aInData, aFrames, aTime, aStatus): super().publish(np.frombuffer(aInData, dtype=np.uint8))
 
     def getSampleRate(self): return self.mySampleRate 
     

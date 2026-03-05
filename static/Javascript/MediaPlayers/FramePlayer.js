@@ -2,14 +2,16 @@
 import { BuilderWarning } from "/static/Javascript/BuilderWarning.js";
 import { MediaPlayer } from "/static/Javascript/MediaPlayers/MediaPlayer.js";
 
-export class VideoPlayer extends MediaPlayer {  
+export class FramePlayer extends MediaPlayer {  
 
     #myCanvasElem;
-    #myCanvasContext;
+    #myCanvasContext; 
+    #myFilter;
     constructor(aSourceRoute) {  
         super(aSourceRoute); 
         this.#myCanvasElem=null; 
         this.#myCanvasContext=null;
+        this.#myFilter="none";
         this.setWebSocketCloseMessage("Error in Connecting To Video"); 
         this.setWebSocketOpenMessage("The Video Is Connected.");
       
@@ -17,6 +19,12 @@ export class VideoPlayer extends MediaPlayer {
     setInit(){ 
         super.setInit();
         (new BuilderWarning(!this.#myCanvasElem || !this.#myCanvasContext)).setSuggested(this.setCanvasElem).enforce(`(This should be the highest priority thing you build in this class!)`);
+        (new BuilderWarning(this.#myFilter=="none")).setSuggested(this.setFilter).enforce(`(Set this Before setPlayer!!)`);
+        return this;
+    }
+
+    setFilter(aFilter){ 
+        this.#myFilter=aFilter; 
         return this;
     }
 
@@ -41,7 +49,11 @@ export class VideoPlayer extends MediaPlayer {
         const theBitmap = await createImageBitmap(new Blob([aBufferData], { type: "image/jpeg" }));
         this.#myCanvasElem.width=theBitmap.width; 
         this.#myCanvasElem.height=theBitmap.height;
+        this.#myCanvasContext.imageSmoothingEnabled = true;
+        this.#myCanvasContext.imageSmoothingQuality = "high"; 
+        this.#myCanvasContext.filter=this.#myFilter;
         this.#myCanvasContext.drawImage(theBitmap, 0, 0, this.#myCanvasElem.width, this.#myCanvasElem.height);
+        
 
         theBitmap.close(); // important to avoid memory leaks
     } 

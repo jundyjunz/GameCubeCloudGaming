@@ -31,6 +31,7 @@ export class InteractiveHtmlElementSingleton{
         if(!this.#myInstance) this.#myInstance = new InteractiveHtmlElementSingleton();  
         ValidationHelpers.isTypeOf(InteractiveHtmlElement, aInteractiveElement);
         this.#myInstance.#myElements.set(aInteractiveElement.getAlias(), aInteractiveElement);
+        return aInteractiveElement;
     }  
 
     static registerManyElements(aElements){ 
@@ -38,6 +39,7 @@ export class InteractiveHtmlElementSingleton{
         ValidationHelpers.isArrayTypeOf(InteractiveHtmlElement, aElements); 
         let theNewElementMap = new Map(aElements.map(aElement=>[aElement.getAlias(),aElement]));
         this.#myInstance.#myElements = new Map([...this.#myInstance.#myElements, ...theNewElementMap])
+        return aElements
     }
 
     static setAllLocksFalse(){ 
@@ -73,6 +75,41 @@ export class InteractiveHtmlElementSingleton{
         let theElement=null; 
         if(this.#myInstance.#myElements.has(aKey)) theElement =this.#myInstance.#myElements.get(aKey)
         return theElement; 
+    }
+
+    static doesElementExist(aElement){ 
+        let theReturnBool=false;
+        if(!this.#myInstance) this.#myInstance = new InteractiveHtmlElementSingleton(); 
+        this.#myInstance.#myElements.forEach((aValue, aKey)=>{ if(aValue==aElement)theReturnBool=true;}); 
+        return theReturnBool;
+    }
+    static unregisterElement(aElement){ 
+        let theDeleteKey=null;
+        if(!this.#myInstance) this.#myInstance = new InteractiveHtmlElementSingleton(); 
+        this.#myInstance.#myElements.forEach((aValue, aKey)=>{ if(aValue==aElement)theDeleteKey=aKey;}); 
+        this.#myInstance.#myElements.delete(theDeleteKey);
+    }
+
+    static unregisterManyElements(aElementType){ 
+        let theDeleteKeys=[]
+        if(!this.#myInstance) this.#myInstance = new InteractiveHtmlElementSingleton(); 
+        this.#myInstance.#myElements.forEach((aValue, aKey)=>{ if(aValue instanceof aElementType )theDeleteKeys.push(aKey);});  
+        theDeleteKeys.forEach((aKey)=>{ this.#myInstance.#myElements.delete(aKey);})
+
+    }
+    static reRegisterElement(aOldElement){ 
+        if(!this.#myInstance) this.#myInstance = new InteractiveHtmlElementSingleton(); 
+        if(!this.doesElementExist(aOldElement))return; 
+        this.unregisterElement(aOldElement); 
+        this.registerElement(aOldElement); 
+    }
+    
+    static forEach(aFunc, aFilter){ 
+        if(!this.#myInstance) this.#myInstance = new InteractiveHtmlElementSingleton();  
+        this.#myInstance.#myElements.forEach((aValue, aKey)=>{ 
+            if(!(aValue instanceof aFilter)) return;
+            aFunc(aValue, aKey); 
+        });
     }
 
 }

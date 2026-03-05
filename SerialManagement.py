@@ -3,27 +3,34 @@ import serial.tools.list_ports
 import time
 import queue 
 import threading
-import asyncio
+import asyncio 
+from NpCircularBuffer import NpCircularBuffer
 
-BAUDRATE=9600 
+BAUDRATE=250000
 IDN_COMMAND='#' 
 IDN="GCN_ADAPTOR" 
 TIMEOUT=1 
 WRITE_TIMEOUT=1
 class SerialWrapper: 
     def __init__(self, aSerialConnection: serial.Serial): 
-        self.mySerialConnection=aSerialConnection 
-        self.mySerialQueue =queue.Queue(maxsize=10)   
+        self.mySerialConnection=aSerialConnection  
+        # no circular buffer here, we dont want to write faster (python side) and over flow the arduino buffer  
+        # it would make things very messy.  
+        # while we could certainly just have a time.sleep(), this is more reliable since we have built in threading protection in case 
+        # more than one person takes control of acontroller. 
         theThread = threading.Thread(target=self.startWrite, daemon=True)
+        self.mySerialQueue =queue.Queue(maxsize=50) 
         theThread.start()
 
-    def put(self, aBytes):  
-        if(self.mySerialQueue.full()):  self.mySerialQueue.get_nowait()
-        self.mySerialQueue.put_nowait(aBytes) 
+    def put(self, aBytes):   
+        if(self.mySerialQueue.full()): self.mySerialQueue.get()
+        self.mySerialQueue.put(aBytes) 
 
     def startWrite(self): 
         while True:
-            self.mySerialConnection.write(self.mySerialQueue.get())
+            theCommand = self.mySerialQueue.get() 
+            if theCommand==b"": continue
+            self.mySerialConnection.write(theCommand) 
 
 class SerialManager: 
     def __init__(self): 
@@ -48,10 +55,18 @@ class SerialManager:
                 # You can supposedly bypass this by accessing a register on the chip, or soldering some pads
                 time.sleep(2) 
                 theSerialConnection.reset_input_buffer()# reset input buffer to avoid random garbage
-                try: theSerialConnection.write(IDN_COMMAND.encode("utf-8"))   
-                except: continue
+                try: 
+                    theSerialConnection.write(IDN_COMMAND.encode("utf-8")) 
+  
+                except: 
+                    print(f"Port: {aComPort.device} Connection Failed.") 
+                    continue
+
                 theResponse = theSerialConnection.readline().decode('utf-8').strip() 
-                if theResponse==IDN: self.mySerialConnections.append(SerialWrapper(theSerialConnection)) 
+                if theResponse==IDN:  
+                    self.mySerialConnections.append(SerialWrapper(theSerialConnection)) 
+                    print(f"Port: {aComPort.device} Connection Successful.")
+
 
     def getSerialConnectionsAmt(self): 
         return len(self.mySerialConnections) 
@@ -59,4 +74,3 @@ class SerialManager:
     def __getitem__(self, key:int):  
         assert isinstance(key, int)
         return self.mySerialConnections[key]
-

@@ -7,13 +7,15 @@ import { ErrorBar } from "/static/Javascript/InteractiveHtmlElement/ErrorBar.js"
 import { SwitchButton } from "/static/Javascript/InteractiveHtmlElement/SwitchButton.js";
 
 import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
+
 import { AudioPlayer } from "/static/Javascript/MediaPlayers/AudioPlayer.js";
-import { VideoPlayer } from "/static/Javascript/MediaPlayers/VideoPlayer.js";
+import { FramePlayer } from "/static/Javascript/MediaPlayers/FramePlayer.js";
 
+import { GameCubePacket } from "/static/Javascript/Packets/GameCubePacket.js";
+import { PacketSingleton } from "/static/Javascript/Packets/PacketSingleton.js";
 
-import { GameControllerPacket } from "/static/Javascript/GameController/GameControllerPacket.js";
-import { GamecubeControllerPacketDispatch } from "/static/Javascript/GameController/GameControllerPacketDispatch.js";  
-import { GameController } from "/static/Javascript/GameController/GameController.js";
+import { ControlButtonCollection } from "/static/Javascript/ControlButtonCollection.js";
+
 // await tosses all following code in an async function into microtask queue. 
 document.addEventListener( "DOMContentLoaded", (event)=>{ 
 
@@ -24,7 +26,11 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     let theVolumeButtonId="VolumeButton";
     let theWholePageId="WholePage"; 
     let theGameCubeControllerVideoWrapperId ="GameCubeControllerVideoWrapper"; 
-    let theAudioPlayer;  
+    let theAudioPlayer;   
+    let theMaxControllerCount; 
+    PacketSingleton.setPacket(new GameCubePacket());
+    RESTapiHelpers.RESTGet("/serial_connections_ct",(aData)=>{ theMaxControllerCount=aData.count;});
+    
     RESTapiHelpers.RESTGet("/subscribe_audio", (aData)=>{ 
         console.log(`AudioPlayer Subscribed at: ${aData.audioClientId}`);
         theAudioPlayer = (new AudioPlayer(`/audio_data/${aData.audioClientId}`)) 
@@ -33,53 +39,47 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
                         .setPlayer( "/audio_metadata") 
                         .setInit();});  
 
+   
     RESTapiHelpers.RESTGet("/subscribe_video", (aData)=>{ 
         console.log(`VideoPlayer Subscribed at: ${aData.videoClientId}`); 
-        (new VideoPlayer(`/frame_data/${aData.videoClientId}`)) 
-        .setCanvasElem(theVideoFramesId) 
+        (new FramePlayer(`/frame_data/${aData.videoClientId}`)) 
+        .setCanvasElem(theVideoFramesId)  
+        .setFilter("saturate(130%) contrast(110%) brightness(100%)")
         .setPlayer() 
         .setInit();});
 
-
+   
     
-    let theDispatchMap = new Map([
-        ["KeyW",        (new GameControllerPacket('U',"MainStick"))   .setKeyButtonElement("MainStickUpKey")    .setVector([0,-1])], //up
-        ["KeyA",        (new GameControllerPacket('L',"MainStick"))   .setKeyButtonElement("MainStickLeftKey")  .setVector([-1,0])], // left
-        ["KeyS",        (new GameControllerPacket('D',"MainStick"))   .setKeyButtonElement("MainStickDownKey")  .setVector([0,1])], // down
-        ["KeyD",        (new GameControllerPacket('R',"MainStick"))   .setKeyButtonElement("MainStickRightKey") .setVector([1,0])], // right
-        ["KeyE",        (new GameControllerPacket('z',"ZButton"))     .setKeyButtonElement("ZButtonKey")], // z 
-        ["KeyQ",        (new GameControllerPacket('s',"StartButton")) .setKeyButtonElement("StartButtonKey")], // start 
+    let theInstructions=[
+        ["AButtonKey",          "AButton",          "KeyK",         "a"                      ],        
+        ["BButtonKey",          "BButton",          "KeyJ",         "b"                      ],      
+        ["XButtonKey",          "XButton",          "KeyL",         "x"                      ],        
+        ["YButtonKey",          "YButton",          "KeyI",         "y"                      ],       
+        ["DPadUpKey",           "DPadUp",           "ArrowUp",      "dup"                    ],      
+        ["DPadDownKey",         "DPadDown",         "ArrowDown",    "ddown"                  ],     
+        ["DPadLeftKey",         "DPadLeft",         "ArrowLeft",    "dleft"                  ],    
+        ["DPadRightKey",        "DPadRight",        "ArrowRight",   "dright"                 ],   
+        ["StartButtonKey",      "StartButton",      "KeyQ",         "start"                  ],  
+        ["LeftTriggerKey",      "LeftTrigger",      "KeyU",         "ltrigger"               ],
+        ["RightTriggerKey",     "RightTrigger",     "KeyO",         "rtrigger"               ],
+        ["CStickUpKey",         "CStick",           "Numpad8",      "cup",        [0,-1]     ],
+        ["CStickDownKey",       "CStick",           "Numpad5",      "cdown",      [0,1]      ],
+        ["CStickLeftKey",       "CStick",           "Numpad4",      "cleft",      [-1,0]     ],
+        ["CStickRightKey",      "CStick",           "Numpad6",      "cright",     [1,0]      ],
+        ["MainStickUpKey",      "MainStick",        "KeyW",         "up",         [0,-1]     ],
+        ["MainStickDownKey",    "MainStick",        "KeyS",         "down",       [0,1]      ],
+        ["MainStickLeftKey",    "MainStick",        "KeyA",         "left",       [-1,0]     ],
+        ["MainStickRightKey",   "MainStick",        "KeyD",         "right",      [1,0]      ],
+        ["ZButtonKey",          "ZButton",          "KeyE",         "ztrigger"               ]  
+    ] 
 
-        ["KeyI",        (new GameControllerPacket('y',"YButton"))     .setKeyButtonElement("YButtonKey")], // y
-        ["KeyJ",        (new GameControllerPacket('b',"BButton"))     .setKeyButtonElement("BButtonKey")], // b
-        ["KeyK",        (new GameControllerPacket('a',"AButton"))     .setKeyButtonElement( "AButtonKey")], // a
-        ['KeyL',        (new GameControllerPacket('x',"XButton"))     .setKeyButtonElement("XButtonKey")], // x
-        ['KeyU',        (new GameControllerPacket('l',"LeftTrigger")) .setKeyButtonElement("LeftTriggerKey")], // left trigger
-        ['KeyO',        (new GameControllerPacket('r',"RightTrigger")).setKeyButtonElement("RightTriggerKey")], // right trigger
-        
-        ['Numpad8',     (new GameControllerPacket('5',"CStick"))      .setKeyButtonElement("CStickUpKey")       .setVector([0,-1])], // cup
-        ['Numpad5',     (new GameControllerPacket('6',"CStick"))      .setKeyButtonElement("CStickDownKey")     .setVector([0,1])], // cdown
-        ['Numpad4',     (new GameControllerPacket('7',"CStick"))      .setKeyButtonElement("CStickLeftKey")     .setVector([-1,0])], // cleft
-        ['Numpad6',     (new GameControllerPacket('8',"CStick"))      .setKeyButtonElement("CStickRightKey")    .setVector([1,0])], // cright 
+    let theControlButtonCollection =new ControlButtonCollection() 
+                                        .setKeyShortenThreshold(5)
+                                        .setDefaultInstructions(theInstructions) 
+                                        .setCookieName("ControllerButtonCookie")  
+                                        .setInit(theInstructions);
 
-        ["ArrowUp",     (new GameControllerPacket('1',"DPadUp"))      .setKeyButtonElement("DPadUpKey")], // dup
-        ["ArrowLeft",   (new GameControllerPacket('2',"DPadLeft"))    .setKeyButtonElement("DPadLeftKey")], // dleft
-        ["ArrowDown",   (new GameControllerPacket('3',"DPadDown"))    .setKeyButtonElement("DPadDownKey")], // ddown
-        ["ArrowRight",  (new GameControllerPacket('4',"DPadRight"))   .setKeyButtonElement("DPadRightKey")] // dright
-    ]);
-    let theGameControllerPacketDispatch=    (new GamecubeControllerPacketDispatch ( theDispatchMap ))
-                                            .setDispatchCookieName("theGameControllerPacketDispatch") 
-                                            .setKeyShortenThreshold(5)
-                                            .setDefaultDispatchMap(theDispatchMap)
-                                            .setColorOnMouseOut("gainsboro")
-                                            .setColorOnMouseOver("dimgray")
-                                            .setTextSettings("tahoma", 8, "bold") 
-                                            .setOverlayClass("overlay") 
-                                            .setInit();
-    let theController = new GameController(theGameControllerPacketDispatch) 
-                            .setSerialConnectionsRoute("/serial_connections_ct") 
-                            .setInit();
-    
+   
     let theSetOverlays=(aState)=>{document.querySelectorAll(".overlay").forEach((aElement)=>{aElement.setAttribute("visibility",aState);});}
     let theSetFullScreen=()=>{ 
         document.getElementById(theWholePageId).style.gridTemplateColumns="1fr";
@@ -106,11 +106,10 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
         if(aRatio==0){InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedTrue(); theAudioPlayer.turnOffAudioPlayer();} 
         else{InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedFalse(); theAudioPlayer.turnOnAudioPlayer();}}; 
     let theSetController = (aControllerID)=>{ 
-        let theMaxControllerCount=theController.getMaxControllerCount();
-        if(aControllerID==null) {theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, ()=>{theController.killWebSocket();}); return;  }
-        if(aControllerID>=theMaxControllerCount){theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID+1} which does not exist!`,()=>{theController.killWebSocket();}); return;}
+        if(aControllerID==null) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, ()=>{PacketSingleton.killWebSocket();}); return;  }
+        if(aControllerID>=theMaxControllerCount){theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID+1} which does not exist!`,()=>{PacketSingleton.killWebSocket();}); return;}
         theErrorBar.disableError();
-        theController.updateWebSocket(`/serial_post/${aControllerID}`);};
+        PacketSingleton.setWebSocket(`/serial_post/${aControllerID}`, aControllerID);};
 
     InteractiveHtmlElementSingleton.registerElement( 
     (new Toggle("OverlayToggleCircle"))
@@ -126,17 +125,16 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     (new Button("ResetCircle")) 
     .setColorOnMouseOut("darkRed") 
     .setColorOnMouseOver("red") 
-    .setClickFunc(()=>{theGameControllerPacketDispatch.revertToDefaultDispatchMap();}) 
+    .setClickFunc(()=>{theControlButtonCollection.resetToDefaultControlButtons();}) 
     .setAlias("ResetButton")
     .setInit());
 
-    let theErrorBar= (new ErrorBar("ErrorRect")) 
+    let theErrorBar=InteractiveHtmlElementSingleton.registerElement((new ErrorBar("ErrorRect")) 
     .setColorOnMouseOut("lightcoral") 
     .setColorOnMouseOver("red")
     .setTextSettings("Trebuchet MS", 15, "bold", true) 
     .setAlias("ErrorBar")
-    .setInit();
-    InteractiveHtmlElementSingleton.registerElement(theErrorBar);
+    .setInit());
     
     InteractiveHtmlElementSingleton.registerElement(
     (new SwitchButton("WindowSizeModifierButton")) 

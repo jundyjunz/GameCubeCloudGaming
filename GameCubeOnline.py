@@ -22,16 +22,19 @@ from starlette.websockets import WebSocketDisconnect
 
 
 theSerialManager=SerialManager()
-theHDMICapture = HDMICapture(0, 515, 390, 100) 
-theSoundCapture = SoundCapture(2, 4096, "float32", RulesetGuermox())
+theHDMICapture = HDMICapture(0,  350, 250, 90) 
+theSoundCapture = SoundCapture(2, 4096, RulesetGuermox())
 
 async def postStreamingData(aClientId:int, aWebSocket:WebSocket, aCapture:Capture, aCaptureRate : float): 
     try:
         await aWebSocket.accept() # accepting the handshake
         while True:  
-            theData=aCapture.getFrame(aClientId)
-            if(theData):await aWebSocket.send_bytes(theData) # formatting the bytes in the protocol format
-            else: await asyncio.sleep(aCaptureRate) # since the function is async, wed like a little pause in between packets so they dont play in parallel
+            theData=aCapture.getFrame(aClientId) 
+            #numpy arrays are not native byte objects so to expose the view in the buffer protocol, we're gonna have to use the meoryview function here.
+            if(theData.any()):await aWebSocket.send_bytes(memoryview(theData))
+            # since the function is async, wed like a little pause in between packets so they dont play in parallel 
+            # this also serves the benefit of not hitting the arduino writes too fast which are blocking. 
+            else: await asyncio.sleep(aCaptureRate) 
     except WebSocketDisconnect:  
         aCapture.unsubscribe(aClientId)
         print (f"Client: {aClientId} Unsubscribed From {aCapture.__class__.__name__}.") 
@@ -72,8 +75,16 @@ async def postToSerial(aId:int,aWebSocket: WebSocket):
     try: 
         while True:  
             theBytes=await aWebSocket.receive_bytes()
-            theSerialManager[aId].put(theBytes)
-            print(f"Keys {theBytes.decode('utf-8')} Were Pressed!")
+            theSerialManager[aId].put(theBytes) 
+            #careful, print statements can be expensive --> https://stackoverflow.com/questions/13288185/performance-effect-of-using-print-statements-in-python-script  
+            #this is because printing is a synchronous call --> https://medium.com/spencerweekly/console-output-overhead-why-is-writing-to-stdout-so-slow-b0cc7c88704c 
+            ''' 
+                So it turns out that I/O buffering is what made even “writing to file” faster than “writing to stdout”. 
+                When we are directly writing outputs to our terminal, each writing operation is being done “synchronously”, which means our programs waits for the “write” to complete before it continues to the next commands.
+            '''
+            #print(f"{theBytes.decode('utf-8')} Were Pressed!") 
+            #print("What Was Sent:       "+' '.join(format(aByte, '08b') for aByte in theBytes))
+            #print("What Was Accepted:   "+' '.join(format(aByte, '08b') for aByte in theSerialManager[aId].mySerialConnection.read(1)))
     except WebSocketDisconnect: print(f"Connection To Controller {aId} Disconnected.")
     except Exception as aError: print("The following unknown error has occured", aError)
 
@@ -84,9 +95,10 @@ async def postToSerial(aId:int,aWebSocket: WebSocket):
      
     return {"status": "ok"}  
 
-@app.websocket("/frame_data/{aClientId}") 
-async def postFrameData(aClientId:int, aWebSocket:WebSocket):  
+@app.websocket("/frame_data/{aClientId}") # FUTURE USE FOR GAME CONSOLE
+async def postFrameData(aClientId:int, aWebSocket:WebSocket):
     await postStreamingData(aClientId, aWebSocket, theHDMICapture, 1/60)
+
     #StreamingResponse Accepts a generator 
     '''
         async functions in python are known as couroutines (functions that can pause their execution) 
@@ -96,10 +108,12 @@ async def postFrameData(aClientId:int, aWebSocket:WebSocket):
             pause the function and jump to the next thing in the event loop 
         so here, if the await for the event loop stalls too long, it will go on with the next thing in the event loop
 
-    '''
+    '''  
+    
+
 @app.websocket("/audio_data/{aClientId}") 
 async def postAudio(aClientId: int ,aWebSocket:WebSocket): 
-    await postStreamingData(aClientId, aWebSocket, theSoundCapture, 0.001)
+    await postStreamingData(aClientId, aWebSocket, theSoundCapture, 1/60)
     #https://blog.postman.com/how-do-websockets-work/ 
     ''' 
     Websockets are a persistent bidirectional communication between server and client. 

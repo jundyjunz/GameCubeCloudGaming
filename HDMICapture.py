@@ -6,7 +6,7 @@ import threading
 #https://stackoverflow.com/questions/63667466/video-streaming-app-using-fastapi-and-opencv
 class HDMICapture(Capture): 
     def __init__(self, aCameraID, aFrameWidth, aFrameHeight, aImageQuality):  
-        super().__init__(b"")
+        super().__init__(aFrameWidth*aFrameHeight*3)
         self.myCapture = cv.VideoCapture(aCameraID);   
         self.myImageQuality=aImageQuality
         self.myFrameWidth = aFrameWidth 
@@ -20,11 +20,11 @@ class HDMICapture(Capture):
             if not theIsSuccess:continue
             theResizedFrame=cv.resize(theFrame, (self.myFrameWidth, self.myFrameHeight)) 
             theEncodedFrame=cv.imencode(".jpg",theResizedFrame, [cv.IMWRITE_JPEG_QUALITY, self.myImageQuality])[1]
-            theFrameBytes = theEncodedFrame.tobytes()
-            super().publishToAllSubscribers(theFrameBytes) 
+            super().publish(theEncodedFrame) 
+            time.sleep(1/60) #cap at 60 frames a second, needed to give control back to the OS scheduler
 
    
+        
     
-
     
                 
