@@ -3,10 +3,8 @@ import serial.tools.list_ports
 import time
 import queue 
 import threading
-import asyncio 
-from NpCircularBuffer import NpCircularBuffer
 
-BAUDRATE=250000
+BAUDRATE=115200
 IDN_COMMAND='#' 
 IDN="GCN_ADAPTOR" 
 TIMEOUT=1 

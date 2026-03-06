@@ -8,7 +8,7 @@
 #define CONSOLE_PIN 2  
 #define CONTROLLER_PIN 7 
 #define INPUT_BUFFER_SIZE 8
-#define BAUD_RATE 250000  //https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf --> see page 164 for baud rate limits, max is 230.4k
+#define BAUD_RATE 115200  //https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf --> see page 164 for baud rate limits, max is 230.4k
 #define STICK_POS 191 //255 and 0 seem to be mapped to the same on yaxis. Using 254 and 1 instead.
 #define STICK_NEG 65 
 #define STICK_DEFAULT 128 
@@ -37,7 +37,7 @@ Hashmap<char, PacketModifier, HASHMAP_SIZE> theDispatch;
 // this approach works because each keystroke causes like 10 serial writes that spam the buffer, so basically one of these commands kinda has to be right
 void setup() {
     Serial.begin(BAUD_RATE);
-    UCSR0A |= (1<<U2X0);
+    //UCSR0A |= (1<<U2X0); // removed, im pretty sure this messes with the security of the writes to the gamecube
     // we can ENABLE the doubling of the clockspeed of USART (UART but with an S (synchronous)) by changing the U2X0 bit  in the UCSR0A register. 
     // in other words we do UCR0A |= (1<<U2X0)
     //https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf --> see page 144, 19.3
