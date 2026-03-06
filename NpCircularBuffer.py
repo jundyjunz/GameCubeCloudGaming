@@ -1,5 +1,7 @@
 import numpy as np
 import threading
+import multiprocessing as mp 
+from multiprocessing import shared_memory as sm
 
 class CircularCounter: 
     def __init__(self, aCircleCount:int, aStartingCount=0): 
@@ -16,7 +18,25 @@ class CircularCounter:
 
     def __eq__(self, aOtherCircularCounter): 
         return self.myCount==aOtherCircularCounter.myCount 
+
+class CircularCounterMultiProcessing: 
+    def __init__(self, aCircleCount:int, aStartingCount=0): 
+        assert 0<=aCircleCount<=255
+        self.myCircleCount=aCircleCount 
+        self.mySmCount = sm.SharedMemory(create=True, size=1)  
+        self.myCount = np.ndarray(1,dtype=np.uint8, buffer=self.mySmCount.buf)
+        self.myCount[0]=aStartingCount%aCircleCount
+
+    def __call__(self): 
+        return self.myCount[0]
     
+    def __iadd__(self, aCountToAdd:int):
+        assert aCountToAdd == 1 
+        self.myCount[0]=(self.myCount[0] +0x01 ) %self.myCircleCount 
+        return self 
+
+    def __eq__(self, aOtherCircularCounter): 
+        return self.myCount[0]==aOtherCircularCounter.myCount[0] 
 
 
 class NpCircularBuffer:
@@ -39,19 +59,30 @@ class NpCircularBuffer:
 
 class NpCircularByteBuffer: 
     
-    def __init__(self, aSize, aMaxDataBufferSize): 
-        self.myHead=CircularCounter(aSize) 
-        self.myBuffer=np.zeros((aSize, aMaxDataBufferSize), dtype=np.uint8) 
-        self.myBufferSizes =np.zeros(aSize, dtype=np.uint32) 
-        self.myDefaultBuffer =np.zeros((aSize, aMaxDataBufferSize), dtype=np.uint8)
-    
-    def getHeadValue(self): 
-        return self.myHead()
+    def __init__(self, aSize, aMaxDataBufferSize, aIsMultiProcessing=False):
+
+        
+        self.myHead=CircularCounterMultiProcessing(aSize) if aIsMultiProcessing else CircularCounter(aSize)
+
+        self.mySmDefaultBuffer=sm.SharedMemory(create=True, size=aSize*aMaxDataBufferSize)if aIsMultiProcessing else None
+        self.myDefaultBuffer =np.ndarray((aMaxDataBufferSize,), dtype=np.uint8, buffer=self.mySmDefaultBuffer.buf if aIsMultiProcessing else None)
+        self.myDefaultBuffer.fill(0)
+
+        self.mySmBuffer=sm.SharedMemory(create =True, size=aSize*aMaxDataBufferSize) if aIsMultiProcessing else None
+        self.myBuffer=np.ndarray((aSize, aMaxDataBufferSize), dtype=np.uint8, buffer=self.mySmBuffer.buf if aIsMultiProcessing else None) 
+        self.myBuffer.fill(0) 
+        
+        self.mySmBufferSizes=sm.SharedMemory(create=True, size=aSize*4)if aIsMultiProcessing else None
+        self.myBufferSizes =np.ndarray((aSize,), dtype=np.uint32, buffer=self.mySmBufferSizes.buf if aIsMultiProcessing else None)  
+        self.myBufferSizes.fill(0)
+
+       
     
     def peek(self, aCircularcounter:CircularCounter): 
-        if aCircularcounter==self.myHead: return self.myDefaultBuffer
-        theBufferSize=self.myBufferSizes[aCircularcounter()]
-        theDataBuffer=self.myBuffer[aCircularcounter()] 
+        #if aCircularcounter==self.myHead: return self.myDefaultBuffer
+        theIdx=aCircularcounter()
+        theBufferSize=self.myBufferSizes[theIdx]
+        theDataBuffer=self.myBuffer[theIdx] 
         theCompressedBuffer=theDataBuffer[:theBufferSize] 
         aCircularcounter+=1
         return theCompressedBuffer 
