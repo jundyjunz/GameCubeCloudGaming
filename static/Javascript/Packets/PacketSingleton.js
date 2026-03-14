@@ -51,7 +51,7 @@ export class PacketSingleton{
     static async #stall(aStallCycle){await new Promise((aResolve) => setTimeout(aResolve, aStallCycle));}
     static killWebSocket=()=>{ 
         if(!this.#myInstance) this.#myInstance = new PacketSingleton();  
-        if(this.#myInstance.#myWebSocket)this.#myInstance.#myWebSocket(1000, `Controller #${this.#myInstance.myControllerNumber} Connection Killed`); 
+        if(this.#myInstance.#myWebSocket)this.#myInstance.#myWebSocket.close(1000, `Controller #${this.#myInstance.myControllerNumber} Connection Killed`); 
     } 
 
     static async #sendBytesFunc(){  

@@ -151,9 +151,9 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     (new Slider( "VolumeSliderCircle", 90, 280))  
     .setColorOnMouseOut("gainsboro") 
     .setColorOnMouseOver("plum") 
-    .setSliderCircleWhenMouseDown(2)  
+    .setSliderCircleSizeWhenMouseDown(2)  
     .setSliderPosition0()
-    .setSliderFunc(2,(aRatio)=>{theChangeButtonBasedOnVolume(aRatio);}) 
+    .setSliderFunc((aRatio)=>{theChangeButtonBasedOnVolume(aRatio);}) 
     .setAlias("VolumeSlider")
     .setInit()); 
     

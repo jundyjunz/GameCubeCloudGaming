@@ -22,7 +22,7 @@ from starlette.websockets import WebSocketDisconnect
 
 #seemingly biggest blockers were limiting the frame rate in the capture card thread and disabling print statements
 theSerialManager=SerialManager()
-theHDMICapture = HDMICapture(0,  350, 250, 75) 
+theHDMICapture = HDMICapture(0,  350, 250, 70) 
 
 theSoundCapture = SoundCapture(2, 4096, RulesetGuermox())
 
