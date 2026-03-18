@@ -11,6 +11,7 @@ import { RESTapiHelpers } from "/static/Javascript/Helpers/RESTapiHelpers.js";
 import { AudioPlayer } from "/static/Javascript/MediaPlayers/AudioPlayer.js";
 import { FramePlayer } from "/static/Javascript/MediaPlayers/FramePlayer.js";
 
+import { Packet } from "/static/Javascript/Packets/Packet.js";
 import { GameCubePacket } from "/static/Javascript/Packets/GameCubePacket.js";
 import { PacketSingleton } from "/static/Javascript/Packets/PacketSingleton.js";
 
@@ -28,7 +29,7 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     let theGameCubeControllerVideoWrapperId ="GameCubeControllerVideoWrapper"; 
     let theAudioPlayer;   
     let theMaxControllerCount; 
-    PacketSingleton.setPacket(new GameCubePacket());
+    PacketSingleton.setPacket(new Packet());
     RESTapiHelpers.RESTGet("/serial_connections_ct",(aData)=>{ theMaxControllerCount=aData.count;});
     
     RESTapiHelpers.RESTGet("/subscribe_audio", (aData)=>{ 

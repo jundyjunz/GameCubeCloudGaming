@@ -1,12 +1,10 @@
 import serial  
 import serial.tools.list_ports
 import time
-import queue 
 import threading
 
-BAUDRATE=115200
-IDN_COMMAND='#' 
-IDN="GCN_ADAPTOR" 
+BAUDRATE=250000
+HANDSHAKE_VALUE = bytes([0xFA]) # bytes constructor expects iterable integer hence the name bytes (plural)
 TIMEOUT=1 
 WRITE_TIMEOUT=1
 class SerialWrapper: 
@@ -14,21 +12,19 @@ class SerialWrapper:
         self.mySerialConnection=aSerialConnection  
         # no circular buffer here, we dont want to write faster (python side) and over flow the arduino buffer  
         # it would make things very messy.  
-        # while we could certainly just have a time.sleep(), this is more reliable since we have built in threading protection in case 
-        # more than one person takes control of acontroller. 
-        theThread = threading.Thread(target=self.startWrite, daemon=True)
-        self.mySerialQueue =queue.Queue(maxsize=50) 
+        
+        self.myCurrentBytes=b""
+        theThread = threading.Thread(target=self.startWrite, daemon=True) 
         theThread.start()
+        
 
     def put(self, aBytes):   
-        if(self.mySerialQueue.full()): self.mySerialQueue.get()
-        self.mySerialQueue.put(aBytes) 
+        self.myCurrentBytes=aBytes
 
     def startWrite(self): 
         while True:
-            theCommand = self.mySerialQueue.get() 
-            if theCommand==b"": continue
-            self.mySerialConnection.write(theCommand) 
+            if self.myCurrentBytes==b"": continue
+            self.mySerialConnection.write(self.myCurrentBytes) 
 
 class SerialManager: 
     def __init__(self): 
@@ -43,28 +39,26 @@ class SerialManager:
                     timeout=TIMEOUT,  
                     write_timeout=WRITE_TIMEOUT
                 )  
+            
+                if theSerialConnection.is_open: 
+                    # https://stackoverflow.com/questions/65224676/why-wont-pyserial-write-inside-of-my-program  
+                    # https://stackoverflow.com/questions/37824371/python-serial-write-doesnt-work-first-run 
+                    # https://www.reddit.com/r/arduino/comments/zkxwv1/reset_when_serial_disconnected_and_reconnected/  
+                    # TLDR: arduino resets itself when serial is established, so we need a delay 
+                    # You can supposedly bypass this by accessing a register on the chip, or soldering some pads
+                    time.sleep(2)
+                    theSerialConnection.reset_input_buffer()# reset input buffer to avoid random garbage
+                    try: theSerialConnection.write(HANDSHAKE_VALUE)   
+    
+                    except: 
+                        print(f"Port: {aComPort.device} Connection Failed.") 
+                        continue
+
+                    if theSerialConnection.read(1)==HANDSHAKE_VALUE:  
+                        self.mySerialConnections.append(SerialWrapper(theSerialConnection)) 
+                        print(f"Port: {aComPort.device} Connection Successful.")
+
             except: continue
-
-            if theSerialConnection.is_open: 
-                # https://stackoverflow.com/questions/65224676/why-wont-pyserial-write-inside-of-my-program  
-                # https://stackoverflow.com/questions/37824371/python-serial-write-doesnt-work-first-run 
-                # https://www.reddit.com/r/arduino/comments/zkxwv1/reset_when_serial_disconnected_and_reconnected/  
-                # TLDR: arduino resets itself when serial is established, so we need a delay 
-                # You can supposedly bypass this by accessing a register on the chip, or soldering some pads
-                time.sleep(2) 
-                theSerialConnection.reset_input_buffer()# reset input buffer to avoid random garbage
-                try: 
-                    theSerialConnection.write(IDN_COMMAND.encode("utf-8")) 
-  
-                except: 
-                    print(f"Port: {aComPort.device} Connection Failed.") 
-                    continue
-
-                theResponse = theSerialConnection.readline().decode('utf-8').strip() 
-                if theResponse==IDN:  
-                    self.mySerialConnections.append(SerialWrapper(theSerialConnection)) 
-                    print(f"Port: {aComPort.device} Connection Successful.")
-
 
     def getSerialConnectionsAmt(self): 
         return len(self.mySerialConnections) 

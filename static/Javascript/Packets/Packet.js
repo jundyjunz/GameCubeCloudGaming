@@ -42,7 +42,7 @@ export class Packet{
         let theEvolvingCRC = 0x00;  
 
         [...this.#myPacket].forEach((aByte)=>{ 
-            [...aByte].reverse().forEach((aBit)=>{ 
+            [...aByte].reverse().forEach((aBit)=>{ // we reverse because we need to operate on the LSB just like in the C code.
                 let theAreLSBBitsDifferent = (aBit^theEvolvingCRC)&1; 
                 theEvolvingCRC>>=1; 
                 if(theAreLSBBitsDifferent) theEvolvingCRC^=Packet.myPolyNomialEncoder; 
