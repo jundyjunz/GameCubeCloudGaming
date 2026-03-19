@@ -12,17 +12,20 @@ class SerialWrapper:
         self.mySerialConnection=aSerialConnection  
         # no circular buffer here, we dont want to write faster (python side) and over flow the arduino buffer  
         # it would make things very messy.  
-        
         self.myCurrentBytes=b""
+        self.myEvent = threading.Event()
         theThread = threading.Thread(target=self.startWrite, daemon=True) 
         theThread.start()
         
 
     def put(self, aBytes):   
         self.myCurrentBytes=aBytes
+        self.myEvent.set()  # wake up the write thread
 
     def startWrite(self): 
         while True:
+            self.myEvent.wait()        # sleeps until put() wakes it
+            self.myEvent.clear()
             if self.myCurrentBytes==b"": continue
             self.mySerialConnection.write(self.myCurrentBytes) 
 

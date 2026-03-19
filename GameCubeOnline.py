@@ -23,6 +23,7 @@ from starlette.websockets import WebSocketDisconnect
 #seemingly biggest blockers were limiting the frame rate in the capture card thread and disabling print statements
 theSerialManager=SerialManager()
 theHDMICapture = HDMICapture(0,  350, 250, 70) 
+#theHDMICapture = HDMICapture(0,  450, 350, 100) 
 
 theSoundCapture = SoundCapture(2, 4096, RulesetGuermox())
 
@@ -35,7 +36,7 @@ async def postStreamingData(aClientId:int, aWebSocket:WebSocket, aCapture:Captur
             if(theData.any()):await aWebSocket.send_bytes(memoryview(theData))
             # since the function is async, wed like a little pause in between packets so they dont play in parallel 
             # this also serves the benefit of not hitting the arduino writes too fast which are blocking. 
-            else: await asyncio.sleep(aCaptureRate) 
+            await asyncio.sleep(aCaptureRate) 
     except WebSocketDisconnect:  
         aCapture.unsubscribe(aClientId)
         print (f"Client: {aClientId} Unsubscribed From {aCapture.__class__.__name__}.") 
