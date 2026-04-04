@@ -22,8 +22,8 @@ from starlette.websockets import WebSocketDisconnect
 
 #seemingly biggest blockers were limiting the frame rate in the capture card thread and disabling print statements
 theSerialManager=SerialManager()
-theHDMICapture = HDMICapture(0,  350, 250, 70) 
-#theHDMICapture = HDMICapture(0,  450, 350, 100) 
+#theHDMICapture = HDMICapture(0,  350, 250, 70) 
+theHDMICapture = HDMICapture(0,  550, 450, 70) 
 
 theSoundCapture = SoundCapture(2, 4096, RulesetGuermox())
 
@@ -34,7 +34,7 @@ async def postStreamingData(aClientId:int, aWebSocket:WebSocket, aCapture:Captur
             theData=aCapture.getFrame(aClientId) 
             #numpy arrays are not native byte objects so to expose the view in the buffer protocol, we're gonna have to use the meoryview function here.
             if(theData.any()):await aWebSocket.send_bytes(memoryview(theData))
-            # since the function is async, wed like a little pause in between packets so they dont play in parallel 
+            # since the function is async, wed like a little pause in between packets so the evnt loop doesnt just jeep hitting the sendbytes command over and over
             # this also serves the benefit of not hitting the arduino writes too fast which are blocking. 
             await asyncio.sleep(aCaptureRate) 
     except WebSocketDisconnect:  

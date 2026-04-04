@@ -19,15 +19,15 @@ class SerialWrapper:
         
 
     def put(self, aBytes):   
+        if aBytes==b"" : pass
         self.myCurrentBytes=aBytes
         self.myEvent.set()  # wake up the write thread
 
     def startWrite(self): 
         while True:
             self.myEvent.wait()        # sleeps until put() wakes it
-            self.myEvent.clear()
-            if self.myCurrentBytes==b"": continue
-            self.mySerialConnection.write(self.myCurrentBytes) 
+            self.myEvent.clear()        # wait only blocks if clear is called so that set can be called again
+            self.mySerialConnection.write(self.myCurrentBytes) #i/o call that releases GIL. should not have any thread contentions
 
 class SerialManager: 
     def __init__(self): 
