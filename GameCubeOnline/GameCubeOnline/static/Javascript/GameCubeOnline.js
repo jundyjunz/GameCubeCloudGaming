@@ -29,7 +29,7 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     let theGameCubeControllerVideoWrapperId ="GameCubeControllerVideoWrapper"; 
     let theAudioPlayer;   
     let theMaxControllerCount; 
-    PacketSingleton.setPacket(new Packet());
+    PacketSingleton.setPacket(Packet);
     RESTapiHelpers.RESTGet("/serial_connections_ct",(aData)=>{ theMaxControllerCount=aData.count;});
     
     RESTapiHelpers.RESTGet("/subscribe_audio", (aData)=>{ 
@@ -107,10 +107,12 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
         if(aRatio==0){InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedTrue(); theAudioPlayer.turnOffAudioPlayer();} 
         else{InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedFalse(); theAudioPlayer.turnOnAudioPlayer();}}; 
     let theSetController = (aControllerID)=>{ 
-        if(aControllerID==null) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, ()=>{PacketSingleton.killWebSocket();}); return;  }
-        if(aControllerID>=theMaxControllerCount){theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID+1} which does not exist!`,()=>{PacketSingleton.killWebSocket();}); return;}
+        if (aControllerID == null) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, () => { PacketSingleton.killWebSocket(); } ); return;  }
+        if (aControllerID >= theMaxControllerCount) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID + 1} which does not exist!`, () => { PacketSingleton.killWebSocket(); }); return;}
         theErrorBar.disableError();
-        PacketSingleton.setWebSocket(`/serial_post/${aControllerID}`, aControllerID);};
+        PacketSingleton.setWebSocket(`/serial_post/${aControllerID}`, aControllerID);
+        theControlButtonCollection.updateControlButtons();
+}; 
 
     InteractiveHtmlElementSingleton.registerElement( 
     (new Toggle("OverlayToggleCircle"))

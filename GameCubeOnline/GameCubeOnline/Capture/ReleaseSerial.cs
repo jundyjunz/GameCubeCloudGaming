@@ -78,7 +78,7 @@ namespace GameCubeOnline.Capture
         }
 
 
-        protected bool tryConnect(string aPortName, byte aConnectCode, int aByteCommandLen, int aSleepBuffer = 2000)
+        protected bool tryConnect(string aPortName, byte aConnectCode, int aByteCommandLen, int aSleepBuffer = 2000, int aWaitBuffer=1)
         {
             Console.WriteLine($"Attempting To Connect To Port {aPortName} ");
             SerialPort thePort = new SerialPort(aPortName, myBaudRate);
@@ -93,6 +93,7 @@ namespace GameCubeOnline.Capture
                 Thread.Sleep(aSleepBuffer);
                 thePort.DiscardInBuffer();
                 thePort.Write(theMessageToWrite, 0, 1);
+                Thread.Sleep(aWaitBuffer); // need to wait a bit here so we can wait for the I/O request.
                 thePort.Read(theMessageToRead, 0, 1);
                 if (theMessageToRead[0] == theMessageToWrite[0]) return registerPort(thePort, aByteCommandLen);
                 thePort.Close();
@@ -129,9 +130,8 @@ namespace GameCubeOnline.Capture
 
         public ReleaseSerial buildSerialConnection(byte aConnectCode, int aByteCommandLen)
         {
-            mySerialConnectionBuilt = (from aPortName
-                                       in SerialPort.GetPortNames()
-                                       select tryConnect(aPortName, aConnectCode, aByteCommandLen))
+            mySerialConnectionBuilt = SerialPort.GetPortNames()
+                                       .Select (aPortName=> tryConnect(aPortName, aConnectCode, aByteCommandLen))
                                        .ToArray()
                                        .Any(aBool => aBool);
             return this;

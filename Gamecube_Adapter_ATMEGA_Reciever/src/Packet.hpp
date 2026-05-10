@@ -35,7 +35,7 @@ class Packet{
             pinMode(PIN_DOWN, OUTPUT); 
             pinMode(PIN_LEFT, OUTPUT); 
             pinMode(PIN_RIGHT, OUTPUT); 
-            pinMode(PIN_ZTRIGGER, OUTPUT); 
+            pinMode(PIN_ZTRIGGER, OUTPUT);  
         }
 
         void unpackPacket(byte* aArray){  

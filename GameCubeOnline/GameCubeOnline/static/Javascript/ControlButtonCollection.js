@@ -14,6 +14,8 @@ export class ControlButtonCollection{
         this.#myKeyShortenThreshold =null;
     } 
 
+    updateControlButtons() { if (!this.#importDispatchMap()) this.resetToDefaultControlButtons(); }
+
     setInit(aControlButtonInstructions){ 
         (new BuilderWarning(!this.#myDefaultInstructions)).setRequired(this.setDefaultInstructions).enforce();
         (new BuilderWarning(!this.#myControlButtonCookieName)).setRequired(this.setCookieName).enforce();

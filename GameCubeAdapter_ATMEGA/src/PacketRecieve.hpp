@@ -5,13 +5,17 @@
 #define STICK_NEG 65 
 #define STICK_DEFAULT 128  
 #define ANALOG_MAX 1023
-#define PIN_POTENTIOMETER A6
+#define ANALOG_MIN 850 // for some reason the pcb make it so we cant even reach below ~593
+#define PIN_POTENTIOMETER A6 
+
 
 class PacketReciever{ 
     private: 
         bool myIsDPad;
         bool readFromPacket(int aInputPin){ return digitalRead(aInputPin)==HIGH; } 
-        void pollPotentiometer(){ myIsDPad=analogRead(PIN_POTENTIOMETER)>(ANALOG_MAX/2);}
+        void pollPotentiometer(){ myIsDPad=analogRead(PIN_POTENTIOMETER)>(ANALOG_MIN); 
+            
+        }
       
     public:
         PacketReciever(){} 

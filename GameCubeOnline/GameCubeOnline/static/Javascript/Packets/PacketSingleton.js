@@ -1,34 +1,36 @@
 
 export class PacketSingleton{ 
     static #myInstance = null; 
-    #myWebSocket;  
-    #myControllerNumber;
-    #myPacket;
+    #myCurrentSocketIndex;
+    #myWebSockets;  
+    #myPackets;
     
     constructor(){  
         if(PacketSingleton.#myInstance){ 
             console.log("Attempted to access PacketSingleton's constructor!");
             return; 
         } 
-        this.#myControllerNumber=null;
-        this.#myWebSocket=null;
-        this.#myPacket=null;
+        this.#myCurrentSocketIndex = null;
+        this.#myWebSockets=[];
+        this.#myPackets=[];
     } 
-    static setPacket(aPacket){ 
-        if(!this.#myInstance) this.#myInstance = new PacketSingleton();  
-        this.#myInstance.#myPacket=aPacket;
-    }
-    static getPacket(){
-        if(!this.#myInstance) this.#myInstance = new PacketSingleton();  
-        return this.#myInstance.#myPacket ? this.#myInstance.#myPacket:null;
+    static setPacket(aPacketType){ 
+        if (!this.#myInstance) this.#myInstance = new PacketSingleton();  
+        this.#myInstance.#myPackets = Array.from({ length: 3 }, () => new aPacketType()); //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
     }
 
-    static setWebSocket(aWebSocketRoute, aControllerNumber){
+    static getPacket(){
         if(!this.#myInstance) this.#myInstance = new PacketSingleton();  
-        this.killWebSocket();
-        this.#myInstance.myControllerNumber=aControllerNumber;
-        this.#myInstance.#myWebSocket = new WebSocket(aWebSocketRoute + `${aControllerNumber}`);  
-        this.#myInstance.#myWebSocket.onopen=async()=>{await this.#sendBytesFunc();};
+        return this.#myInstance.#myPackets[this.#myInstance.#myCurrentSocketIndex] ? this.#myInstance.#myPackets[this.#myInstance.#myCurrentSocketIndex] : this.#myInstance.#myPackets[0];
+    }
+
+    static setWebSocket(aWebSocketRoute, aPacketIndex){
+        if(!this.#myInstance) this.#myInstance = new PacketSingleton();  
+        this.killWebSocket(); 
+        this.#myInstance.#myCurrentSocketIndex = aPacketIndex;
+        this.#myInstance.#myWebSockets[this.#myInstance.#myCurrentSocketIndex] = new WebSocket(aWebSocketRoute);   
+        let pee = aWebSocketRoute + `${this.#myInstance.#myCurrentSocketIndex}`;
+        this.#myInstance.#myWebSockets[this.#myInstance.#myCurrentSocketIndex].onopen = async () => { await this.#sendBytesFunc(this.#myInstance.#myCurrentSocketIndex);};
     } 
     // aStall cycle is in milliseconds
     // promises hold results of an async function --> microtask queue 
@@ -51,13 +53,14 @@ export class PacketSingleton{
     static async #stall(aStallCycle){await new Promise((aResolve) => setTimeout(aResolve, aStallCycle));}
     static killWebSocket=()=>{ 
         if(!this.#myInstance) this.#myInstance = new PacketSingleton();  
-        if(this.#myInstance.#myWebSocket)this.#myInstance.#myWebSocket.close(1000, `Controller #${this.#myInstance.myControllerNumber} Connection Killed`); 
+        if (this.#myInstance.#myWebSockets[this.#myInstance.#myCurrentSocketIndex]) this.#myInstance.#myWebSockets[this.#myInstance.#myCurrentSocketIndex].close(1000, `Controller #${this.#myInstance.#myCurrentSocketIndex} Connection Killed`); 
     } 
 
     static async #sendBytesFunc(){  
         if(!this.#myInstance) this.#myInstance = new PacketSingleton();  
-        while(this.#myInstance.#myWebSocket.readyState === WebSocket.OPEN){
-            this.#myInstance.#myWebSocket.send(this.getPacket().getBytes());  
+        while (this.#myInstance.#myWebSockets[this.#myInstance.#myCurrentSocketIndex].readyState === WebSocket.OPEN) {
+            let leepicpacket = this.getPacket().getBytes();
+            this.#myInstance.#myWebSockets[this.#myInstance.#myCurrentSocketIndex].send(leepicpacket);  
             await this.#stall(1) // await required here or microtask queue never finishes
         }
     }

@@ -42,7 +42,7 @@ export class MultiToggle extends InteractiveHtmlElement {
 
     setInit(){ //should come last! 
         super.setInit(); 
-        (new BuilderWarning(this.#mySwitchButtons==[])).setRequired(this.setButton).enforce("(Make Sure Each SwitchButton Has Called .setInit()!)");
+        (new BuilderWarning(this.#mySwitchButtons.length==0)).setRequired(this.setButton).enforce("(Make Sure Each SwitchButton Has Called .setInit()!)");
         (new BuilderWarning(this.#myIsSetFuncSet==false)).setRequired(this.setFunc).enforce("(Make Sure You Have Called SetButton Beforehand!)");
         return this;
     }

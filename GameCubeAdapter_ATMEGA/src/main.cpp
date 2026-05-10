@@ -33,6 +33,7 @@ void setup() {
   thePacket=defaultGamecubeData;
   thePacketReciever.initPacket();
   GamecubeController1.read();
+  Serial.begin(9600);
 } 
 
 void loop() {
