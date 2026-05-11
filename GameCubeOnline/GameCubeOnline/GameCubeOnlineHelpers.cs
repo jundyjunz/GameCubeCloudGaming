@@ -47,7 +47,7 @@ namespace GameCubeOnline
         public  async static Task sendFrame<T> (IServiceProvider aService, int aClientId, HttpContext aContext) where T: Capture<T>
         {
             WebSocket theWebSocket = await aContext.WebSockets.AcceptWebSocketAsync();
-            int theFrameRate = aService.GetRequiredService<GameCubeOnlineSettings>().FrameRate;
+            int theFrameRate = (typeof(T)==typeof(Capture<CaptureVideo>)) ? aService.GetRequiredService<GameCubeOnlineSettings>().VideoFrameRate : aService.GetRequiredService<GameCubeOnlineSettings>().AudioFrameRate;
             Capture<T> theCapture = aService.GetRequiredService<T>();
 
             WebSocketWatchDog theWatchDog = new WebSocketWatchDog(theWebSocket);

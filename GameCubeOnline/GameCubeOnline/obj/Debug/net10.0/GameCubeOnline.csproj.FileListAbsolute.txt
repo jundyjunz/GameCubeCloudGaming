@@ -58,3 +58,4 @@ C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCub
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\obj\Debug\net10.0\GameCubeOnline.pdb
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\obj\Debug\net10.0\GameCubeOnline.genruntimeconfig.cache
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\obj\Debug\net10.0\ref\GameCubeOnline.dll
+C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\static\GameCubeOnlineSettingsJSON.json

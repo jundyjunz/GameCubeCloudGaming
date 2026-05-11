@@ -110,9 +110,7 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
         if (aControllerID == null) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, () => { PacketSingleton.killWebSocket(); } ); return;  }
         if (aControllerID >= theMaxControllerCount) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID + 1} which does not exist!`, () => { PacketSingleton.killWebSocket(); }); return;}
         theErrorBar.disableError();
-        PacketSingleton.setWebSocket(`/serial_post/${aControllerID}`, aControllerID);
-        theControlButtonCollection.updateControlButtons();
-}; 
+        PacketSingleton.setWebSocket(`/serial_post/${aControllerID}`, aControllerID);}; 
 
     InteractiveHtmlElementSingleton.registerElement( 
     (new Toggle("OverlayToggleCircle"))

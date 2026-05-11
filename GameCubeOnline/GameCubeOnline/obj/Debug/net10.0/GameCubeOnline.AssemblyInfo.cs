@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameCubeOnline")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b63766096da801c6cd7b6490c21d691aefcf5de7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d3cfd7842c7321292ef18e21aa03ae7ba059658")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameCubeOnline")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameCubeOnline")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

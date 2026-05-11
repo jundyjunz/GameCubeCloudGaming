@@ -1,7 +1,10 @@
 ﻿using PortAudioSharp;
+using GameCubeOnline.Helpers;
+using System.Runtime.CompilerServices;
 
 namespace GameCubeOnline.Capture
-{
+{ 
+
     abstract class CaptureAudioRuleSet
     {
         protected string myName;
@@ -20,8 +23,9 @@ namespace GameCubeOnline.Capture
         }
     }
 
-    class GuermokRuleSet : CaptureAudioRuleSet
+    class GuermokRuleSet : CaptureAudioRuleSet, Factory<CaptureAudioRuleSet>.Registry<GuermokRuleSet>
     {
+        [ModuleInitializer] public static void forceRegistry() { Factory<CaptureAudioRuleSet>.Registry<GuermokRuleSet>.register(aObjects => new GuermokRuleSet()); }
         public GuermokRuleSet()
         {
             myName = "Digital Audio Interface (USB3 Digital Audio)";

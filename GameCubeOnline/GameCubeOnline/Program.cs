@@ -7,28 +7,38 @@ using System.Runtime;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton(aService => (new GameCubeOnlineSettings())
-                                            .buildBufferSize(10)
                                             .buildStaticFiles(builder, "static")
-                                            .buildFrameRate(16)
+                                            .buildSettings("/GameCubeOnlineSettingsJSON.json")
                                             .buildInit()); 
 
-builder.Services.AddSingleton(aService =>(new CaptureVideo(aService.GetRequiredService<GameCubeOnlineSettings>().BufferSize, 500, 400)) 
-                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().FrameRate)
-                                            .buildVideoSource(0)
-                                            .buildVideoQuality(70)
+builder.Services.AddSingleton(aService =>(new CaptureVideo( 
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().VideoBufferSize,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().FrameWidth,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().FrameHeight 
+                                             )) 
+                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().VideoFrameRate)
+                                            .buildVideoSource(aService.GetRequiredService<GameCubeOnlineSettings>().VideoSource)
+                                            .buildVideoQuality(aService.GetRequiredService<GameCubeOnlineSettings>().VideoQuality)
                                             .buildInit()); 
 
-builder.Services.AddSingleton(aService=>(new CaptureAudio(aService.GetRequiredService<GameCubeOnlineSettings>().BufferSize, 4096, 2, 4))
-                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().FrameRate)
-                                            .buildStreamParameters(new GuermokRuleSet())
+builder.Services.AddSingleton(aService=>(new CaptureAudio( 
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().AudioBufferSize,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().FramesPerBuffer,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().ChannelCount,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().SampleByteSize
+                                             ))
+                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().AudioFrameRate)
+                                            .buildStreamParameters(aService.GetRequiredService<GameCubeOnlineSettings>().AudioRuleSet)
                                             .buildStream()
                                             .buildInit()); 
 
 builder.Services.AddSingleton(aService => (new ReleaseSerial())
-                                            .buildBaudRate(250000)
-                                            .buildReadTimeout(-1)
-                                            .buildWriteTimeout(-1)
-                                            .buildSerialConnection(0xFA, 5)
+                                            .buildBaudRate(aService.GetRequiredService<GameCubeOnlineSettings>().BaudRate)
+                                            .buildReadTimeout(aService.GetRequiredService<GameCubeOnlineSettings>().ReadTimeout)
+                                            .buildWriteTimeout(aService.GetRequiredService<GameCubeOnlineSettings>().WriteTimeout)
+                                            .buildSerialConnection( 
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().ConnectCode,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().CommandByteLen)
                                             .buildInit());
 
 var app = builder.Build();

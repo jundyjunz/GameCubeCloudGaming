@@ -78,7 +78,7 @@ namespace GameCubeOnline.Capture
         }
 
 
-        protected bool tryConnect(string aPortName, byte aConnectCode, int aByteCommandLen, int aSleepBuffer = 2000, int aWaitBuffer=1)
+        protected bool tryConnect(string aPortName, byte aConnectCode, int aByteCommandLen, int aSleepBuffer = 2000, int aWaitBuffer=500)
         {
             Console.WriteLine($"Attempting To Connect To Port {aPortName} ");
             SerialPort thePort = new SerialPort(aPortName, myBaudRate);

@@ -1,23 +1,51 @@
 ﻿
+using GameCubeOnline.Capture;
 using GameCubeOnline.Helpers;
 using Microsoft.Extensions.FileProviders;
 using System.Runtime;
+using System.Text.Json;
 
 namespace GameCubeOnline
 {
+    
+    
+    class GameCubeOnlineSettingsSerialized
+    {
+        public Dictionary<string, JsonElement>? VideoSettings { get; set; }
+        public Dictionary<string, JsonElement>? AudioSettings { get; set; }
+        public Dictionary<string, JsonElement>? SerialSettings { get; set; }
+    }
     class GameCubeOnlineSettings : Builder<GameCubeOnlineSettings>
     {
 
-        protected int myBufferSize; 
-        public int BufferSize { get => myBufferSize; }
         protected PhysicalFileProvider myStaticFiles;
         public PhysicalFileProvider StaticFiles { get => myStaticFiles; }
-        protected int myFrameRate; 
-        public int FrameRate { get => myFrameRate; }
+
+        protected GameCubeOnlineSettingsSerialized mySerializedSettings;
+
+        public int VideoBufferSize  { get => mySerializedSettings.VideoSettings!["BufferSize"].Deserialize<int>(); }
+        public int FrameWidth       { get => mySerializedSettings.VideoSettings!["FrameWidth"].Deserialize<int>(); }
+        public int FrameHeight      { get => mySerializedSettings.VideoSettings!["FrameHeight"].Deserialize<int>(); }
+        public int VideoQuality     { get => mySerializedSettings.VideoSettings!["VideoQuality"].Deserialize<int>(); }
+        public int VideoSource      { get => mySerializedSettings.VideoSettings!["VideoSource"].Deserialize<int>(); } 
+        public int VideoFrameRate   { get => mySerializedSettings.VideoSettings!["FrameRate"].Deserialize<int>(); }
+
+        public int AudioBufferSize  { get => mySerializedSettings.AudioSettings!["BufferSize"].Deserialize<int>(); }
+        public uint FramesPerBuffer { get => mySerializedSettings.AudioSettings!["FramesPerBuffer"].Deserialize<uint>();  }
+        public int ChannelCount     { get => mySerializedSettings.AudioSettings!["ChannelCount"].Deserialize<int>(); }
+        public int SampleByteSize   { get => mySerializedSettings.AudioSettings!["SampleByteSize"].Deserialize<int>(); }
+        public int AudioFrameRate   { get => mySerializedSettings.AudioSettings!["FrameRate"].Deserialize<int>(); }
+        public CaptureAudioRuleSet AudioRuleSet  { get => Factory<CaptureAudioRuleSet>.make(mySerializedSettings.AudioSettings!["AudioRuleset"].Deserialize<string>()!); }
+        public int BaudRate         { get => mySerializedSettings.SerialSettings!["BaudRate"].Deserialize<int>(); }
+        public int ReadTimeout      { get => mySerializedSettings.SerialSettings!["ReadTimeout"].Deserialize<int>(); }
+        public int WriteTimeout     { get => mySerializedSettings.SerialSettings!["WriteTimeout"].Deserialize<int>(); }
+        public byte ConnectCode     { get => mySerializedSettings.SerialSettings!["ConnectCode"].Deserialize<byte>(); }
+        public int CommandByteLen   { get => mySerializedSettings.SerialSettings!["CommandByteLen"].Deserialize<int>(); }
+
 
         public GameCubeOnlineSettings() {
             GCSettings.LatencyMode = GCLatencyMode.LowLatency;
-            myBufferSize = 0; 
+            mySerializedSettings = null;
             myStaticFiles=null;
         }
 
@@ -25,25 +53,24 @@ namespace GameCubeOnline
         public string getFileAt(string aSubPath) => StaticFiles.GetFileInfo(aSubPath).PhysicalPath!;
        
 
-        public GameCubeOnlineSettings buildBufferSize(int aBufferSize) {  
-            myBufferSize=aBufferSize; 
-            return this;
-        } 
+        
 
         public GameCubeOnlineSettings buildStaticFiles(WebApplicationBuilder aBuilder, string aFileDirectory) {
             myStaticFiles = new PhysicalFileProvider(Path.Combine(aBuilder.Environment.ContentRootPath, "static"));
             return this;
         }
 
-        public GameCubeOnlineSettings buildFrameRate(int aFrameRateInMs) {
-            myFrameRate = aFrameRateInMs;
-            return this;
+        public GameCubeOnlineSettings buildSettings(string aSubPath) {    
+           mySerializedSettings=JsonSerializer.Deserialize<GameCubeOnlineSettingsSerialized>(File.ReadAllText(getFileAt(aSubPath)))!;
+           return this;
         }
+
+       
 
         public GameCubeOnlineSettings buildInit() {
             (new BuilderWarning<GameCubeOnlineSettings>())
-            .requires(myBufferSize != 0, nameof(buildBufferSize))
-            .requires(myStaticFiles != null, nameof(buildStaticFiles))
+            .requires(myStaticFiles != null, nameof(buildStaticFiles)) 
+            .requires(mySerializedSettings!=null, nameof(buildSettings), "please call buildStaticFiles() before calling this function.")
             .enforce(); 
             return this;
         }
