@@ -4,12 +4,13 @@
 #define HANDSHAKE_VALUE 0xFA 
 #define START_BYTE 0xFA
 #define BYTES_TO_PROCESS 5
+#define COMMAND_BYTE_LEN BYTES_TO_PROCESS-2
 
 
 
 
-byte theBytes[BYTES_TO_PROCESS];
-Packet thePacket;
+byte theBytes[BYTES_TO_PROCESS]={};
+Packet thePacket(theBytes, BYTES_TO_PROCESS, COMMAND_BYTE_LEN);
 
 void setup() {
   Serial.begin(BAUD_RATE); 
@@ -19,8 +20,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:  
-  if(!ByteReciever::readBytes(theBytes, BYTES_TO_PROCESS, START_BYTE)) return;   
-  thePacket.unpackPacket(theBytes); 
+  if(!ByteReciever::readBytes(theBytes, BYTES_TO_PROCESS, START_BYTE)) return;
+  thePacket.unpackPacket(); 
   thePacket.pollPacket();
   thePacket.resetPacket(); 
 

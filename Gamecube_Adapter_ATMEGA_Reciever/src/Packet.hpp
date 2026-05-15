@@ -6,7 +6,10 @@
 
 
 class Packet{  
-    private:  
+    private:   
+        byte* myBufferArray;  
+        int myBufferArrayLen; 
+        int myCommandBytesLen;
         bool myPacket[TOTAL_BITS];  
         void digitalWriteFromPacket(int aPacketIndex, int aOutputPin){  
             if( myPacket[aPacketIndex]) digitalWrite(aOutputPin, HIGH);  
@@ -15,7 +18,10 @@ class Packet{
         
       
     public:
-        Packet() {  
+        Packet(byte* aBufferArray, int aBufferArrayLen, int aCommandBytesLen) { 
+            myBufferArray=aBufferArray;   
+            myBufferArrayLen=aBufferArrayLen; 
+            myCommandBytesLen=aCommandBytesLen;
             resetPacket();  
         } 
 
@@ -38,13 +44,13 @@ class Packet{
             pinMode(PIN_ZTRIGGER, OUTPUT);  
         }
 
-        void unpackPacket(byte* aArray){  
-            int theCommandBytesLen =3;
-            byte theCommandBytes[theCommandBytesLen]={aArray[1], aArray[2], aArray[3]};
-            for(int i=0; i< theCommandBytesLen; i++) for(int k=0; k<BYTE_LEN; k++) myPacket[i*BYTE_LEN+k] = ((theCommandBytes[i]>>(7-k)) & 0x01) == 0x01;
+        void unpackPacket(){  
+            byte theCommandBytes[myCommandBytesLen]; 
+            for(int i=0; i<myCommandBytesLen; i++ ) theCommandBytes[i]=myBufferArray[i+1];
+            for(int i=0; i< myCommandBytesLen; i++) for(int k=0; k<BYTE_LEN; k++) myPacket[i*BYTE_LEN+k] = ((theCommandBytes[i]>>(7-k)) & 0x01) == 0x01;
         }  
 
-        void resetPacket(){for(int i=0; i< TOTAL_BITS; i++) myPacket[i]=false;}
+        void resetPacket(){  for(int i=0; i< TOTAL_BITS; i++) myPacket[i]=false; }
 
         void A            (){digitalWriteFromPacket(0 ,     PIN_A              );}
         void B            (){digitalWriteFromPacket(1 ,     PIN_B              );}      

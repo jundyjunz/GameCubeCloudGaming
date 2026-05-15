@@ -63,6 +63,10 @@ app.MapGet("/subscribe_video", async (IServiceProvider aService) =>{
     return Results.Json(new { videoClientId = aService.GetRequiredService<CaptureVideo>().subscribeToBuffer() });
 });
 
+app.MapGet("/subscribe_port/{aId}", async (IServiceProvider aService, int aId) =>{
+    return Results.Json(new { portClientId = aService.GetRequiredService<ReleaseSerial>()[aId].subscribeToPort() });
+});
+
 app.MapGet("/audio_metadata", async (IServiceProvider aService) => {
     return Results.Json(new { sampleRate = aService.GetRequiredService<CaptureAudio>().SampleRate, channels =  aService.GetRequiredService<CaptureAudio>().ChannelCount }); 
 });
@@ -79,8 +83,8 @@ app.Map("/audio_data/{aClientId}", async (IServiceProvider aService, int aClient
     await GameCubeOnlineHelpers.sendFrame<CaptureAudio>(aService, aClientId, aContext);
 });
 
-app.Map("/serial_post/{aId}", async (IServiceProvider aService, int aId, HttpContext aContext) =>{
-    await GameCubeOnlineHelpers.readBytes(aService, aId, aContext);
+app.Map("/serial_post/{aId}/{aClientId}", async (IServiceProvider aService, int aId, int aClientId, HttpContext aContext) =>{
+    await GameCubeOnlineHelpers.readBytes(aService, aId, aClientId,  aContext);
 });
 
 app.Run();

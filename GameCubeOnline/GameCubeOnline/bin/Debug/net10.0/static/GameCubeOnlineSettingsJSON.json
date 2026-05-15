@@ -1,8 +1,8 @@
 {
   "VideoSettings": {
     "BufferSize": 10,
-    "FrameWidth": 600,
-    "FrameHeight": 500, 
+    "FrameWidth": 500,
+    "FrameHeight": 400, 
     "VideoQuality": 70,
     "VideoSource": 0, 
     "FrameRate": 16

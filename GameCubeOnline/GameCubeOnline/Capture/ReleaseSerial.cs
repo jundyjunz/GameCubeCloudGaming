@@ -1,4 +1,5 @@
 ﻿using GameCubeOnline.Helpers;
+using System.Buffers;
 using System.IO.Ports;
 
 namespace GameCubeOnline.Capture
@@ -7,44 +8,77 @@ namespace GameCubeOnline.Capture
     {
         protected SerialPort myPort;
         protected int myBytesToWrite;
-        protected byte[] myCurrentCommand;
+        protected Dictionary<int, byte[]> myCurrentCommands;
+        protected byte[] myCoalescedCommand;
+        protected Lock myCommandLock;
+        protected Lock mySubscriberLock;
+        protected static byte myPolynomialMultiplier = 0xFA;
+        protected int myNewestClientId;
 
         public int BytesToWrite { get => myBytesToWrite;  }
         public SerialWrapper(SerialPort aPort, int aBytesToWrite)
         {
             myPort = aPort;
             myBytesToWrite = aBytesToWrite;
-            myCurrentCommand = new byte[aBytesToWrite];
+            myCommandLock = new Lock();
+            mySubscriberLock = new Lock();
+            myCurrentCommands = new Dictionary<int, byte[]>(); 
+            myCoalescedCommand = new byte[myBytesToWrite];
+            myNewestClientId = 0;
             Task.Run(write);
         }
 
-        public bool isDefaultCommand() {
-            ReadOnlySpan<byte> theCommands = myCurrentCommand.AsSpan(1, myCurrentCommand.Length - 2);
-            bool theIsDefaultCommand = true;
-            foreach (var aCommand in theCommands) if (!(theIsDefaultCommand = aCommand == 0) ) break;
-            return theIsDefaultCommand;
-        }
-
-        public void read(ReadOnlyMemory<byte> aBytes)
+        protected byte crc8(ReadOnlySpan<byte> theBytes)
         {
-            // concurrency issue here, writes can happen at the same time as reads. 
-            // fortunately, crc8 checks will drop the packets arduino side if their bad. 
-            // the scheduler also cannot be this malicious, as to schedule this many reads and writes at the same time.
-            aBytes.CopyTo(myCurrentCommand.AsMemory(0, myBytesToWrite)); 
+            byte theEvolvingCRC = 0x00;
+            for (int i = 0; i < theBytes.Length; i++)
+            {
+                byte theCurrentByte = theBytes[i];
+                for (int j = 0; j < 8; j++)
+                {
+                    int theAreBothBitsDifferent = (theEvolvingCRC ^ theCurrentByte) & 0x01;
+                    theEvolvingCRC >>= 1;
+                    if (theAreBothBitsDifferent==1) theEvolvingCRC ^= myPolynomialMultiplier;
+                    theCurrentByte >>= 1;
+                }
+            }
+            return theEvolvingCRC;
         }
 
+        protected void byteArrayOrEquals(byte[] aByteArr1, byte[] aByteArr2) { 
+            if (aByteArr1.Length == aByteArr2.Length) for (int i = 0; i < aByteArr1.Length; i++) { aByteArr1[i] |= aByteArr2[i]; }
+        }
+
+        protected void resetCoalescedCommandToDefault() => myCoalescedCommand.AsSpan(1, myBytesToWrite-2).Fill(0x00);
+
+        //protected bool isDefaultCoalescedCommand() => myCoalescedCommand.Skip(1).SkipLast(1).All(aByte => aByte == 0x00);
+
+        public int subscribeToPort(){
+            // needed such that the enumeration while looping through the subscribers to coalesce the command doesnt fail.
+            // Fine to have a lock in this case since contention is rare. Only happens upon connection.
+            lock (mySubscriberLock){
+                int theOldSubscriberCount = myNewestClientId;
+                myCurrentCommands[myNewestClientId++] = new byte[myBytesToWrite];
+                return theOldSubscriberCount;
+            }
+        }
+
+        public int unsubscribeFromPort(int aClientId){
+            lock (mySubscriberLock) myCurrentCommands.Remove(aClientId);
+            return aClientId;
+        }
+
+        public void readCommand(ReadOnlyMemory<byte> aBytes, int aClientId) { lock (myCommandLock) aBytes.CopyTo(myCurrentCommands[aClientId]); } 
         protected void writeCommand()
         {
-            // if (isDefaultCommand()) return; --> this fails and stagnates the character to the last command. 
-            // theres a check arduino side to see if theres incoming bytes. the reset only happens if there are incominhg bytes so it never reset the character.
-            myPort.Write(myCurrentCommand, 0, myBytesToWrite);
+            lock (mySubscriberLock) foreach (var aCommand in myCurrentCommands) byteArrayOrEquals(myCoalescedCommand, aCommand.Value);
+            myCoalescedCommand[myBytesToWrite - 1] = crc8(myCoalescedCommand.AsSpan(0, myBytesToWrite-1));
+            myPort.Write(myCoalescedCommand, 0, myBytesToWrite);
+            resetCoalescedCommandToDefault(); // have to reset command every time so stale command doesnt persist
         }
+        public void write(){ while (true) writeCommand(); }
 
-        public void write()
-        {
-            try { while (true) writeCommand(); }
-            catch { myPort.Close(); myPort.Dispose(); }
-        }
+        
 
 
     }
@@ -130,10 +164,7 @@ namespace GameCubeOnline.Capture
 
         public ReleaseSerial buildSerialConnection(byte aConnectCode, int aByteCommandLen)
         {
-            mySerialConnectionBuilt = SerialPort.GetPortNames()
-                                       .Select (aPortName=> tryConnect(aPortName, aConnectCode, aByteCommandLen))
-                                       .ToArray()
-                                       .Any(aBool => aBool);
+            mySerialConnectionBuilt = SerialPort.GetPortNames().Select (aPortName=> tryConnect(aPortName, aConnectCode, aByteCommandLen)).ToArray().Any(aBool => aBool);
             return this;
         }
 

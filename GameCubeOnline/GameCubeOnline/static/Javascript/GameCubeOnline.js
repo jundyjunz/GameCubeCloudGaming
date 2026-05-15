@@ -29,6 +29,7 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
     let theGameCubeControllerVideoWrapperId ="GameCubeControllerVideoWrapper"; 
     let theAudioPlayer;   
     let theMaxControllerCount; 
+
     PacketSingleton.setPacket(Packet);
     RESTapiHelpers.RESTGet("/serial_connections_ct",(aData)=>{ theMaxControllerCount=aData.count;});
     
@@ -106,11 +107,11 @@ document.addEventListener( "DOMContentLoaded", (event)=>{
         theAudioPlayer.setVolume(aRatio);
         if(aRatio==0){InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedTrue(); theAudioPlayer.turnOffAudioPlayer();} 
         else{InteractiveHtmlElementSingleton.getElement(theVolumeButtonId).setPngElemWhenSwitchedFalse(); theAudioPlayer.turnOnAudioPlayer();}}; 
-    let theSetController = (aControllerID)=>{ 
+    let theSetController = (aControllerID) => { 
         if (aControllerID == null) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n Please select a controller!`, () => { PacketSingleton.killWebSocket(); } ); return;  }
         if (aControllerID >= theMaxControllerCount) { theErrorBar.enableError(`There are currently ${theMaxControllerCount} connected controllers! \n You are playing on controller #${aControllerID + 1} which does not exist!`, () => { PacketSingleton.killWebSocket(); }); return;}
-        theErrorBar.disableError();
-        PacketSingleton.setWebSocket(`/serial_post/${aControllerID}`, aControllerID);}; 
+        theErrorBar.disableError(); 
+        RESTapiHelpers.RESTGet(`/subscribe_port/${aControllerID}`, (aData) => {PacketSingleton.setWebSocket(`/serial_post/${aControllerID}/${aData.portClientId}`, aControllerID);})}; 
 
     InteractiveHtmlElementSingleton.registerElement( 
     (new Toggle("OverlayToggleCircle"))
