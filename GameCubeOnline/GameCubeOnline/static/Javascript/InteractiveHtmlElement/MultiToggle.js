@@ -12,6 +12,8 @@ export class MultiToggle extends InteractiveHtmlElement {
 
     }    
 
+    getMultiToggleLength() { return this.#mySwitchButtons.length; }
+
     setButton(aButton){ 
         this.#mySwitchButtons.push(aButton);
         return this;

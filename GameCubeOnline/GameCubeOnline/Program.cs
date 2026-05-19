@@ -6,6 +6,7 @@ using System.Runtime;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.AddSingleton(aService => (new GameCubeOnlineSettings())
                                             .buildStaticFiles(builder, "static")
                                             .buildSettings("/GameCubeOnlineSettingsJSON.json")
@@ -55,6 +56,14 @@ app.MapGet("/", async (IServiceProvider aService) => {
 
 });
 
+app.MapPost("/get_hash", async (IServiceProvider aService, GameCubeOnlineHelpers.LockMatrixObject aData) => {
+    return await GameCubeOnlineHelpers.getHash(aService, aData);
+});
+
+app.MapPost("/check_hash", async (IServiceProvider aService, GameCubeOnlineHelpers.HashObject aData) => {
+    return (aService.GetRequiredService<GameCubeOnlineSettings>().Hashes.Contains(aData.hash)) ? Results.Json(new { hash = aData.hash}) : Results.Json(new { hash = (string?)null }); ;
+});
+
 app.MapGet("/subscribe_audio", async (IServiceProvider aService) =>{
     return Results.Json( new { audioClientId = aService.GetRequiredService<CaptureAudio>().subscribeToBuffer()});
 });
@@ -88,3 +97,4 @@ app.Map("/serial_post/{aId}/{aClientId}", async (IServiceProvider aService, int 
 });
 
 app.Run();
+

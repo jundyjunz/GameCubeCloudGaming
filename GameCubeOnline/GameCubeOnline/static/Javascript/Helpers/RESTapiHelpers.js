@@ -2,16 +2,18 @@
 // How the js event loop works
 export class RESTapiHelpers{ 
     static RESTGet(aRoute, aCallback){ 
-        fetch(aRoute).then((aData)=>aData.json()).then((aData)=>{ 
-            aCallback(aData); 
-        });
+        fetch(aRoute)
+        .then((aData) => aData.json())
+        .then((aData) => {aCallback(aData);});
     } 
 
-    static RESTPost(aRoute, aJsonObject, aHeaders={ "Content-Type": "application/json" }){ 
+    static RESTPost(aRoute, aJsonObject, aCallback,  aHeaders={ "Content-Type": "application/json" }){ 
         fetch(aRoute, {
             method: "POST",
             headers: aHeaders,
             body: JSON.stringify(aJsonObject)
-        });
+        })
+        .then(aData => aData.json())
+        .then(aData => aCallback(aData));
     }
 }

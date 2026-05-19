@@ -51,7 +51,6 @@ namespace GameCubeOnline.Capture
 
         protected void resetCoalescedCommandToDefault() => myCoalescedCommand.AsSpan(1, myBytesToWrite-2).Fill(0x00);
 
-        //protected bool isDefaultCoalescedCommand() => myCoalescedCommand.Skip(1).SkipLast(1).All(aByte => aByte == 0x00);
 
         public int subscribeToPort(){
             // needed such that the enumeration while looping through the subscribers to coalesce the command doesnt fail.
@@ -71,7 +70,7 @@ namespace GameCubeOnline.Capture
         public void readCommand(ReadOnlyMemory<byte> aBytes, int aClientId) { lock (myCommandLock) aBytes.CopyTo(myCurrentCommands[aClientId]); } 
         protected void writeCommand()
         {
-            lock (mySubscriberLock) foreach (var aCommand in myCurrentCommands) byteArrayOrEquals(myCoalescedCommand, aCommand.Value);
+            lock (mySubscriberLock) foreach (var aCommand in myCurrentCommands) byteArrayOrEquals(myCoalescedCommand, aCommand.Value); //coalescing commands
             myCoalescedCommand[myBytesToWrite - 1] = crc8(myCoalescedCommand.AsSpan(0, myBytesToWrite-1));
             myPort.Write(myCoalescedCommand, 0, myBytesToWrite);
             resetCoalescedCommandToDefault(); // have to reset command every time so stale command doesnt persist

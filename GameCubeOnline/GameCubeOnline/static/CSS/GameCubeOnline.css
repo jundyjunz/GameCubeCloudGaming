@@ -1,16 +1,28 @@
+
+
 #WholePage{ 
     display: grid; 
-    grid-template-columns: 1fr 1fr;  
-    gap:2.5%;
+    grid-template-columns: 1fr 1fr;   
+    grid-template-rows:1fr;
+    gap:2.5%; 
 }
 #GameCubeControllerWrapper{ 
     grid-column: 2;  
-}  
+}
+#GameCubePageLockWrapper {
+    position: absolute;
+    top: 0%;
+    left:0%;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.8); 
+}
 
-#GameCubeControllerVideoWrapper{ 
-    display:grid;
-    grid-template-rows: 4fr 1fr ; 
-    gap:1.5% 
+#GameCubeControllerVideoWrapper {
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+    gap: 1.5%;
 }
 #GameCubeControllerPanel{ 
     width:100%; 
@@ -22,7 +34,7 @@
     border-radius: 25px;  
     border: 15px solid indigo ; 
     width: 100%; 
-    height:100%
+    height:100%;
 } 
 img{ 
     image-rendering: auto;

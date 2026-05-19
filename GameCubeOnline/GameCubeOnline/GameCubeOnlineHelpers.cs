@@ -8,6 +8,21 @@ namespace GameCubeOnline
 {
     static class GameCubeOnlineHelpers
     {
+        public record HashObject(string hash);
+        public record LockMatrixObject(int[][] lockmatrix);
+
+        public async static Task<IResult> getHash(IServiceProvider aService, LockMatrixObject aData){
+            GameCubeOnlineSettings theSettings = aService.GetRequiredService<GameCubeOnlineSettings>();
+            if (!theSettings.isMatrixEquivalent(aData.lockmatrix)) return Results.Json(new { hash = (string?) null });
+            string theHash = makeHash();
+            theSettings.Hashes.Add(theHash);
+            return Results.Json(new { hash = theHash });
+        }
+
+
+        private static string makeHash() => Convert.ToHexString(SHA256.HashData(BitConverter.GetBytes(Random.Shared.Next())));
+
+
         //This class exists because a websocket in C# needs to recieve messages in order to see that the state of a websocket is closed. 
         // therefore we have this watchdog class for websockets that only send information.
         private class WebSocketWatchDog { 
@@ -94,4 +109,6 @@ namespace GameCubeOnline
             }
         }
     }
+    
+
 }

@@ -10,7 +10,9 @@ namespace GameCubeOnline
     
     
     class GameCubeOnlineSettingsSerialized
-    {
+    {   
+        public int[][]? PageLockMatrix { get; set; }
+
         public Dictionary<string, JsonElement>? VideoSettings { get; set; }
         public Dictionary<string, JsonElement>? AudioSettings { get; set; }
         public Dictionary<string, JsonElement>? SerialSettings { get; set; }
@@ -22,6 +24,9 @@ namespace GameCubeOnline
         public PhysicalFileProvider StaticFiles { get => myStaticFiles; }
 
         protected GameCubeOnlineSettingsSerialized mySerializedSettings;
+
+
+        public List<string> Hashes; 
 
         public int VideoBufferSize  { get => mySerializedSettings.VideoSettings!["BufferSize"].Deserialize<int>(); }
         public int FrameWidth       { get => mySerializedSettings.VideoSettings!["FrameWidth"].Deserialize<int>(); }
@@ -47,6 +52,7 @@ namespace GameCubeOnline
             GCSettings.LatencyMode = GCLatencyMode.LowLatency;
             mySerializedSettings = null;
             myStaticFiles=null;
+            Hashes = new List<string>();
         }
 
 
@@ -63,6 +69,13 @@ namespace GameCubeOnline
         public GameCubeOnlineSettings buildSettings(string aSubPath) {    
            mySerializedSettings=JsonSerializer.Deserialize<GameCubeOnlineSettingsSerialized>(File.ReadAllText(getFileAt(aSubPath)))!;
            return this;
+        }
+
+        public bool isMatrixEquivalent(int[][] aMatrix) {
+            // zip takes two sequences and pairs them together.
+            // you then provide it to create a value in a sequence per each zipped value. 
+            // we then do .All to see if they are all true.
+            return (mySerializedSettings.PageLockMatrix!.Length == aMatrix.Length) && mySerializedSettings.PageLockMatrix!.Zip(aMatrix, (myMatrixRow, aMatrixRow) => myMatrixRow.SequenceEqual(aMatrixRow)).All(aIsEqual=>aIsEqual);
         }
 
        

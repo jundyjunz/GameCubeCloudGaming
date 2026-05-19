@@ -1,16 +1,24 @@
 {
+  "PageLockMatrix": [
+    [1,0,0,0,0],
+    [0,0,1,0,0],
+    [0,0,0,0,1],
+    [0,0,1,0,0],
+    [1,0,0,0,0]
+  ],
+
   "VideoSettings": {
     "BufferSize": 10,
     "FrameWidth": 500,
-    "FrameHeight": 400, 
+    "FrameHeight": 400,
     "VideoQuality": 70,
-    "VideoSource": 0, 
+    "VideoSource": 0,
     "FrameRate": 16
   },
   "AudioSettings": {
     "BufferSize": 10,
     "FramesPerBuffer": 4096,
-    "ChannelCount":2,
+    "ChannelCount": 2,
     "SampleByteSize": 4,
     "FrameRate": 16,
     "AudioRuleset": "GuermokRuleSet"
@@ -19,7 +27,7 @@
     "BaudRate": 250000,
     "ReadTimeout": -1,
     "WriteTimeout": -1,
-    "ConnectCode": 250, 
-    "CommandByteLen":5 
+    "ConnectCode": 250,
+    "CommandByteLen": 5
   }
 }
