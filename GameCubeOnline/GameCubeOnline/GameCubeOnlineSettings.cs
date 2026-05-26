@@ -62,7 +62,7 @@ namespace GameCubeOnline
         
 
         public GameCubeOnlineSettings buildStaticFiles(WebApplicationBuilder aBuilder, string aFileDirectory) {
-            myStaticFiles = new PhysicalFileProvider(Path.Combine(aBuilder.Environment.ContentRootPath, "static"));
+            myStaticFiles = new PhysicalFileProvider(Path.Combine(aBuilder.Environment.ContentRootPath, aFileDirectory));
             return this;
         }
 

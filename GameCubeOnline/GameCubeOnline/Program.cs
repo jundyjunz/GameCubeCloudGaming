@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton(aService => (new GameCubeOnlineSettings())
                                             .buildStaticFiles(builder, "static")
-                                            .buildSettings("/GameCubeOnlineSettingsJSON.json")
+                                            .buildSettings("GameCubeOnlineSettingsJSON.json")
                                             .buildInit()); 
 
 builder.Services.AddSingleton(aService =>(new CaptureVideo( 
@@ -52,7 +52,7 @@ app.UseStaticFiles(new StaticFileOptions{
 });
 
 app.MapGet("/", async (IServiceProvider aService) => {
-    return Results.File( aService.GetRequiredService<GameCubeOnlineSettings>().getFileAt("/HTML/GameCubeOnline.html"),  "text/html"); 
+    return Results.File( aService.GetRequiredService<GameCubeOnlineSettings>().getFileAt(Path.Combine("HTML","GameCubeOnline.html")),  "text/html"); 
 
 });
 

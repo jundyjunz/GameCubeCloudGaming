@@ -25,7 +25,7 @@ namespace GameCubeOnline
 
         //This class exists because a websocket in C# needs to recieve messages in order to see that the state of a websocket is closed. 
         // therefore we have this watchdog class for websockets that only send information.
-        private class WebSocketWatchDog { 
+        private class WebSocketWatchDog : IDisposable { 
             protected CancellationTokenSource myCancellationTokenSource;
             protected WebSocket mySocket;
             protected int myRecieveMessageSize;
@@ -53,6 +53,8 @@ namespace GameCubeOnline
                 catch { }
                 finally { myCancellationTokenSource.Cancel(); }
             }
+
+            public void Dispose() { myCancellationTokenSource.Dispose(); }
         }
 
         private async static Task killSocket(WebSocket aWebSocket, string aConnectionName, int aConnectionId) {

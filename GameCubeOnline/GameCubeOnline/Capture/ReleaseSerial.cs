@@ -75,7 +75,7 @@ namespace GameCubeOnline.Capture
             myPort.Write(myCoalescedCommand, 0, myBytesToWrite);
             resetCoalescedCommandToDefault(); // have to reset command every time so stale command doesnt persist
         }
-        public void write(){ while (true) writeCommand(); }
+        public void write(){ while (true) { writeCommand(); Thread.Sleep(1);  } } // minimum thread stall so as not to hog the CPU.
 
         
 
