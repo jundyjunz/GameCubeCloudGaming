@@ -49,8 +49,8 @@ class PacketReciever{
         void Dleft        (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_DLEFT        )) if(myIsDPad) {aPacket->report.dleft=1;}  else {aPacket->report.cxAxis=STICK_NEG;}                ;}
         void Dright       (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_DRIGHT       )) if(myIsDPad) {aPacket->report.dright=1;} else {aPacket->report.cxAxis=STICK_POS;}                ;}
         void Start        (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_START        )) aPacket->report.start=1                                                                          ;}
-        void Ltrigger     (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_LTRIGGER     )) aPacket->report.l=1                                                                              ;}
-        void Rtrigger     (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_RTRIGGER     )) aPacket->report.r=1                                                                              ;}
+        void Ltrigger     (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_LTRIGGER     )) {aPacket->report.l=1; aPacket->report.left=255                                                   ;}}
+        void Rtrigger     (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_RTRIGGER     )) {aPacket->report.r=1; aPacket->report.right=255                                                  ;}}
         void Up           (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_UP           )) aPacket->report.yAxis=STICK_POS                                                                  ;}
         void Down         (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_DOWN         )) aPacket->report.yAxis=STICK_NEG                                                                  ;}
         void Left         (Gamecube_Data_t* aPacket){ if(readFromPacket(PIN_LEFT         )) aPacket->report.xAxis=STICK_NEG                                                                  ;}
@@ -90,6 +90,8 @@ class PacketReciever{
             aPacket->report.start=0                 ;  
             aPacket->report.l=0                     ; 
             aPacket->report.r=0                     ;
+            aPacket->report.left=0                  ; 
+            aPacket->report.right=0                 ;
             aPacket->report.cyAxis=STICK_DEFAULT    ;
             aPacket->report.cxAxis=STICK_DEFAULT    ;
             aPacket->report.yAxis=STICK_DEFAULT     ;
