@@ -8,7 +8,7 @@
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 		<PublishSingleFile>true</PublishSingleFile>
 		<SelfContained>true</SelfContained>
-		<RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>		
+		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>		
 	</PropertyGroup>
 
 	<ItemGroup>
