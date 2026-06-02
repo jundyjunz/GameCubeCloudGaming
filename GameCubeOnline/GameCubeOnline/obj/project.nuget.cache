@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "/Va0OcrSnfI=",
+  "dgSpecHash": "QZsix6rkxEI=",
   "success": true,
   "projectFilePath": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\GameCubeOnline.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\rjirw\\.nuget\\packages\\microsoft.net.illink.tasks\\10.0.8\\microsoft.net.illink.tasks.10.0.8.nupkg.sha512",
     "C:\\Users\\rjirw\\.nuget\\packages\\opencvsharp4\\4.13.0.20260330\\opencvsharp4.4.13.0.20260330.nupkg.sha512",
+    "C:\\Users\\rjirw\\.nuget\\packages\\opencvsharp4.official.runtime.linux-x64\\4.13.0.20260531\\opencvsharp4.official.runtime.linux-x64.4.13.0.20260531.nupkg.sha512",
     "C:\\Users\\rjirw\\.nuget\\packages\\opencvsharp4.runtime.win\\4.13.0.20260302\\opencvsharp4.runtime.win.4.13.0.20260302.nupkg.sha512",
     "C:\\Users\\rjirw\\.nuget\\packages\\org.k2fsa.portaudio.runtime.linux-aarch64\\1.0.6\\org.k2fsa.portaudio.runtime.linux-aarch64.1.0.6.nupkg.sha512",
     "C:\\Users\\rjirw\\.nuget\\packages\\org.k2fsa.portaudio.runtime.linux-x64\\1.0.6\\org.k2fsa.portaudio.runtime.linux-x64.1.0.6.nupkg.sha512",
@@ -29,7 +31,13 @@
     "C:\\Users\\rjirw\\.nuget\\packages\\runtime.native.system.io.ports\\10.0.7\\runtime.native.system.io.ports.10.0.7.nupkg.sha512",
     "C:\\Users\\rjirw\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\10.0.7\\runtime.osx-arm64.runtime.native.system.io.ports.10.0.7.nupkg.sha512",
     "C:\\Users\\rjirw\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\10.0.7\\runtime.osx-x64.runtime.native.system.io.ports.10.0.7.nupkg.sha512",
-    "C:\\Users\\rjirw\\.nuget\\packages\\system.io.ports\\10.0.7\\system.io.ports.10.0.7.nupkg.sha512"
+    "C:\\Users\\rjirw\\.nuget\\packages\\system.io.ports\\10.0.7\\system.io.ports.10.0.7.nupkg.sha512",
+    "C:\\Users\\rjirw\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\10.0.8\\microsoft.netcore.app.runtime.linux-x64.10.0.8.nupkg.sha512",
+    "C:\\Users\\rjirw\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\10.0.8\\microsoft.netcore.app.host.linux-x64.10.0.8.nupkg.sha512",
+    "C:\\Users\\rjirw\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\10.0.8\\microsoft.aspnetcore.app.runtime.win-x64.10.0.8.nupkg.sha512",
+    "C:\\Users\\rjirw\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\10.0.8\\microsoft.windowsdesktop.app.runtime.win-x64.10.0.8.nupkg.sha512",
+    "C:\\Users\\rjirw\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\10.0.8\\microsoft.netcore.app.runtime.win-x64.10.0.8.nupkg.sha512",
+    "C:\\Users\\rjirw\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\10.0.8\\microsoft.aspnetcore.app.runtime.linux-x64.10.0.8.nupkg.sha512"
   ],
   "logs": []
 }
