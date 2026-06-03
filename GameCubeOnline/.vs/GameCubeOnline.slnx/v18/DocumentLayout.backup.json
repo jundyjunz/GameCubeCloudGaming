@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\static\\javascript\\gamecubeonline.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\static\\javascript\\gamecubeonline.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\gamecubeonline.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\gamecubeonline.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
@@ -19,6 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GameCubeOnline.js",
+              "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\static\\Javascript\\GameCubeOnline.js",
+              "RelativeDocumentMoniker": "GameCubeOnline\\static\\Javascript\\GameCubeOnline.js",
+              "ToolTip": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\static\\Javascript\\GameCubeOnline.js",
+              "RelativeToolTip": "GameCubeOnline\\static\\Javascript\\GameCubeOnline.js",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-06-03T03:27:11.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "GameCubeOnline.csproj",
               "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\GameCubeOnline.csproj",
               "RelativeDocumentMoniker": "GameCubeOnline\\GameCubeOnline.csproj",

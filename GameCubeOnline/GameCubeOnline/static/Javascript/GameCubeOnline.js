@@ -12,7 +12,6 @@ import { AudioPlayer } from "/static/Javascript/MediaPlayers/AudioPlayer.js";
 import { FramePlayer } from "/static/Javascript/MediaPlayers/FramePlayer.js";
 
 import { Packet } from "/static/Javascript/Packets/Packet.js";
-import { GameCubePacket } from "/static/Javascript/Packets/GameCubePacket.js";
 import { PacketSingleton } from "/static/Javascript/Packets/PacketSingleton.js";
 
 import { ControlButtonCollection } from "/static/Javascript/ControlButtonCollection.js"; 
