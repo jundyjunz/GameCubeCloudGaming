@@ -35,16 +35,22 @@ namespace GameCubeOnline.Capture
         [ModuleInitializer] public static void forceRegistry() { Factory<CaptureAudioRuleSet>.Registry<GuermokRuleSet>.register(aObjects => new GuermokRuleSet()); }
         public GuermokRuleSet()
         {
-            OSPlatform thePlatform = getOS(); 
+            OSPlatform thePlatform = getOS();
 
-            myName = (thePlatform==OSPlatform.Windows) ? "Digital Audio Interface (USB3 Digital Audio)" 
-                     :(thePlatform==OSPlatform.OSX) ? "" // TODO: find out what the equivalent on mac is. 
-                     :"alsa_input.usb-UltraSemi_Guermok_USB3_Video_80646466-02.analog-stereo";
+            myName = (thePlatform == OSPlatform.Windows) ? "Digital Audio Interface (USB3 Digital Audio)"
+                     : (thePlatform == OSPlatform.OSX) ? "" // TODO: find out what the equivalent on mac is. 
+                     : (thePlatform == OSPlatform.Linux) ? "Guermok USB3 Video: Audio (hw:1,0)" : "";
 
             myRealName = "Guermok";
             myDefaultSampleRate = 48000.0;
-            myDefaultHighOutputLatency = 0.0;
-            myDefaultLowOutputLatency = 0.0;
+
+            myDefaultHighOutputLatency = (thePlatform == OSPlatform.Windows) ? 0.0
+                                        : (thePlatform == OSPlatform.OSX) ? 0.0 // TODO: find out what the equivalent on mac is. 
+                                        : (thePlatform == OSPlatform.Linux) ? -1 : 0.0;
+
+            myDefaultLowOutputLatency = (thePlatform == OSPlatform.Windows) ? 0.0
+                                        : (thePlatform == OSPlatform.OSX) ? 0.0 // TODO: find out what the equivalent on mac is. 
+                                        : (thePlatform == OSPlatform.Linux) ? -1 : 0.0;
         }
     }
 
