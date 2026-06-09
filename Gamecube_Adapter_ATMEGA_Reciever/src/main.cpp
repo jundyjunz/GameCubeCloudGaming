@@ -19,8 +19,9 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:  
-  if(!ByteReciever::readBytes(theBytes, BYTES_TO_PROCESS, START_BYTE)) return;
+  
+
+  if(!ByteReciever::readBytes(theBytes, BYTES_TO_PROCESS, START_BYTE))return;
   thePacket.unpackPacket(); 
   thePacket.pollPacket();
   thePacket.resetPacket(); 

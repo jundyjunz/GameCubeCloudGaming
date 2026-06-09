@@ -28,6 +28,7 @@
     "ReadTimeout": -1,
     "WriteTimeout": -1,
     "ConnectCode": 250,
-    "CommandByteLen": 5
+    "CommandByteLen": 5, 
+    "ReadBytesFromClientTimeout": 5
   }
 }

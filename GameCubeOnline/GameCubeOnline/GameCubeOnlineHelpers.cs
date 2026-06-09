@@ -90,15 +90,17 @@ namespace GameCubeOnline
         public async static Task readBytes(IServiceProvider aService, int aId, int aClientId, HttpContext aContext) {
             WebSocket theWebSocket = await aContext.WebSockets.AcceptWebSocketAsync();
             int theBytesToWrite = aService.GetRequiredService<ReleaseSerial>()[aId].BytesToWrite;
+            int theReadBytesFromClientTimeout = aService.GetRequiredService<GameCubeOnlineSettings>().ReadBytesFromClientTimeout;
             SerialWrapper theSerialConnection = aService.GetRequiredService<ReleaseSerial>()[aId];
             byte[] theCommandBuffer =  ArrayPool<byte>.Shared.Rent(theBytesToWrite);
-
+            using CancellationTokenSource theSocketTimeout = new CancellationTokenSource();
             try
             {
                 while (theWebSocket.State == WebSocketState.Open)
                 {
+                    theSocketTimeout.CancelAfter(TimeSpan.FromSeconds(theReadBytesFromClientTimeout)); // timeout is necessary in case client hangs and stops sending bytes for whatever reason.
                     Memory<byte> theCommandBufferMemory = new Memory<byte>(theCommandBuffer, 0, theBytesToWrite);
-                    var theMessage=await theWebSocket.ReceiveAsync(theCommandBufferMemory, CancellationToken.None);
+                    var theMessage=await theWebSocket.ReceiveAsync(theCommandBufferMemory, theSocketTimeout.Token);
                     theSerialConnection.readCommand(theCommandBufferMemory, aClientId );
                     if (theMessage.MessageType == WebSocketMessageType.Close) break;
                 }

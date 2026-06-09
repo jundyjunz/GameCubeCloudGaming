@@ -10,7 +10,6 @@ namespace GameCubeOnline.Capture
         protected int myBytesToWrite;
         protected Dictionary<int, byte[]> myCurrentCommands;
         protected byte[] myCoalescedCommand;
-        protected Lock myCommandLock;
         protected Lock mySubscriberLock;
         protected static byte myPolynomialMultiplier = 0xFA;
         protected int myNewestClientId;
@@ -20,7 +19,6 @@ namespace GameCubeOnline.Capture
         {
             myPort = aPort;
             myBytesToWrite = aBytesToWrite;
-            myCommandLock = new Lock();
             mySubscriberLock = new Lock();
             myCurrentCommands = new Dictionary<int, byte[]>(); 
             myCoalescedCommand = new byte[myBytesToWrite];
@@ -49,7 +47,8 @@ namespace GameCubeOnline.Capture
             if (aByteArr1.Length == aByteArr2.Length) for (int i = 0; i < aByteArr1.Length; i++) { aByteArr1[i] |= aByteArr2[i]; }
         }
 
-        protected void resetCoalescedCommandToDefault() => myCoalescedCommand.AsSpan(1, myBytesToWrite-2).Fill(0x00);
+        protected void resetByteArrayExceptFirstAndLastByte(byte[] aByteArr) => aByteArr.AsSpan(1, myBytesToWrite - 2).Fill(0x00);
+
 
 
         public int subscribeToPort(){
@@ -67,13 +66,13 @@ namespace GameCubeOnline.Capture
             return aClientId;
         }
 
-        public void readCommand(ReadOnlyMemory<byte> aBytes, int aClientId) { lock (myCommandLock) aBytes.CopyTo(myCurrentCommands[aClientId]); } 
+        public void readCommand(ReadOnlyMemory<byte> aBytes, int aClientId) { aBytes.CopyTo(myCurrentCommands[aClientId]); } 
         protected void writeCommand()
         {
             lock (mySubscriberLock) foreach (var aCommand in myCurrentCommands) byteArrayOrEquals(myCoalescedCommand, aCommand.Value); //coalescing commands
             myCoalescedCommand[myBytesToWrite - 1] = crc8(myCoalescedCommand.AsSpan(0, myBytesToWrite-1));
             myPort.Write(myCoalescedCommand, 0, myBytesToWrite);
-            resetCoalescedCommandToDefault(); // have to reset command every time so stale command doesnt persist
+            resetByteArrayExceptFirstAndLastByte(myCoalescedCommand);// have to reset command every time so stale command doesnt persist
         }
         public void write(){ while (true) { writeCommand(); Thread.Sleep(1);  } } // minimum thread stall so as not to hog the CPU.
 
