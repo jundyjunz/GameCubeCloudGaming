@@ -66,9 +66,12 @@ namespace GameCubeOnline.Capture
             return aClientId;
         }
 
-        public void readCommand(ReadOnlyMemory<byte> aBytes, int aClientId) { aBytes.CopyTo(myCurrentCommands[aClientId]); } 
+        public void readCommand(ReadOnlyMemory<byte> aBytes, int aClientId) { aBytes.CopyTo(myCurrentCommands[aClientId]); } //  not adding lock here, doesnt seem to cause any issues when client is playing, and lock adds overhead.
         protected void writeCommand()
-        {
+        { 
+            // Write command can act faster than read command and may be scheduled more often.
+            // Resetting each client's command in myCurrentCommands will in this case cause stutter 
+            // this is because after one iteration acts and resets, the command will coalesce to 0s from the previous reset.
             lock (mySubscriberLock) foreach (var aCommand in myCurrentCommands) byteArrayOrEquals(myCoalescedCommand, aCommand.Value); //coalescing commands
             myCoalescedCommand[myBytesToWrite - 1] = crc8(myCoalescedCommand.AsSpan(0, myBytesToWrite-1));
             myPort.Write(myCoalescedCommand, 0, myBytesToWrite);
