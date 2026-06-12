@@ -13,7 +13,9 @@
     "FrameHeight": 400,
     "VideoQuality": 70,
     "VideoSource": 0,
-    "FrameRate": 16
+    "FrameRate": 16,
+    "UseHuffmanOptimization":false, 
+    "UseProgressiveScan": false
   },
   "AudioSettings": {
     "BufferSize": 10,

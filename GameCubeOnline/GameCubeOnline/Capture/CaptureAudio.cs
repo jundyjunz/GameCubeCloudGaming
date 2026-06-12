@@ -30,10 +30,8 @@ namespace GameCubeOnline.Capture
         }
         public override unsafe void publishToBuffer(IntPtr aPtr)
         {
-            byte[] theTempBuffer = ArrayPool<byte>.Shared.Rent(myCircularByteBuffer.ElementByteSize); // new byte[myCircularByteBuffer.ElementByteSize];
-            (new ReadOnlySpan<byte>((byte*)aPtr, myCircularByteBuffer.ElementByteSize)).CopyTo(theTempBuffer); 
-            myCircularByteBuffer.put(new ReadOnlyMemory<byte>(theTempBuffer), myCircularByteBuffer.ElementByteSize);
-            ArrayPool<byte>.Shared.Return(theTempBuffer);
+            (new ReadOnlySpan<byte>((byte*)aPtr, myCircularByteBuffer.ElementByteSize)).CopyTo(myTempBuffer); 
+            myCircularByteBuffer.put(new ReadOnlyMemory<byte>(myTempBuffer), myCircularByteBuffer.ElementByteSize);
         }
         protected int findDeviceId(CaptureAudioRuleSet aRuleSet)
         {

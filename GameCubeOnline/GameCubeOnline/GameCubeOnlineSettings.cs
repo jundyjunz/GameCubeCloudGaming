@@ -35,6 +35,10 @@ namespace GameCubeOnline
         public int VideoSource      { get => mySerializedSettings.VideoSettings!["VideoSource"].Deserialize<int>(); } 
         public int VideoFrameRate   { get => mySerializedSettings.VideoSettings!["FrameRate"].Deserialize<int>(); }
 
+        public bool UseHuffmanOptimization { get => mySerializedSettings.VideoSettings!["UseHuffmanOptimization"].Deserialize<bool>(); }
+
+        public bool UseProgressiveScan { get => mySerializedSettings.VideoSettings!["UseProgressiveScan"].Deserialize<bool>(); }
+
         public int AudioBufferSize  { get => mySerializedSettings.AudioSettings!["BufferSize"].Deserialize<int>(); }
         public uint FramesPerBuffer { get => mySerializedSettings.AudioSettings!["FramesPerBuffer"].Deserialize<uint>();  }
         public int ChannelCount     { get => mySerializedSettings.AudioSettings!["ChannelCount"].Deserialize<int>(); }

@@ -6,12 +6,16 @@ namespace GameCubeOnline.Capture
         protected CircularByteBuffer myCircularByteBuffer;
         protected Dictionary<int, CircularCounter> mySubscribers;
         protected int myNewestClientId;
-        protected int myFrameRate;  
+        protected int myFrameRate;
+        protected byte[] myTempBuffer; // this is needed for when data is transfered from the audio/video driver to the circular buffer
+
         protected Capture(int aElementByteSize, int aElementCount)
         {
             mySubscribers = new Dictionary<int, CircularCounter>();
             myCircularByteBuffer = new CircularByteBuffer(aElementByteSize, aElementCount);
             myNewestClientId = 0;
+            myTempBuffer = new byte[aElementByteSize];
+
         }
 
         public int subscribeToBuffer()

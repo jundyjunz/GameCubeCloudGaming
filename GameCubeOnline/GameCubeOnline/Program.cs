@@ -19,7 +19,10 @@ builder.Services.AddSingleton(aService =>(new CaptureVideo(
                                              )) 
                                             .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().VideoFrameRate)
                                             .buildVideoSource(aService.GetRequiredService<GameCubeOnlineSettings>().VideoSource)
-                                            .buildVideoQuality(aService.GetRequiredService<GameCubeOnlineSettings>().VideoQuality)
+                                            .buildVideoQuality( 
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().VideoQuality,  
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().UseHuffmanOptimization,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().UseProgressiveScan)
                                             .buildInit()); 
 
 builder.Services.AddSingleton(aService=>(new CaptureAudio( 
