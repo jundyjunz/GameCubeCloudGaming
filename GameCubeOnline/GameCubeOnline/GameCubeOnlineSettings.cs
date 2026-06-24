@@ -49,8 +49,12 @@ namespace GameCubeOnline
         public int ReadTimeout      { get => mySerializedSettings.SerialSettings!["ReadTimeout"].Deserialize<int>(); }
         public int WriteTimeout     { get => mySerializedSettings.SerialSettings!["WriteTimeout"].Deserialize<int>(); }
         public byte ConnectCode     { get => mySerializedSettings.SerialSettings!["ConnectCode"].Deserialize<byte>(); }
-        public int CommandByteLen   { get => mySerializedSettings.SerialSettings!["CommandByteLen"].Deserialize<int>(); }
+        public int CommandByteLen   { get => mySerializedSettings.SerialSettings!["CommandByteLen"].Deserialize<int>(); } 
+
+        public int CommandSendSleepTime { get => mySerializedSettings.SerialSettings!["CommandSendSleepTime"].Deserialize<int>(); }
         public int ReadBytesFromClientTimeout { get => mySerializedSettings.SerialSettings!["ReadBytesFromClientTimeout"].Deserialize<int>(); }
+
+        
 
 
         public GameCubeOnlineSettings() {

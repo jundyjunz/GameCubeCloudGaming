@@ -40,9 +40,10 @@ builder.Services.AddSingleton(aService => (new ReleaseSerial())
                                             .buildBaudRate(aService.GetRequiredService<GameCubeOnlineSettings>().BaudRate)
                                             .buildReadTimeout(aService.GetRequiredService<GameCubeOnlineSettings>().ReadTimeout)
                                             .buildWriteTimeout(aService.GetRequiredService<GameCubeOnlineSettings>().WriteTimeout)
+                                            .buildCommandSendSleepTime(aService.GetRequiredService<GameCubeOnlineSettings>().CommandSendSleepTime)
                                             .buildSerialConnection( 
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().ConnectCode,
-                                                aService.GetRequiredService<GameCubeOnlineSettings>().CommandByteLen)
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().CommandByteLen) 
                                             .buildInit());
 
 var app = builder.Build();

@@ -13,9 +13,10 @@ namespace GameCubeOnline.Capture
         protected Lock mySubscriberLock;
         protected static byte myPolynomialMultiplier = 0xFA;
         protected int myNewestClientId;
+        protected int myCommandSendSleepTime;
 
         public int BytesToWrite { get => myBytesToWrite;  }
-        public SerialWrapper(SerialPort aPort, int aBytesToWrite)
+        public SerialWrapper(SerialPort aPort, int aBytesToWrite, int aCommandSendSleepTime)
         {
             myPort = aPort;
             myBytesToWrite = aBytesToWrite;
@@ -23,6 +24,7 @@ namespace GameCubeOnline.Capture
             myCurrentCommands = new Dictionary<int, byte[]>(); 
             myCoalescedCommand = new byte[myBytesToWrite];
             myNewestClientId = 0;
+            myCommandSendSleepTime = aCommandSendSleepTime;
             Task.Run(write);
         }
 
@@ -77,7 +79,7 @@ namespace GameCubeOnline.Capture
             myPort.Write(myCoalescedCommand, 0, myBytesToWrite);
             resetByteArrayExceptFirstAndLastByte(myCoalescedCommand);// have to reset command every time so stale command doesnt persist
         }
-        public void write(){ while (true) { writeCommand(); Thread.Sleep(1);  } } // minimum thread stall so as not to hog the CPU.
+        public void write(){ while (true) { writeCommand(); Thread.Sleep(myCommandSendSleepTime);  } } // minimum thread stall so as not to hog the CPU.
 
         
 
@@ -89,7 +91,8 @@ namespace GameCubeOnline.Capture
         protected int myReadTimeout;
         protected int myWriteTimeout;
         protected List<SerialWrapper> myPorts;
-        protected bool mySerialConnectionBuilt; 
+        protected bool mySerialConnectionBuilt;
+        protected int myCommandSendSleepTime;
 
         public int PortCount { get => myPorts.Count; } 
 
@@ -100,14 +103,15 @@ namespace GameCubeOnline.Capture
             myBaudRate = 0;
             myReadTimeout = 0;
             myWriteTimeout = 0;
+            myCommandSendSleepTime = -1;
             myPorts = new List<SerialWrapper>();
             mySerialConnectionBuilt = false;
         }
 
 
-        protected bool registerPort(SerialPort aPort, int aByteCommandLen)
+        protected bool registerPort(SerialPort aPort, int aByteCommandLen, int aCommandSendSleepTime)
         {
-            myPorts.Add(new SerialWrapper(aPort, aByteCommandLen));
+            myPorts.Add(new SerialWrapper(aPort, aByteCommandLen, aCommandSendSleepTime));
             Console.WriteLine($"Successfully Registered Port {aPort.PortName}");
             return true;
         }
@@ -130,7 +134,7 @@ namespace GameCubeOnline.Capture
                 thePort.Write(theMessageToWrite, 0, 1);
                 Thread.Sleep(aWaitBuffer); // need to wait a bit here so we can wait for the I/O request.
                 thePort.Read(theMessageToRead, 0, 1);
-                if (theMessageToRead[0] == theMessageToWrite[0]) return registerPort(thePort, aByteCommandLen);
+                if (theMessageToRead[0] == theMessageToWrite[0]) return registerPort(thePort, aByteCommandLen, myCommandSendSleepTime);
                 thePort.Close();
                 thePort.Dispose();
                 return false;
@@ -161,13 +165,18 @@ namespace GameCubeOnline.Capture
             myReadTimeout = aReadTimeout;
             return this;
         }
-
-
+        public ReleaseSerial buildCommandSendSleepTime(int aTimeToSleepInMs)
+        {
+            myCommandSendSleepTime = aTimeToSleepInMs;
+            return this;
+        }
         public ReleaseSerial buildSerialConnection(byte aConnectCode, int aByteCommandLen)
         {
             mySerialConnectionBuilt = SerialPort.GetPortNames().Select (aPortName=> tryConnect(aPortName, aConnectCode, aByteCommandLen)).ToArray().Any(aBool => aBool);
             return this;
         }
+
+       
 
 
 
@@ -176,8 +185,9 @@ namespace GameCubeOnline.Capture
             (new BuilderWarning<ReleaseSerial>())
             .requires(myBaudRate != 0, nameof(buildBaudRate))
             .requires(myReadTimeout != 0, nameof(buildReadTimeout))
-            .requires(myWriteTimeout != 0, nameof(buildWriteTimeout))
-            .requires(mySerialConnectionBuilt != false, nameof(buildSerialConnection), "Baud Rate and Read/Write Timeouts need to be Set Before this! ")
+            .requires(myWriteTimeout != 0, nameof(buildWriteTimeout)) 
+            .requires(myCommandSendSleepTime > 0, nameof(buildCommandSendSleepTime) )
+            .requires(mySerialConnectionBuilt != false, nameof(buildSerialConnection), "Baud Rate, Read/Write Timeouts, and Command Sleep Times need to be Set Before this! ")
             .enforce();
 
             return this;

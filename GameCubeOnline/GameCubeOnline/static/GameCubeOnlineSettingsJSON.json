@@ -9,9 +9,9 @@
 
   "VideoSettings": {
     "BufferSize": 10,
-    "FrameWidth": 500,
-    "FrameHeight": 400,
-    "VideoQuality": 70,
+    "FrameWidth": 640,
+    "FrameHeight": 480,
+    "VideoQuality": 65,
     "VideoSource": 0,
     "FrameRate": 16,
     "UseHuffmanOptimization":false, 
@@ -30,7 +30,8 @@
     "ReadTimeout": -1,
     "WriteTimeout": -1,
     "ConnectCode": 250,
-    "CommandByteLen": 5, 
+    "CommandByteLen": 5,  
+    "CommandSendSleepTime": 8,
     "ReadBytesFromClientTimeout": 5
   }
 }
