@@ -33,7 +33,9 @@ namespace GameCubeOnline
         public int FrameHeight      { get => mySerializedSettings.VideoSettings!["FrameHeight"].Deserialize<int>(); }
         public int VideoQuality     { get => mySerializedSettings.VideoSettings!["VideoQuality"].Deserialize<int>(); }
         public int VideoSource      { get => mySerializedSettings.VideoSettings!["VideoSource"].Deserialize<int>(); } 
-        public int VideoFrameRate   { get => mySerializedSettings.VideoSettings!["FrameRate"].Deserialize<int>(); }
+        public int ServerVideoFrameRate   { get => mySerializedSettings.VideoSettings!["ServerFrameRate"].Deserialize<int>(); }
+        public int ClientVideoFrameRate { get => mySerializedSettings.VideoSettings!["ClientFrameRate"].Deserialize<int>(); }
+
 
         public bool UseHuffmanOptimization { get => mySerializedSettings.VideoSettings!["UseHuffmanOptimization"].Deserialize<bool>(); }
 
@@ -43,7 +45,8 @@ namespace GameCubeOnline
         public uint FramesPerBuffer { get => mySerializedSettings.AudioSettings!["FramesPerBuffer"].Deserialize<uint>();  }
         public int ChannelCount     { get => mySerializedSettings.AudioSettings!["ChannelCount"].Deserialize<int>(); }
         public int SampleByteSize   { get => mySerializedSettings.AudioSettings!["SampleByteSize"].Deserialize<int>(); }
-        public int AudioFrameRate   { get => mySerializedSettings.AudioSettings!["FrameRate"].Deserialize<int>(); }
+        public int ServerAudioFrameRate   { get => mySerializedSettings.AudioSettings!["ServerFrameRate"].Deserialize<int>(); }
+        public int ClientAudioFrameRate { get => mySerializedSettings.AudioSettings!["ClientFrameRate"].Deserialize<int>(); }
         public CaptureAudioRuleSet AudioRuleSet  { get => Factory<CaptureAudioRuleSet>.make(mySerializedSettings.AudioSettings!["AudioRuleset"].Deserialize<string>()!); }
         public int BaudRate         { get => mySerializedSettings.SerialSettings!["BaudRate"].Deserialize<int>(); }
         public int ReadTimeout      { get => mySerializedSettings.SerialSettings!["ReadTimeout"].Deserialize<int>(); }

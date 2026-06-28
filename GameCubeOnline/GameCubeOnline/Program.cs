@@ -17,7 +17,7 @@ builder.Services.AddSingleton(aService =>(new CaptureVideo(
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().FrameWidth,
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().FrameHeight 
                                              )) 
-                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().VideoFrameRate)
+                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().ServerVideoFrameRate)
                                             .buildVideoSource(aService.GetRequiredService<GameCubeOnlineSettings>().VideoSource)
                                             .buildVideoQuality( 
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().VideoQuality,  
@@ -31,7 +31,7 @@ builder.Services.AddSingleton(aService=>(new CaptureAudio(
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().ChannelCount,
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().SampleByteSize
                                              ))
-                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().AudioFrameRate)
+                                            .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().ServerAudioFrameRate)
                                             .buildStreamParameters(aService.GetRequiredService<GameCubeOnlineSettings>().AudioRuleSet)
                                             .buildStream()
                                             .buildInit()); 

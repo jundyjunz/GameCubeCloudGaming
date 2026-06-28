@@ -11,9 +11,10 @@
     "BufferSize": 10,
     "FrameWidth": 640,
     "FrameHeight": 480,
-    "VideoQuality": 65,
+    "VideoQuality": 80,
     "VideoSource": 0,
-    "FrameRate": 16,
+    "ClientFrameRate": 16, 
+    "ServerFrameRate":  1, 
     "UseHuffmanOptimization":false, 
     "UseProgressiveScan": false
   },
@@ -22,7 +23,8 @@
     "FramesPerBuffer": 4096,
     "ChannelCount": 2,
     "SampleByteSize": 4,
-    "FrameRate": 16,
+    "ClientFrameRate":  1,
+    "ServerFrameRate": 1,
     "AudioRuleset": "GuermokRuleSet"
   },
   "SerialSettings": {
@@ -31,7 +33,7 @@
     "WriteTimeout": -1,
     "ConnectCode": 250,
     "CommandByteLen": 5,  
-    "CommandSendSleepTime": 8,
+    "CommandSendSleepTime": 12,
     "ReadBytesFromClientTimeout": 5
   }
 }

@@ -58,7 +58,7 @@ namespace GameCubeOnline.Capture
             (new BuilderWarning<CaptureVideo>())
             .requires(myVideoCapture != null, nameof(buildVideoSource))
             .requires(myVideoQuality != null, nameof(buildVideoQuality))
-            .requires(myFrameRate != 0, nameof(buildFrameRate)) 
+            .requires(myFrameRate != 0, nameof(buildFrameRate))
             .enforce();
             Task.Run(() => { publishToBuffer(IntPtr.Zero); });
             return this;
