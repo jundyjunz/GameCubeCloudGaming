@@ -1,0 +1,228 @@
+\doxysection{Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer Class Reference}
+\hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{}\label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+
+
+\doxylink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{Circular\+Byte\+Buffer}.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a0d2c5fef2d1b1977b1f6a26562e0a700}{Circular\+Byte\+Buffer}} (int a\+Element\+Byte\+Size, int a\+Element\+Count)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a259e0199bbd8279d01ee694344ddcf09}{put}} (Read\+Only\+Memory$<$ byte $>$ a\+Buffer, int a\+Size)
+\item 
+Read\+Only\+Memory$<$ byte $>$? \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_ae7d6ddb203c7f3e8a9c7e35fa7e74497}{peek}} (\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}} a\+Counter)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_abd3944fc7b14146faafa4095e52fe92d}{Copy\+Data\+Into\+My\+Buffer}} (Read\+Only\+Memory$<$ byte $>$ a\+Buffer, int a\+Offset)
+\item 
+Read\+Only\+Memory$<$ byte $>$ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a35a46faa035dccdea2ee83f32ff95e89}{Copy\+Data\+Out\+To\+ABuffer}} (int a\+Offset, int a\+Size)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte\+[$\,$]\+ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_aeb8942cd8a5e54da50849fa6ad9f6743}{my\+Buffer}}
+\item 
+int\+[$\,$]\+ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a51d14d4d46b1074409f03cda0f2e7df7}{my\+Sizes}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a9bc6fa75904ada2e7b233e858cd098f8}{my\+Element\+Byte\+Size}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a6de088d6322b91e68ea916f89b6f6807}{my\+Element\+Count}}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}} \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a41e9b49e23fc6f88d6ab1a02f6b4d25f}{my\+Head}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a68e48fd4f4046cd837c2b464b847d553}{Head\+Position}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a7b4c8e2735e0227cf351ea7ba630b42d}{Count}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_ab2b163ff9ec88a0fcb1f6649b15a7973}{Element\+Byte\+Size}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{Circular\+Byte\+Buffer}. 
+
+A circular buffer. Its slightly different than a normal circular buffer in the sense that it also records the ACTUAL size of the element you put in. Though its partitioned at the maximum size that element can be. Peek is slightly different than pop as well. Peek takes in circular counter from a reader and uses it as its tail for that reader, making sure it doesn\textquotesingle{}t pass the head.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ theBuffer\ =\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a0d2c5fef2d1b1977b1f6a26562e0a700}{CircularByteBuffer}}(10,\ 200).\ }
+\DoxyCodeLine{\textcolor{keywordtype}{byte}[]\ theBytes\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{byte}[200];\ }
+\DoxyCodeLine{theBytes[0]=\textcolor{charliteral}{'b'};\ }
+\DoxyCodeLine{theBytes[1]=\textcolor{charliteral}{'i'};}
+\DoxyCodeLine{theBuffer.put(theBytes.AsMemory,\ 2);\ \textcolor{comment}{//\ head\ advanced\ to\ position\ 1\ }}
+\DoxyCodeLine{var\ theCounter\ =\ CircularCounter(10,0);}
+\DoxyCodeLine{ReadOnlyMemory<byte>?\ theNewBuffer\ =\ theBuffer.peek(theCounter);\ \textcolor{comment}{//\ tail\ reads\ at\ 0.\ The\ new\ buffer\ is\ ['b','i']}}
+
+\end{DoxyCode}
+
+
+\begin{DoxyWarning}{Warning}
+\doxylink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{Circular\+Byte\+Buffer} is NOT thread safe. The head can silently overwrite the tail. BUT the Tail cannot overwrite the head. ~\newline
+ It is engineered like this to prioritize giving you the most recent frame, rather than to have smooth playback. Fortunately, making the buffer large enough avoids concurrency issues, which gives smooth playback in the end. 
+\end{DoxyWarning}
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00129}{129}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-constructors}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a0d2c5fef2d1b1977b1f6a26562e0a700}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!CircularByteBuffer@{CircularByteBuffer}}
+\index{CircularByteBuffer@{CircularByteBuffer}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{CircularByteBuffer()}{CircularByteBuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a0d2c5fef2d1b1977b1f6a26562e0a700} 
+Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+Circular\+Byte\+Buffer (\begin{DoxyParamCaption}\item[{int}]{a\+Element\+Byte\+Size}{, }\item[{int}]{a\+Element\+Count}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00152}{152}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-func-members}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_abd3944fc7b14146faafa4095e52fe92d}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!CopyDataIntoMyBuffer@{CopyDataIntoMyBuffer}}
+\index{CopyDataIntoMyBuffer@{CopyDataIntoMyBuffer}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{CopyDataIntoMyBuffer()}{CopyDataIntoMyBuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_abd3944fc7b14146faafa4095e52fe92d} 
+void Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+Copy\+Data\+Into\+My\+Buffer (\begin{DoxyParamCaption}\item[{Read\+Only\+Memory$<$ byte $>$}]{a\+Buffer}{, }\item[{int}]{a\+Offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00162}{162}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a35a46faa035dccdea2ee83f32ff95e89}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!CopyDataOutToABuffer@{CopyDataOutToABuffer}}
+\index{CopyDataOutToABuffer@{CopyDataOutToABuffer}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{CopyDataOutToABuffer()}{CopyDataOutToABuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a35a46faa035dccdea2ee83f32ff95e89} 
+Read\+Only\+Memory$<$ byte $>$ Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+Copy\+Data\+Out\+To\+ABuffer (\begin{DoxyParamCaption}\item[{int}]{a\+Offset}{, }\item[{int}]{a\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00164}{164}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_ae7d6ddb203c7f3e8a9c7e35fa7e74497}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!peek@{peek}}
+\index{peek@{peek}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_ae7d6ddb203c7f3e8a9c7e35fa7e74497} 
+Read\+Only\+Memory$<$ byte $>$? Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+peek (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}}}]{a\+Counter}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00172}{172}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a259e0199bbd8279d01ee694344ddcf09}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!put@{put}}
+\index{put@{put}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{put()}{put()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a259e0199bbd8279d01ee694344ddcf09} 
+void Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+put (\begin{DoxyParamCaption}\item[{Read\+Only\+Memory$<$ byte $>$}]{a\+Buffer}{, }\item[{int}]{a\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00165}{165}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-variable-members}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_aeb8942cd8a5e54da50849fa6ad9f6743}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!myBuffer@{myBuffer}}
+\index{myBuffer@{myBuffer}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{myBuffer}{myBuffer}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_aeb8942cd8a5e54da50849fa6ad9f6743} 
+byte \+[$\,$]\+ Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+my\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00143}{143}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a9bc6fa75904ada2e7b233e858cd098f8}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!myElementByteSize@{myElementByteSize}}
+\index{myElementByteSize@{myElementByteSize}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{myElementByteSize}{myElementByteSize}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a9bc6fa75904ada2e7b233e858cd098f8} 
+int Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+my\+Element\+Byte\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00145}{145}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a6de088d6322b91e68ea916f89b6f6807}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!myElementCount@{myElementCount}}
+\index{myElementCount@{myElementCount}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{myElementCount}{myElementCount}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a6de088d6322b91e68ea916f89b6f6807} 
+int Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+my\+Element\+Count\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00146}{146}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a41e9b49e23fc6f88d6ab1a02f6b4d25f}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!myHead@{myHead}}
+\index{myHead@{myHead}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{myHead}{myHead}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a41e9b49e23fc6f88d6ab1a02f6b4d25f} 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}} Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+my\+Head\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00147}{147}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a51d14d4d46b1074409f03cda0f2e7df7}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!mySizes@{mySizes}}
+\index{mySizes@{mySizes}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{mySizes}{mySizes}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a51d14d4d46b1074409f03cda0f2e7df7} 
+int \+[$\,$]\+ Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+my\+Sizes\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00144}{144}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-property-members}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a7b4c8e2735e0227cf351ea7ba630b42d}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!Count@{Count}}
+\index{Count@{Count}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{Count}{Count}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a7b4c8e2735e0227cf351ea7ba630b42d} 
+int Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00150}{150}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_ab2b163ff9ec88a0fcb1f6649b15a7973}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!ElementByteSize@{ElementByteSize}}
+\index{ElementByteSize@{ElementByteSize}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{ElementByteSize}{ElementByteSize}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_ab2b163ff9ec88a0fcb1f6649b15a7973} 
+int Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+Element\+Byte\+Size\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00151}{151}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a68e48fd4f4046cd837c2b464b847d553}\index{GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}!HeadPosition@{HeadPosition}}
+\index{HeadPosition@{HeadPosition}!GameCubeOnline.Helpers.CircularByteBuffer@{GameCubeOnline.Helpers.CircularByteBuffer}}
+\doxysubsubsection{\texorpdfstring{HeadPosition}{HeadPosition}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer_a68e48fd4f4046cd837c2b464b847d553} 
+int Game\+Cube\+Online.\+Helpers.\+Circular\+Byte\+Buffer.\+Head\+Position\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00148}{148}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Game\+Cube\+Online/\+\+Helpers/\+\doxymbox{\hyperlink{_circular_buffer_8cs}{Circular\+Buffer.\+cs}}\end{DoxyCompactItemize}

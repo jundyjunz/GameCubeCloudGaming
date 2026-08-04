@@ -14,7 +14,7 @@ namespace GameCubeOnline.Helpers
             }  
         }
 
-        public Factory() { myMakers=new Dictionary<string, Func<object[],T>>(); }
+        private Factory() { myMakers=new Dictionary<string, Func<object[],T>>(); }
 
         public static T make(string aMakerKey, params object[] aArgs) {
             if (Instance.myMakers.ContainsKey(aMakerKey)) return Instance.myMakers[aMakerKey](aArgs);

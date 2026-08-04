@@ -1,0 +1,239 @@
+\doxysection{Game\+Cube\+Online.\+Helpers.\+Circular\+Counter Class Reference}
+\hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter}{}\label{class_game_cube_online_1_1_helpers_1_1_circular_counter}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+
+
+\doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} (int a\+Limit, int a\+Default\+Count=0)
+\begin{DoxyCompactList}\small\item\em Constructor. Sets the my\+Limit and my\+Count Variables. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a04b58cf57c466e4877f11ee255d65f90}{peek}} ()
+\begin{DoxyCompactList}\small\item\em peek. Gets the next number the circular counter is supposed to be after a ++. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_aa6c176d4ed89656b03a03142ad03f5e9}{operator++}} (\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} a\+Counter)
+\begin{DoxyCompactList}\small\item\em ++ operator. Adds 1 to the circular counter. \end{DoxyCompactList}\item 
+static bool \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a5aad2ba39f1016780c0fdbec3dd49b1b}{operator==}} (\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} a\+Counter\+Left, \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} a\+Counter\+Right)
+\begin{DoxyCompactList}\small\item\em == operator. Checks if the two my\+Counts are equivalent to eachother. \end{DoxyCompactList}\item 
+static bool \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a4bbdc2e794846133dd6e1cbeb8718737}{operator!=}} (\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} a\+Counter\+Left, \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} a\+Counter\+Right)
+\begin{DoxyCompactList}\small\item\em != operator. Checks if the two my\+Counts are not equivalent to eachother. \end{DoxyCompactList}\item 
+static implicit \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_ac1974a9f5e5e4ff392604c103c3e6977}{operator int}} (\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} a\+Counter)
+\begin{DoxyCompactList}\small\item\em implicit int operator. Converts to int when used as one. The value is the value of my\+Count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+volatile int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_ae630f3a43ef9a69b6f7c453fc80b3cc9}{my\+Count}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_ab28fae22da2be435a794dbdeee370012}{my\+Limit}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}. 
+
+A counter that loops around itself at a specified value. It can be implicitly converted to int if need be. ~\newline
+ You can also set a value to have it start counting at, but it is by default 0.
+
+Example Usage:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{avr\ theCounter\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{CircularCounter}}(10,\ 9);\ }
+\DoxyCodeLine{theCounter++;\ }
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ theNum\ =\ theCounter\ \textcolor{comment}{//\ theNum=0;\ 10\%10\ =\ 0.}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00019}{19}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_helpers_1_1_circular_counter_doc-constructors}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!CircularCounter@{CircularCounter}}
+\index{CircularCounter@{CircularCounter}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{CircularCounter()}{CircularCounter()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d} 
+Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+Circular\+Counter (\begin{DoxyParamCaption}\item[{int}]{a\+Limit}{, }\item[{int}]{a\+Default\+Count}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+
+
+Constructor. Sets the my\+Limit and my\+Count Variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Limit} & The Limit you want To Set. \\
+\hline
+{\em a\+Default\+Count} & The Number You Want To Start Counting at. Set to 0 by Default. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00031}{31}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_helpers_1_1_circular_counter_doc-func-members}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_ac1974a9f5e5e4ff392604c103c3e6977}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!operator int@{operator int}}
+\index{operator int@{operator int}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{operator int()}{operator int()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_ac1974a9f5e5e4ff392604c103c3e6977} 
+implicit Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+operator int (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}}}]{a\+Counter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+implicit int operator. Converts to int when used as one. The value is the value of my\+Count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Counter} & the\+Circular\+Counter you want to transform into an int.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a bool seeing if the internal counts are not the same.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+since the implicit int operator exists this may be redundant. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00098}{98}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_a4bbdc2e794846133dd6e1cbeb8718737}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_a4bbdc2e794846133dd6e1cbeb8718737} 
+bool Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+operator!= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}}}]{a\+Counter\+Left}{, }\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}}}]{a\+Counter\+Right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+!= operator. Checks if the two my\+Counts are not equivalent to eachother. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Counter\+Left} & the \doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter} on the left side of !=\\
+\hline
+{\em a\+Counter\+Right} & the \doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter} on the right side of !=\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a bool seeing if the internal counts are not the same.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+since the implicit int operator exists this may be redundant. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00086}{86}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_aa6c176d4ed89656b03a03142ad03f5e9}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!operator++@{operator++}}
+\index{operator++@{operator++}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_aa6c176d4ed89656b03a03142ad03f5e9} 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}} Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+operator++ (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}}}]{a\+Counter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+++ operator. Adds 1 to the circular counter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Counter} & the \doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter} you want to add to. ~\newline
+\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the circular counter instance you are operating on.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+C\# operators are static, and operate on an instance. ~\newline
+ 
+
+This is unlike the regular ++ postfix operator. It will act more like the prefix ++ operator. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00048}{48}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_a5aad2ba39f1016780c0fdbec3dd49b1b}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!operator==@{operator==}}
+\index{operator==@{operator==}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_a5aad2ba39f1016780c0fdbec3dd49b1b} 
+bool Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+operator== (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}}}]{a\+Counter\+Left}{, }\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter_a0b2781b24ab05e0e58cec6097e359f5d}{Circular\+Counter}}}]{a\+Counter\+Right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+== operator. Checks if the two my\+Counts are equivalent to eachother. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Counter\+Left} & the \doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter} on the left side of ==\\
+\hline
+{\em a\+Counter\+Right} & the \doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter} on the right side of ==\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a bool seeing if the internal counts are the same.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+since the implicit int operator exists this may be redundant. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00073}{73}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_a04b58cf57c466e4877f11ee255d65f90}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!peek@{peek}}
+\index{peek@{peek}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_a04b58cf57c466e4877f11ee255d65f90} 
+int Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+peek (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+peek. Gets the next number the circular counter is supposed to be after a ++. 
+
+\begin{DoxyReturn}{Returns}
+the int representing the next number the \doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter} will advance to. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00059}{59}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_helpers_1_1_circular_counter_doc-variable-members}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_ae630f3a43ef9a69b6f7c453fc80b3cc9}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!myCount@{myCount}}
+\index{myCount@{myCount}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{myCount}{myCount}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_ae630f3a43ef9a69b6f7c453fc80b3cc9} 
+volatile int Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+my\+Count\hspace{0.3cm}{\ttfamily [protected]}}
+
+The internal count of the \doxylink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}. It is volatile to force the update of the counter accross multiple CPUs if need be. 
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00022}{22}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_helpers_1_1_circular_counter_ab28fae22da2be435a794dbdeee370012}\index{GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}!myLimit@{myLimit}}
+\index{myLimit@{myLimit}!GameCubeOnline.Helpers.CircularCounter@{GameCubeOnline.Helpers.CircularCounter}}
+\doxysubsubsection{\texorpdfstring{myLimit}{myLimit}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_helpers_1_1_circular_counter_ab28fae22da2be435a794dbdeee370012} 
+int Game\+Cube\+Online.\+Helpers.\+Circular\+Counter.\+my\+Limit\hspace{0.3cm}{\ttfamily [protected]}}
+
+the limit of the internal counter. Adding past this point will reset the count back to 0. 
+
+Definition at line \doxymbox{\hyperlink{_circular_buffer_8cs_source_l00023}{23}} of file \doxymbox{\hyperlink{_circular_buffer_8cs_source}{Circular\+Buffer.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Game\+Cube\+Online/\+\+Helpers/\+\doxymbox{\hyperlink{_circular_buffer_8cs}{Circular\+Buffer.\+cs}}\end{DoxyCompactItemize}

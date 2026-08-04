@@ -1,0 +1,51 @@
+\doxysection{Capture.\+cs}
+\hypertarget{_capture_8cs_source}{}\label{_capture_8cs_source}\index{GameCubeOnline/Capture/Capture.cs@{GameCubeOnline/Capture/Capture.cs}}
+\doxymbox{\hyperlink{_capture_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespace_game_cube_online_1_1_helpers}{GameCubeOnline.Helpers}};}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00002}\doxymbox{\hyperlink{namespace_game_cube_online}{00002}}\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_game_cube_online_1_1_capture}{GameCubeOnline.Capture}}}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00003}00003\ \{}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00004}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g}{00004}}\ \ \ \ \ \textcolor{keyword}{abstract}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a9f40e1bc4623a492d44b8b46c9112d5c}{Capture}}<T>\ where\ T\ :\ class}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00005}00005\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00006}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{00006}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{CircularByteBuffer}}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{myCircularByteBuffer}};}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00007}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{00007}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}\ Dictionary<int,\ CircularCounter>\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{mySubscribers}};}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00008}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}{00008}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}{myNewestClientId}};}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00009}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a428af61ca3d5610ab20678771bc22d36}{00009}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a428af61ca3d5610ab20678771bc22d36}{myFrameRate}};}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00010}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ad0983380043c7974c03085942456fbdf}{00010}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}\ \textcolor{keywordtype}{byte}[]\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ad0983380043c7974c03085942456fbdf}{myTempBuffer}};\ \textcolor{comment}{//\ this\ is\ needed\ for\ when\ data\ is\ transfered\ from\ the\ audio/video\ driver\ to\ the\ circular\ buffer}}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00012}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a9f40e1bc4623a492d44b8b46c9112d5c}{00012}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a9f40e1bc4623a492d44b8b46c9112d5c}{Capture}}(\textcolor{keywordtype}{int}\ aElementByteSize,\ \textcolor{keywordtype}{int}\ aElementCount)}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{mySubscribers}}\ =\ \textcolor{keyword}{new}\ Dictionary<int,\ CircularCounter>();}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{myCircularByteBuffer}}\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{CircularByteBuffer}}(aElementByteSize,\ aElementCount);}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}{myNewestClientId}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ad0983380043c7974c03085942456fbdf}{myTempBuffer}}\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{byte}[aElementByteSize];}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00019}00019\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00021}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a69fd945c20179261d4304f45450d3c08}{00021}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a69fd945c20179261d4304f45450d3c08}{subscribeToBuffer}}()}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ theOldSubscriberCount\ =\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}{myNewestClientId}};}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{mySubscribers}}[\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}{myNewestClientId}}++]\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{CircularCounter}}(\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{myCircularByteBuffer}}.Count,\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{myCircularByteBuffer}}.HeadPosition);}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ theOldSubscriberCount;}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00028}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ac1ab5b7511249f2b38979b10b60ba573}{00028}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ac1ab5b7511249f2b38979b10b60ba573}{unsubscribeFromBuffer}}(\textcolor{keywordtype}{int}\ aClientId)}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{mySubscribers}}.Remove(aClientId);}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ aClientId;}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00034}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2773105b6f55491d5917f07116a79357}{00034}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{abstract}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2773105b6f55491d5917f07116a79357}{publishToBuffer}}(IntPtr\ aPtr);}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00035}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2089fa62ddd900202fba44f49d2786ef}{00035}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ ReadOnlyMemory<byte>?\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2089fa62ddd900202fba44f49d2786ef}{readFromBuffer}}(\textcolor{keywordtype}{int}\ aClientId)\ =>\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{myCircularByteBuffer}}.peek(\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{mySubscribers}}[aClientId]);}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00037}\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a4482da75a2b9ddcb09f6f09339e3033c}{00037}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ T\ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a4482da75a2b9ddcb09f6f09339e3033c}{buildFrameRate}}(\textcolor{keywordtype}{int}\ aFrameRateInMs)\ \{}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00038}00038\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a428af61ca3d5610ab20678771bc22d36}{myFrameRate}}\ =\ aFrameRateInMs;}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{this}\ as\ T;}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_capture_8cs_source_l00045}00045\ \}}
+
+\end{DoxyCode}

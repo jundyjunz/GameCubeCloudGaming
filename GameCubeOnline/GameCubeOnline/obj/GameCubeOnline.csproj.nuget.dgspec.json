@@ -55,7 +55,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.8, )",
+              "version": "[10.0.9, )",
               "autoReferenced": true
             },
             "OpenCvSharp4": {
@@ -93,15 +93,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[10.0.8, 10.0.8]"
+              "version": "[10.0.9, 10.0.9]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[10.0.8, 10.0.8]"
+              "version": "[10.0.9, 10.0.9]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[10.0.8, 10.0.8]"
+              "version": "[10.0.9, 10.0.9]"
             }
           ],
           "frameworkReferences": {
@@ -112,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

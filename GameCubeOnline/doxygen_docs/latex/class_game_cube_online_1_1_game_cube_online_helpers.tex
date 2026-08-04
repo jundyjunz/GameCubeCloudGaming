@@ -1,0 +1,113 @@
+\doxysection{Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers Class Reference}
+\hypertarget{class_game_cube_online_1_1_game_cube_online_helpers}{}\label{class_game_cube_online_1_1_game_cube_online_helpers}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_1_1_web_socket_watch_dog}{Web\+Socket\+Watch\+Dog}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+record \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a238a31d5639ddcb1d53110a3c6e4fc29}{Hash\+Object}} (string hash)
+\item 
+record \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a73f5202b32fd27b061fef1e6ba457984}{Lock\+Matrix\+Object}} (int\+[$\,$]\+\+[$\,$]\+ lockmatrix)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static async Task$<$ IResult $>$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a3e9fa12e1ffc67222ba44307fc1ec119}{get\+Hash}} (IService\+Provider a\+Service, \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a73f5202b32fd27b061fef1e6ba457984}{Lock\+Matrix\+Object}} a\+Data)
+\item 
+static async Task \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a372f028ceb6a73add3d294e5df68942b}{send\+Frame$<$ T $>$}} (IService\+Provider a\+Service, int a\+Client\+Id, Http\+Context a\+Context)
+\item 
+static async Task \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_ac18578d4aef57f9febc4b29b85694244}{read\+Bytes}} (IService\+Provider a\+Service, int a\+Id, int a\+Client\+Id, Http\+Context a\+Context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static string \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_ac80394142d22e6abf8b66666e6240e90}{make\+Hash}} ()
+\item 
+static async Task \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a49912e14739355da386c219784469bce}{kill\+Socket}} (Web\+Socket a\+Web\+Socket, string a\+Connection\+Name, int a\+Connection\+Id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source_l00009}{9}} of file \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source}{Game\+Cube\+Online\+Helpers.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_game_cube_online_helpers_doc-func-members}
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_a3e9fa12e1ffc67222ba44307fc1ec119}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}!getHash@{getHash}}
+\index{getHash@{getHash}!GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection{\texorpdfstring{getHash()}{getHash()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_game_cube_online_helpers_a3e9fa12e1ffc67222ba44307fc1ec119} 
+async Task$<$ IResult $>$ Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers.\+get\+Hash (\begin{DoxyParamCaption}\item[{IService\+Provider}]{a\+Service}{, }\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a73f5202b32fd27b061fef1e6ba457984}{Lock\+Matrix\+Object}}}]{a\+Data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source_l00014}{14}} of file \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source}{Game\+Cube\+Online\+Helpers.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_a238a31d5639ddcb1d53110a3c6e4fc29}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}!HashObject@{HashObject}}
+\index{HashObject@{HashObject}!GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection{\texorpdfstring{HashObject()}{HashObject()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_game_cube_online_helpers_a238a31d5639ddcb1d53110a3c6e4fc29} 
+record Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers.\+Hash\+Object (\begin{DoxyParamCaption}\item[{string}]{hash}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_a49912e14739355da386c219784469bce}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}!killSocket@{killSocket}}
+\index{killSocket@{killSocket}!GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection{\texorpdfstring{killSocket()}{killSocket()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_game_cube_online_helpers_a49912e14739355da386c219784469bce} 
+async Task Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers.\+kill\+Socket (\begin{DoxyParamCaption}\item[{Web\+Socket}]{a\+Web\+Socket}{, }\item[{string}]{a\+Connection\+Name}{, }\item[{int}]{a\+Connection\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source_l00060}{60}} of file \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source}{Game\+Cube\+Online\+Helpers.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_a73f5202b32fd27b061fef1e6ba457984}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}!LockMatrixObject@{LockMatrixObject}}
+\index{LockMatrixObject@{LockMatrixObject}!GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection{\texorpdfstring{LockMatrixObject()}{LockMatrixObject()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_game_cube_online_helpers_a73f5202b32fd27b061fef1e6ba457984} 
+record Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers.\+Lock\+Matrix\+Object (\begin{DoxyParamCaption}\item[{int}]{lockmatrix}{\+[$\,$]\+\+[$\,$]\+}\end{DoxyParamCaption})}
+
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_ac80394142d22e6abf8b66666e6240e90}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}!makeHash@{makeHash}}
+\index{makeHash@{makeHash}!GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection{\texorpdfstring{makeHash()}{makeHash()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_game_cube_online_helpers_ac80394142d22e6abf8b66666e6240e90} 
+string Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers.\+make\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source_l00023}{23}} of file \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source}{Game\+Cube\+Online\+Helpers.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_ac18578d4aef57f9febc4b29b85694244}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}!readBytes@{readBytes}}
+\index{readBytes@{readBytes}!GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection{\texorpdfstring{readBytes()}{readBytes()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_game_cube_online_helpers_ac18578d4aef57f9febc4b29b85694244} 
+async Task Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers.\+read\+Bytes (\begin{DoxyParamCaption}\item[{IService\+Provider}]{a\+Service}{, }\item[{int}]{a\+Id}{, }\item[{int}]{a\+Client\+Id}{, }\item[{Http\+Context}]{a\+Context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source_l00090}{90}} of file \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source}{Game\+Cube\+Online\+Helpers.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_game_cube_online_helpers_a372f028ceb6a73add3d294e5df68942b}\index{GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}!sendFrame$<$ T $>$@{sendFrame$<$ T $>$}}
+\index{sendFrame$<$ T $>$@{sendFrame$<$ T $>$}!GameCubeOnline.GameCubeOnlineHelpers@{GameCubeOnline.GameCubeOnlineHelpers}}
+\doxysubsubsection{\texorpdfstring{sendFrame$<$ T $>$()}{sendFrame< T >()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_game_cube_online_helpers_a372f028ceb6a73add3d294e5df68942b} 
+async Task Game\+Cube\+Online.\+Game\+Cube\+Online\+Helpers.\+send\+Frame$<$ T $>$ (\begin{DoxyParamCaption}\item[{IService\+Provider}]{a\+Service}{, }\item[{int}]{a\+Client\+Id}{, }\item[{Http\+Context}]{a\+Context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em \doxymbox{\hyperlink{namespace_game_cube_online_1_1_capture}{Capture}}$<$T$>$}]\end{description}
+\end{Desc}
+
+
+Definition at line \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source_l00066}{66}} of file \doxymbox{\hyperlink{_game_cube_online_helpers_8cs_source}{Game\+Cube\+Online\+Helpers.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Game\+Cube\+Online/\+\doxymbox{\hyperlink{_game_cube_online_helpers_8cs}{Game\+Cube\+Online\+Helpers.\+cs}}\end{DoxyCompactItemize}

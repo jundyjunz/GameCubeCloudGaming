@@ -1,0 +1,291 @@
+\doxysection{Game\+Cube\+Online.\+Capture.\+Capture\+Audio Class Reference}
+\hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio}{}\label{class_game_cube_online_1_1_capture_1_1_capture_audio}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+Inheritance diagram for Game\+Cube\+Online.\+Capture.\+Capture\+Audio:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.493333cm]{class_game_cube_online_1_1_capture_1_1_capture_audio}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}{Capture\+Audio}} (int a\+Buffer\+Size, uint a\+Frames\+Per\+Buffer, int a\+Channel\+Count, int a\+Sample\+Byte\+Size)
+\item 
+override unsafe void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a2f1e08b21ea5643f3aaa6c363a0febbc}{publish\+To\+Buffer}} (Int\+Ptr a\+Ptr)
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}{Capture\+Audio}} \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a8cf3b4451664483cc270648e153eda10}{build\+Stream\+Parameters}} (\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_rule_set}{Capture\+Audio\+Rule\+Set}} a\+Rule\+Set)
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}{Capture\+Audio}} \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_aa653a46d8009a67b2966a0a848a8d1fd}{build\+Stream}} ()
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}{Capture\+Audio}} \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a8971cbb743f4ba952b41be2e65cb1738}{build\+Init}} ()
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a26e9494c54bddd5e104c7f33afa9b9a2}{Dispose}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g}{Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a69fd945c20179261d4304f45450d3c08}{subscribe\+To\+Buffer}} ()
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ac1ab5b7511249f2b38979b10b60ba573}{unsubscribe\+From\+Buffer}} (int a\+Client\+Id)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2773105b6f55491d5917f07116a79357}{publish\+To\+Buffer}} (Int\+Ptr a\+Ptr)
+\item 
+Read\+Only\+Memory$<$ byte $>$? \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2089fa62ddd900202fba44f49d2786ef}{read\+From\+Buffer}} (int a\+Client\+Id)
+\item 
+T \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a4482da75a2b9ddcb09f6f09339e3033c}{build\+Frame\+Rate}} (int a\+Frame\+Rate\+In\+Ms)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a8d64fa95706b8e43df26dd4de332e33c}{find\+Device\+Id}} (\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_rule_set}{Capture\+Audio\+Rule\+Set}} a\+Rule\+Set)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g}{Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a9f40e1bc4623a492d44b8b46c9112d5c}{Capture}} (int a\+Element\+Byte\+Size, int a\+Element\+Count)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a88fdaeea20949a6a8137b71c2e4d3905}{my\+Frames\+Per\+Buffer}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a78f54d53b2998d8de792c7ae5ecdc032}{my\+Channel\+Count}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_ada475430703f70452dc0367e1bd0d625}{my\+Sample\+Byte\+Size}}
+\item 
+double \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a8161e0e31b41d4dd1cd135bb0b6516d5}{my\+Sample\+Rate}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a9f7ec274a47c1db190d852448fbdc01e}{my\+Sample\+Format}}
+\item 
+Port\+Audio\+Sharp.\+Stream \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_aafb6306ae785fc742afe937611b4d213}{my\+Stream}}
+\item 
+Stream\+Parameters \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a48cf279448ab59a137703e6db7f887e2}{my\+Stream\+Parameters}}
+\item 
+Dictionary$<$ int, Sample\+Format $>$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_ae7c6c8c3af6e89d8845bb3ea2c2902f0}{my\+Int\+To\+Sample\+Format\+Conversion}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g}{Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{Circular\+Byte\+Buffer}} \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{my\+Circular\+Byte\+Buffer}}
+\item 
+Dictionary$<$ int, \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}} $>$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{my\+Subscribers}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}{my\+Newest\+Client\+Id}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a428af61ca3d5610ab20678771bc22d36}{my\+Frame\+Rate}}
+\item 
+byte\+[$\,$]\+ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ad0983380043c7974c03085942456fbdf}{my\+Temp\+Buffer}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a054c7f0f06d0316a295232ae38820913}{Channel\+Count}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\item 
+double \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a66e15ad93b160bf2aff95da6ca58188c}{Sample\+Rate}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00007}{7}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-constructors}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!CaptureAudio@{CaptureAudio}}
+\index{CaptureAudio@{CaptureAudio}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{CaptureAudio()}{CaptureAudio()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c} 
+Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+Capture\+Audio (\begin{DoxyParamCaption}\item[{int}]{a\+Buffer\+Size}{, }\item[{uint}]{a\+Frames\+Per\+Buffer}{, }\item[{int}]{a\+Channel\+Count}{, }\item[{int}]{a\+Sample\+Byte\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00021}{21}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-func-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a8971cbb743f4ba952b41be2e65cb1738}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!buildInit@{buildInit}}
+\index{buildInit@{buildInit}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{buildInit()}{buildInit()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a8971cbb743f4ba952b41be2e65cb1738} 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}{Capture\+Audio}} Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+build\+Init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Implements \doxymbox{\hyperlink{interface_game_cube_online_1_1_helpers_1_1_builder-1-g_acb41ad452b1e9a2740c99eaa7fb6cc7a}{Game\+Cube\+Online.\+Helpers.\+Builder$<$ T $>$}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00076}{76}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_aa653a46d8009a67b2966a0a848a8d1fd}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!buildStream@{buildStream}}
+\index{buildStream@{buildStream}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{buildStream()}{buildStream()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_aa653a46d8009a67b2966a0a848a8d1fd} 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}{Capture\+Audio}} Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+build\+Stream (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00056}{56}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a8cf3b4451664483cc270648e153eda10}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!buildStreamParameters@{buildStreamParameters}}
+\index{buildStreamParameters@{buildStreamParameters}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{buildStreamParameters()}{buildStreamParameters()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a8cf3b4451664483cc270648e153eda10} 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_a515dfd0cc63c71be2c4516682757a43c}{Capture\+Audio}} Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+build\+Stream\+Parameters (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_rule_set}{Capture\+Audio\+Rule\+Set}}}]{a\+Rule\+Set}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00042}{42}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a26e9494c54bddd5e104c7f33afa9b9a2}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a26e9494c54bddd5e104c7f33afa9b9a2} 
+void Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00088}{88}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a8d64fa95706b8e43df26dd4de332e33c}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!findDeviceId@{findDeviceId}}
+\index{findDeviceId@{findDeviceId}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{findDeviceId()}{findDeviceId()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a8d64fa95706b8e43df26dd4de332e33c} 
+int Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+find\+Device\+Id (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio_rule_set}{Capture\+Audio\+Rule\+Set}}}]{a\+Rule\+Set}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00036}{36}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a2f1e08b21ea5643f3aaa6c363a0febbc}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!publishToBuffer@{publishToBuffer}}
+\index{publishToBuffer@{publishToBuffer}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{publishToBuffer()}{publishToBuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a2f1e08b21ea5643f3aaa6c363a0febbc} 
+override unsafe void Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+publish\+To\+Buffer (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{a\+Ptr}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00031}{31}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-variable-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a78f54d53b2998d8de792c7ae5ecdc032}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!myChannelCount@{myChannelCount}}
+\index{myChannelCount@{myChannelCount}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{myChannelCount}{myChannelCount}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a78f54d53b2998d8de792c7ae5ecdc032} 
+int Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Channel\+Count\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00010}{10}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a88fdaeea20949a6a8137b71c2e4d3905}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!myFramesPerBuffer@{myFramesPerBuffer}}
+\index{myFramesPerBuffer@{myFramesPerBuffer}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{myFramesPerBuffer}{myFramesPerBuffer}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a88fdaeea20949a6a8137b71c2e4d3905} 
+uint Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Frames\+Per\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00009}{9}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_ae7c6c8c3af6e89d8845bb3ea2c2902f0}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!myIntToSampleFormatConversion@{myIntToSampleFormatConversion}}
+\index{myIntToSampleFormatConversion@{myIntToSampleFormatConversion}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{myIntToSampleFormatConversion}{myIntToSampleFormatConversion}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_ae7c6c8c3af6e89d8845bb3ea2c2902f0} 
+Dictionary$<$int, Sample\+Format$>$ Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Int\+To\+Sample\+Format\+Conversion\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00016}{16}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_ada475430703f70452dc0367e1bd0d625}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!mySampleByteSize@{mySampleByteSize}}
+\index{mySampleByteSize@{mySampleByteSize}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{mySampleByteSize}{mySampleByteSize}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_ada475430703f70452dc0367e1bd0d625} 
+int Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Sample\+Byte\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00011}{11}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a9f7ec274a47c1db190d852448fbdc01e}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!mySampleFormat@{mySampleFormat}}
+\index{mySampleFormat@{mySampleFormat}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{mySampleFormat}{mySampleFormat}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a9f7ec274a47c1db190d852448fbdc01e} 
+int Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Sample\+Format\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00013}{13}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a8161e0e31b41d4dd1cd135bb0b6516d5}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!mySampleRate@{mySampleRate}}
+\index{mySampleRate@{mySampleRate}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{mySampleRate}{mySampleRate}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a8161e0e31b41d4dd1cd135bb0b6516d5} 
+double Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Sample\+Rate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00012}{12}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_aafb6306ae785fc742afe937611b4d213}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!myStream@{myStream}}
+\index{myStream@{myStream}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{myStream}{myStream}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_aafb6306ae785fc742afe937611b4d213} 
+Port\+Audio\+Sharp.\+Stream Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Stream\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00014}{14}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a48cf279448ab59a137703e6db7f887e2}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!myStreamParameters@{myStreamParameters}}
+\index{myStreamParameters@{myStreamParameters}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{myStreamParameters}{myStreamParameters}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a48cf279448ab59a137703e6db7f887e2} 
+Stream\+Parameters Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+my\+Stream\+Parameters\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00015}{15}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-property-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a054c7f0f06d0316a295232ae38820913}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!ChannelCount@{ChannelCount}}
+\index{ChannelCount@{ChannelCount}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{ChannelCount}{ChannelCount}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a054c7f0f06d0316a295232ae38820913} 
+int Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+Channel\+Count\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00018}{18}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture_audio_a66e15ad93b160bf2aff95da6ca58188c}\index{GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}!SampleRate@{SampleRate}}
+\index{SampleRate@{SampleRate}!GameCubeOnline.Capture.CaptureAudio@{GameCubeOnline.Capture.CaptureAudio}}
+\doxysubsubsection{\texorpdfstring{SampleRate}{SampleRate}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture_audio_a66e15ad93b160bf2aff95da6ca58188c} 
+double Game\+Cube\+Online.\+Capture.\+Capture\+Audio.\+Sample\+Rate\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_audio_8cs_source_l00019}{19}} of file \doxymbox{\hyperlink{_capture_audio_8cs_source}{Capture\+Audio.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Game\+Cube\+Online/\+\+Capture/\+\doxymbox{\hyperlink{_capture_audio_8cs}{Capture\+Audio.\+cs}}\end{DoxyCompactItemize}

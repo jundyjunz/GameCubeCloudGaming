@@ -1,0 +1,265 @@
+\doxysection{Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper Class Reference}
+\hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper}{}\label{class_game_cube_online_1_1_capture_1_1_serial_wrapper}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a47b64c4235b052803573a395bfad21b5}{Serial\+Wrapper}} (Serial\+Port a\+Port, int a\+Bytes\+To\+Write, int a\+Command\+Send\+Sleep\+Time)
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a0d9688d90b6d4e45b00da55b3eb695ae}{subscribe\+To\+Port}} ()
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_adc8cb2c46ac4fce8899a41d1c20752c3}{unsubscribe\+From\+Port}} (int a\+Client\+Id)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a555cd5f5cf51f220b01b5b98d61dcd5b}{read\+Command}} (Read\+Only\+Memory$<$ byte $>$ a\+Bytes, int a\+Client\+Id)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_acd1bc79dd5f5e81a80198ebc06c2227e}{write}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+byte \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_aca9fce51c4f7828b2a751cdd3361c477}{crc8}} (Read\+Only\+Span$<$ byte $>$ the\+Bytes)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a7eb1dcc62b10226f785ba5aa665416f3}{byte\+Array\+Or\+Equals}} (byte\+[$\,$]\+ a\+Byte\+Arr1, byte\+[$\,$]\+ a\+Byte\+Arr2)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2937bb4e39cdf72f74b3e740ac29cb7a}{reset\+Byte\+Array\+Except\+First\+And\+Last\+Byte}} (byte\+[$\,$]\+ a\+Byte\+Arr)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2c3f0cc02448adf058a072beec45815f}{write\+Command}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Serial\+Port \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_ab45a6188922251d1ce8e9dedabb7d545}{my\+Port}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2f75ef740c3133dea56d8d201a001853}{my\+Bytes\+To\+Write}}
+\item 
+Dictionary$<$ int, byte\+[$\,$]\+$>$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_ac47c5b5cea4e945e404a223550815b4c}{my\+Current\+Commands}}
+\item 
+byte\+[$\,$]\+ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_aa673685e6dc89ae47363c2088fc59278}{my\+Coalesced\+Command}}
+\item 
+Lock \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_af4fe68b283b848528f35e412d0c53f25}{my\+Subscriber\+Lock}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a211cf92e7dcd2aa23757dff85e8adf72}{my\+Newest\+Client\+Id}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a483eed588ef517733324a419eca7178c}{my\+Command\+Send\+Sleep\+Time}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static byte \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a196a37915bc17e05a3b8d0da32307c9d}{my\+Polynomial\+Multiplier}} = 0x\+FA
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a26fd36109beeef564072e5ae58429590}{Bytes\+To\+Write}}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00007}{7}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-constructors}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a47b64c4235b052803573a395bfad21b5}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!SerialWrapper@{SerialWrapper}}
+\index{SerialWrapper@{SerialWrapper}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{SerialWrapper()}{SerialWrapper()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a47b64c4235b052803573a395bfad21b5} 
+Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+Serial\+Wrapper (\begin{DoxyParamCaption}\item[{Serial\+Port}]{a\+Port}{, }\item[{int}]{a\+Bytes\+To\+Write}{, }\item[{int}]{a\+Command\+Send\+Sleep\+Time}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00019}{19}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-func-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a7eb1dcc62b10226f785ba5aa665416f3}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!byteArrayOrEquals@{byteArrayOrEquals}}
+\index{byteArrayOrEquals@{byteArrayOrEquals}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{byteArrayOrEquals()}{byteArrayOrEquals()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a7eb1dcc62b10226f785ba5aa665416f3} 
+void Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+byte\+Array\+Or\+Equals (\begin{DoxyParamCaption}\item[{byte\+[$\,$]\+}]{a\+Byte\+Arr1}{, }\item[{byte\+[$\,$]\+}]{a\+Byte\+Arr2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00048}{48}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_aca9fce51c4f7828b2a751cdd3361c477}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!crc8@{crc8}}
+\index{crc8@{crc8}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{crc8()}{crc8()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_aca9fce51c4f7828b2a751cdd3361c477} 
+byte Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+crc8 (\begin{DoxyParamCaption}\item[{Read\+Only\+Span$<$ byte $>$}]{the\+Bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00031}{31}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a555cd5f5cf51f220b01b5b98d61dcd5b}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!readCommand@{readCommand}}
+\index{readCommand@{readCommand}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{readCommand()}{readCommand()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a555cd5f5cf51f220b01b5b98d61dcd5b} 
+void Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+read\+Command (\begin{DoxyParamCaption}\item[{Read\+Only\+Memory$<$ byte $>$}]{a\+Bytes}{, }\item[{int}]{a\+Client\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00071}{71}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2937bb4e39cdf72f74b3e740ac29cb7a}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!resetByteArrayExceptFirstAndLastByte@{resetByteArrayExceptFirstAndLastByte}}
+\index{resetByteArrayExceptFirstAndLastByte@{resetByteArrayExceptFirstAndLastByte}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{resetByteArrayExceptFirstAndLastByte()}{resetByteArrayExceptFirstAndLastByte()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2937bb4e39cdf72f74b3e740ac29cb7a} 
+void Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+reset\+Byte\+Array\+Except\+First\+And\+Last\+Byte (\begin{DoxyParamCaption}\item[{byte\+[$\,$]\+}]{a\+Byte\+Arr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00052}{52}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a0d9688d90b6d4e45b00da55b3eb695ae}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!subscribeToPort@{subscribeToPort}}
+\index{subscribeToPort@{subscribeToPort}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{subscribeToPort()}{subscribeToPort()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a0d9688d90b6d4e45b00da55b3eb695ae} 
+int Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+subscribe\+To\+Port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00056}{56}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_adc8cb2c46ac4fce8899a41d1c20752c3}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!unsubscribeFromPort@{unsubscribeFromPort}}
+\index{unsubscribeFromPort@{unsubscribeFromPort}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{unsubscribeFromPort()}{unsubscribeFromPort()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_adc8cb2c46ac4fce8899a41d1c20752c3} 
+int Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+unsubscribe\+From\+Port (\begin{DoxyParamCaption}\item[{int}]{a\+Client\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00066}{66}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_acd1bc79dd5f5e81a80198ebc06c2227e}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!write@{write}}
+\index{write@{write}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_acd1bc79dd5f5e81a80198ebc06c2227e} 
+void Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+write (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00082}{82}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2c3f0cc02448adf058a072beec45815f}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!writeCommand@{writeCommand}}
+\index{writeCommand@{writeCommand}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{writeCommand()}{writeCommand()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2c3f0cc02448adf058a072beec45815f} 
+void Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+write\+Command (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00072}{72}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-variable-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2f75ef740c3133dea56d8d201a001853}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!myBytesToWrite@{myBytesToWrite}}
+\index{myBytesToWrite@{myBytesToWrite}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{myBytesToWrite}{myBytesToWrite}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a2f75ef740c3133dea56d8d201a001853} 
+int Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Bytes\+To\+Write\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00010}{10}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_aa673685e6dc89ae47363c2088fc59278}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!myCoalescedCommand@{myCoalescedCommand}}
+\index{myCoalescedCommand@{myCoalescedCommand}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{myCoalescedCommand}{myCoalescedCommand}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_aa673685e6dc89ae47363c2088fc59278} 
+byte \+[$\,$]\+ Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Coalesced\+Command\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00012}{12}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a483eed588ef517733324a419eca7178c}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!myCommandSendSleepTime@{myCommandSendSleepTime}}
+\index{myCommandSendSleepTime@{myCommandSendSleepTime}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{myCommandSendSleepTime}{myCommandSendSleepTime}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a483eed588ef517733324a419eca7178c} 
+int Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Command\+Send\+Sleep\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00016}{16}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_ac47c5b5cea4e945e404a223550815b4c}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!myCurrentCommands@{myCurrentCommands}}
+\index{myCurrentCommands@{myCurrentCommands}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{myCurrentCommands}{myCurrentCommands}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_ac47c5b5cea4e945e404a223550815b4c} 
+Dictionary$<$int, byte\+[$\,$]\+$>$ Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Current\+Commands\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00011}{11}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a211cf92e7dcd2aa23757dff85e8adf72}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!myNewestClientId@{myNewestClientId}}
+\index{myNewestClientId@{myNewestClientId}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{myNewestClientId}{myNewestClientId}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a211cf92e7dcd2aa23757dff85e8adf72} 
+int Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Newest\+Client\+Id\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00015}{15}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a196a37915bc17e05a3b8d0da32307c9d}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!myPolynomialMultiplier@{myPolynomialMultiplier}}
+\index{myPolynomialMultiplier@{myPolynomialMultiplier}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{myPolynomialMultiplier}{myPolynomialMultiplier}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a196a37915bc17e05a3b8d0da32307c9d} 
+byte Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Polynomial\+Multiplier = 0x\+FA\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00014}{14}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_ab45a6188922251d1ce8e9dedabb7d545}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!myPort@{myPort}}
+\index{myPort@{myPort}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{myPort}{myPort}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_ab45a6188922251d1ce8e9dedabb7d545} 
+Serial\+Port Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00009}{9}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_af4fe68b283b848528f35e412d0c53f25}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!mySubscriberLock@{mySubscriberLock}}
+\index{mySubscriberLock@{mySubscriberLock}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{mySubscriberLock}{mySubscriberLock}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_af4fe68b283b848528f35e412d0c53f25} 
+Lock Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+my\+Subscriber\+Lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00013}{13}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-property-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a26fd36109beeef564072e5ae58429590}\index{GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}!BytesToWrite@{BytesToWrite}}
+\index{BytesToWrite@{BytesToWrite}!GameCubeOnline.Capture.SerialWrapper@{GameCubeOnline.Capture.SerialWrapper}}
+\doxysubsubsection{\texorpdfstring{BytesToWrite}{BytesToWrite}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_serial_wrapper_a26fd36109beeef564072e5ae58429590} 
+int Game\+Cube\+Online.\+Capture.\+Serial\+Wrapper.\+Bytes\+To\+Write\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_release_serial_8cs_source_l00018}{18}} of file \doxymbox{\hyperlink{_release_serial_8cs_source}{Release\+Serial.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Game\+Cube\+Online/\+\+Capture/\+\doxymbox{\hyperlink{_release_serial_8cs}{Release\+Serial.\+cs}}\end{DoxyCompactItemize}

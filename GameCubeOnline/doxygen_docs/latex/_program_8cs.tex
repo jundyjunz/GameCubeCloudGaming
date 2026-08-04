@@ -1,0 +1,186 @@
+\doxysection{Game\+Cube\+Online/\+\+Program.cs File Reference}
+\hypertarget{_program_8cs}{}\label{_program_8cs}\index{GameCubeOnline/Program.cs@{GameCubeOnline/Program.cs}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+builder.\+Services. \doxymbox{\hyperlink{_program_8cs_a84bef011636cf4e2dc96bd8d4c067b4e}{Add\+Singleton}} (a\+Service=$>$(new \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}}()) .build\+Static\+Files(\doxymbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}}, "{}static"{}) .build\+Settings("{}Game\+Cube\+Online\+Settings\+JSON.\+json"{}) .build\+Init())
+\item 
+builder.\+Services. \doxymbox{\hyperlink{_program_8cs_a52f289a0f64be7d8b65006174733462a}{Add\+Singleton}} (a\+Service=$>$(new \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_video}{Capture\+Video}}(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Video\+Buffer\+Size, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Frame\+Width, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Frame\+Height)) .build\+Frame\+Rate(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Server\+Video\+Frame\+Rate) .build\+Video\+Source(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Video\+Source) .build\+Video\+Quality(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Video\+Quality, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Use\+Huffman\+Optimization, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Use\+Progressive\+Scan) .build\+Init())
+\item 
+builder.\+Services. \doxymbox{\hyperlink{_program_8cs_aee050eaea10a4ecb36722009764756a6}{Add\+Singleton}} (a\+Service=$>$(new \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}}(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Audio\+Buffer\+Size, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Frames\+Per\+Buffer, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Channel\+Count, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Sample\+Byte\+Size)) .build\+Frame\+Rate(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Server\+Audio\+Frame\+Rate) .build\+Stream\+Parameters(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Audio\+Rule\+Set) .build\+Stream() .build\+Init())
+\item 
+builder.\+Services. \doxymbox{\hyperlink{_program_8cs_a95d4ce82305024d767074b1f6fc0372b}{Add\+Singleton}} (a\+Service=$>$(new \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_release_serial}{Release\+Serial}}()) .build\+Baud\+Rate(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Baud\+Rate) .build\+Read\+Timeout(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Read\+Timeout) .build\+Write\+Timeout(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Write\+Timeout) .build\+Command\+Send\+Sleep\+Time(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Command\+Send\+Sleep\+Time) .build\+Serial\+Connection(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Connect\+Code, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Command\+Byte\+Len) .build\+Init())
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a602eef420817a521ab9857bf938fb964}{Use\+Web\+Sockets}} ()
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a70446060612c8f7da910cea1553eb899}{Use\+Static\+Files}} (new Static\+File\+Options\{ File\+Provider=new Physical\+File\+Provider(Path.\+Combine(builder.\+Environment.\+Content\+Root\+Path, "{}static"{})), Request\+Path="{}/\+static"{} \})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_aebdec4c992b68bfcc16f96e119f1ca4b}{Map\+Get}} ("{}/\+"{}, async(IService\+Provider a\+Service)=$>$ \{ return Results.\+File(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().get\+File\+At(Path.\+Combine("{}HTML"{},"{}Game\+Cube\+Online.\+html"{})), "{}text/\+html"{});\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a0d8abfda0b2909640260867d7564107b}{Map\+Post}} ("{}/\+get\+\_\+hash"{}, async(IService\+Provider a\+Service, \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a73f5202b32fd27b061fef1e6ba457984}{Game\+Cube\+Online\+Helpers.\+Lock\+Matrix\+Object}} a\+Data)=$>$ \{ return await \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a3e9fa12e1ffc67222ba44307fc1ec119}{Game\+Cube\+Online\+Helpers.\+get\+Hash}}(a\+Service, a\+Data);\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a90cee343af304d64cc3712b6ef60f179}{Map\+Post}} ("{}/\+check\+\_\+hash"{}, async(IService\+Provider a\+Service, \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a238a31d5639ddcb1d53110a3c6e4fc29}{Game\+Cube\+Online\+Helpers.\+Hash\+Object}} a\+Data)=$>$ \{ return(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Hashes.\+Contains(a\+Data.\+hash)) ? Results.\+Json(new \{ hash=a\+Data.\+hash\}) :\+Results.\+Json(new \{ hash=(string?) null \});;\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_ac9dfc1dd8108f1b78092a81904e1d98f}{Map\+Get}} ("{}/\+subscribe\+\_\+audio"{}, async(IService\+Provider a\+Service)=$>$\{ return Results.\+Json(new \{ audio\+Client\+Id=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$().subscribe\+To\+Buffer()\});\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a4040219c38dd8b736980d73dc5287609}{Map\+Get}} ("{}/\+subscribe\+\_\+video"{}, async(IService\+Provider a\+Service)=$>$\{ return Results.\+Json(new \{ video\+Client\+Id=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_video}{Capture\+Video}} $>$().subscribe\+To\+Buffer() \});\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_abafbbbae6715a4503d2da2d7320221ac}{Map\+Get}} ("{}/\+subscribe\+\_\+port/\+\{a\+Id\}"{}, async(IService\+Provider a\+Service, int a\+Id)=$>$\{ return Results.\+Json(new \{ port\+Client\+Id=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_release_serial}{Release\+Serial}} $>$()\+[a\+Id]\+.subscribe\+To\+Port() \});\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_aa7f8c8f7ed41959407213787c2dfc9b8}{Map\+Get}} ("{}/\+audio\+\_\+metadata"{}, async(IService\+Provider a\+Service)=$>$ \{ return Results.\+Json(new \{ sample\+Rate=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$().Sample\+Rate, channels=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$().Channel\+Count \});\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a0919033390f91d6e99a1c214c7fd0e94}{Map\+Get}} ("{}/\+serial\+\_\+connections\+\_\+ct"{}, async(IService\+Provider a\+Service)=$>$\{ return Results.\+Json(new \{ count=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_release_serial}{Release\+Serial}} $>$().Port\+Count \});\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a5e752d909debfc2a37c691b322635f61}{Map}} ("{}/\+frame\+\_\+data/\+\{a\+Client\+Id\}"{}, async(IService\+Provider a\+Service, int a\+Client\+Id, Http\+Context a\+Context)=$>$ \{ await Game\+Cube\+Online\+Helpers.\+send\+Frame$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_video}{Capture\+Video}} $>$(a\+Service, a\+Client\+Id, a\+Context);\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_a4ded998cac15c1bdbc642dd6df7d7e49}{Map}} ("{}/\+audio\+\_\+data/\+\{a\+Client\+Id\}"{}, async(IService\+Provider a\+Service, int a\+Client\+Id, Http\+Context a\+Context)=$>$ \{ await Game\+Cube\+Online\+Helpers.\+send\+Frame$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$(a\+Service, a\+Client\+Id, a\+Context);\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_adcf52325b5bc2f9e52b4fed5beb506d3}{Map}} ("{}/\+serial\+\_\+post/\+\{a\+Id\}/\+\{a\+Client\+Id\}"{}, async(IService\+Provider a\+Service, int a\+Id, int a\+Client\+Id, Http\+Context a\+Context)=$>$\{ await \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_ac18578d4aef57f9febc4b29b85694244}{Game\+Cube\+Online\+Helpers.\+read\+Bytes}}(a\+Service, a\+Id, a\+Client\+Id, a\+Context);\})
+\item 
+app. \doxymbox{\hyperlink{_program_8cs_aaa3dbf02e269c3ef7e8546d290c6b3dd}{Run}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+var \doxymbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}} = Web\+Application.\+Create\+Builder(args)
+\item 
+var \doxymbox{\hyperlink{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}{app}} = builder.\+Build()
+\end{DoxyCompactItemize}
+
+
+\label{_program_8cs_doc-func-members}
+\Hypertarget{_program_8cs_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_program_8cs_aee050eaea10a4ecb36722009764756a6}\index{Program.cs@{Program.cs}!AddSingleton@{AddSingleton}}
+\index{AddSingleton@{AddSingleton}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddSingleton()}{AddSingleton()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_aee050eaea10a4ecb36722009764756a6} 
+builder.\+Services. Add\+Singleton (\begin{DoxyParamCaption}\item[{a\+Service}]{}{, }\item[{(new \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}}(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Audio\+Buffer\+Size, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Frames\+Per\+Buffer, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Channel\+Count, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Sample\+Byte\+Size)) .build\+Frame\+Rate(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Server\+Audio\+Frame\+Rate) .build\+Stream\+Parameters(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Audio\+Rule\+Set) .build\+Stream() .build\+Init()}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a52f289a0f64be7d8b65006174733462a}\index{Program.cs@{Program.cs}!AddSingleton@{AddSingleton}}
+\index{AddSingleton@{AddSingleton}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddSingleton()}{AddSingleton()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_a52f289a0f64be7d8b65006174733462a} 
+builder.\+Services. Add\+Singleton (\begin{DoxyParamCaption}\item[{a\+Service}]{}{, }\item[{(new \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_video}{Capture\+Video}}(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Video\+Buffer\+Size, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Frame\+Width, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Frame\+Height)) .build\+Frame\+Rate(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Server\+Video\+Frame\+Rate) .build\+Video\+Source(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Video\+Source) .build\+Video\+Quality(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Video\+Quality, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Use\+Huffman\+Optimization, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Use\+Progressive\+Scan) .build\+Init()}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a84bef011636cf4e2dc96bd8d4c067b4e}\index{Program.cs@{Program.cs}!AddSingleton@{AddSingleton}}
+\index{AddSingleton@{AddSingleton}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddSingleton()}{AddSingleton()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_a84bef011636cf4e2dc96bd8d4c067b4e} 
+builder.\+Services. Add\+Singleton (\begin{DoxyParamCaption}\item[{a\+Service}]{}{, }\item[{(new \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}}()) .build\+Static\+Files(\doxymbox{\hyperlink{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}{builder}}, "{}static"{}) .build\+Settings("{}Game\+Cube\+Online\+Settings\+JSON.\+json"{}) .build\+Init()}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a95d4ce82305024d767074b1f6fc0372b}\index{Program.cs@{Program.cs}!AddSingleton@{AddSingleton}}
+\index{AddSingleton@{AddSingleton}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{AddSingleton()}{AddSingleton()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{_program_8cs_a95d4ce82305024d767074b1f6fc0372b} 
+builder.\+Services. Add\+Singleton (\begin{DoxyParamCaption}\item[{a\+Service}]{}{, }\item[{(new \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_release_serial}{Release\+Serial}}()) .build\+Baud\+Rate(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Baud\+Rate) .build\+Read\+Timeout(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Read\+Timeout) .build\+Write\+Timeout(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Write\+Timeout) .build\+Command\+Send\+Sleep\+Time(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Command\+Send\+Sleep\+Time) .build\+Serial\+Connection(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Connect\+Code, a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Command\+Byte\+Len) .build\+Init()}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a4ded998cac15c1bdbc642dd6df7d7e49}\index{Program.cs@{Program.cs}!Map@{Map}}
+\index{Map@{Map}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Map()}{Map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{_program_8cs_a4ded998cac15c1bdbc642dd6df7d7e49} 
+app. Map (\begin{DoxyParamCaption}\item[{"{}/\+audio\+\_\+data/\+\{a\+Client\+Id\}"{}}]{}{, }\item[{async(IService\+Provider a\+Service, int a\+Client\+Id, Http\+Context a\+Context)}]{}{, }\item[{\{ await Game\+Cube\+Online\+Helpers.\+send\+Frame$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$(a\+Service, a\+Client\+Id, a\+Context);\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a5e752d909debfc2a37c691b322635f61}\index{Program.cs@{Program.cs}!Map@{Map}}
+\index{Map@{Map}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Map()}{Map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{_program_8cs_a5e752d909debfc2a37c691b322635f61} 
+app. Map (\begin{DoxyParamCaption}\item[{"{}/\+frame\+\_\+data/\+\{a\+Client\+Id\}"{}}]{}{, }\item[{async(IService\+Provider a\+Service, int a\+Client\+Id, Http\+Context a\+Context)}]{}{, }\item[{\{ await Game\+Cube\+Online\+Helpers.\+send\+Frame$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_video}{Capture\+Video}} $>$(a\+Service, a\+Client\+Id, a\+Context);\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_adcf52325b5bc2f9e52b4fed5beb506d3}\index{Program.cs@{Program.cs}!Map@{Map}}
+\index{Map@{Map}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Map()}{Map()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{_program_8cs_adcf52325b5bc2f9e52b4fed5beb506d3} 
+app. Map (\begin{DoxyParamCaption}\item[{"{}/\+serial\+\_\+post/\+\{a\+Id\}/\+\{a\+Client\+Id\}"{}}]{}{, }\item[{async(IService\+Provider a\+Service, int a\+Id, int a\+Client\+Id, Http\+Context a\+Context)}]{}{, }\item[{\{ await \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_ac18578d4aef57f9febc4b29b85694244}{Game\+Cube\+Online\+Helpers.\+read\+Bytes}}(a\+Service, a\+Id, a\+Client\+Id, a\+Context);\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_aebdec4c992b68bfcc16f96e119f1ca4b}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \label{_program_8cs_aebdec4c992b68bfcc16f96e119f1ca4b} 
+app. Map\+Get (\begin{DoxyParamCaption}\item[{"{}/\+"{}}]{}{, }\item[{async(IService\+Provider a\+Service)}]{}{, }\item[{\{ return Results.\+File(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().get\+File\+At(Path.\+Combine("{}HTML"{},"{}Game\+Cube\+Online.\+html"{})), "{}text/\+html"{});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_aa7f8c8f7ed41959407213787c2dfc9b8}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily \label{_program_8cs_aa7f8c8f7ed41959407213787c2dfc9b8} 
+app. Map\+Get (\begin{DoxyParamCaption}\item[{"{}/\+audio\+\_\+metadata"{}}]{}{, }\item[{async(IService\+Provider a\+Service)}]{}{, }\item[{\{ return Results.\+Json(new \{ sample\+Rate=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$().Sample\+Rate, channels=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$().Channel\+Count \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a0919033390f91d6e99a1c214c7fd0e94}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \label{_program_8cs_a0919033390f91d6e99a1c214c7fd0e94} 
+app. Map\+Get (\begin{DoxyParamCaption}\item[{"{}/\+serial\+\_\+connections\+\_\+ct"{}}]{}{, }\item[{async(IService\+Provider a\+Service)}]{}{, }\item[{\{ return Results.\+Json(new \{ count=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_release_serial}{Release\+Serial}} $>$().Port\+Count \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_ac9dfc1dd8108f1b78092a81904e1d98f}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily \label{_program_8cs_ac9dfc1dd8108f1b78092a81904e1d98f} 
+app. Map\+Get (\begin{DoxyParamCaption}\item[{"{}/\+subscribe\+\_\+audio"{}}]{}{, }\item[{async(IService\+Provider a\+Service)}]{}{, }\item[{\{ return Results.\+Json(new \{ audio\+Client\+Id=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_audio}{Capture\+Audio}} $>$().subscribe\+To\+Buffer()\});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_abafbbbae6715a4503d2da2d7320221ac}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \label{_program_8cs_abafbbbae6715a4503d2da2d7320221ac} 
+app. Map\+Get (\begin{DoxyParamCaption}\item[{"{}/\+subscribe\+\_\+port/\+\{a\+Id\}"{}}]{}{, }\item[{async(IService\+Provider a\+Service, int a\+Id)}]{}{, }\item[{\{ return Results.\+Json(new \{ port\+Client\+Id=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_release_serial}{Release\+Serial}} $>$()\+[a\+Id]\+.subscribe\+To\+Port() \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a4040219c38dd8b736980d73dc5287609}\index{Program.cs@{Program.cs}!MapGet@{MapGet}}
+\index{MapGet@{MapGet}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapGet()}{MapGet()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily \label{_program_8cs_a4040219c38dd8b736980d73dc5287609} 
+app. Map\+Get (\begin{DoxyParamCaption}\item[{"{}/\+subscribe\+\_\+video"{}}]{}{, }\item[{async(IService\+Provider a\+Service)}]{}{, }\item[{\{ return Results.\+Json(new \{ video\+Client\+Id=a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture_video}{Capture\+Video}} $>$().subscribe\+To\+Buffer() \});\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a90cee343af304d64cc3712b6ef60f179}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{_program_8cs_a90cee343af304d64cc3712b6ef60f179} 
+app. Map\+Post (\begin{DoxyParamCaption}\item[{"{}/\+check\+\_\+hash"{}}]{}{, }\item[{async(IService\+Provider a\+Service, \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a238a31d5639ddcb1d53110a3c6e4fc29}{Game\+Cube\+Online\+Helpers.\+Hash\+Object}} a\+Data)}]{}{, }\item[{\{ return(a\+Service.\+Get\+Required\+Service$<$ \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_settings}{Game\+Cube\+Online\+Settings}} $>$().Hashes.\+Contains(a\+Data.\+hash)) ? Results.\+Json(new \{ hash=a\+Data.\+hash\}) :\+Results.\+Json(new \{ hash=(string?) null \});;\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a0d8abfda0b2909640260867d7564107b}\index{Program.cs@{Program.cs}!MapPost@{MapPost}}
+\index{MapPost@{MapPost}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{MapPost()}{MapPost()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{_program_8cs_a0d8abfda0b2909640260867d7564107b} 
+app. Map\+Post (\begin{DoxyParamCaption}\item[{"{}/\+get\+\_\+hash"{}}]{}{, }\item[{async(IService\+Provider a\+Service, \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a73f5202b32fd27b061fef1e6ba457984}{Game\+Cube\+Online\+Helpers.\+Lock\+Matrix\+Object}} a\+Data)}]{}{, }\item[{\{ return await \doxymbox{\hyperlink{class_game_cube_online_1_1_game_cube_online_helpers_a3e9fa12e1ffc67222ba44307fc1ec119}{Game\+Cube\+Online\+Helpers.\+get\+Hash}}(a\+Service, a\+Data);\}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_aaa3dbf02e269c3ef7e8546d290c6b3dd}\index{Program.cs@{Program.cs}!Run@{Run}}
+\index{Run@{Run}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{_program_8cs_aaa3dbf02e269c3ef7e8546d290c6b3dd} 
+app. Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a70446060612c8f7da910cea1553eb899}\index{Program.cs@{Program.cs}!UseStaticFiles@{UseStaticFiles}}
+\index{UseStaticFiles@{UseStaticFiles}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{UseStaticFiles()}{UseStaticFiles()}}
+{\footnotesize\ttfamily \label{_program_8cs_a70446060612c8f7da910cea1553eb899} 
+app. Use\+Static\+Files (\begin{DoxyParamCaption}\item[{new Static\+File\+Options\{ File\+Provider=new Physical\+File\+Provider(Path.\+Combine(builder.\+Environment.\+Content\+Root\+Path, "{}static"{})), Request\+Path="{}/\+static"{} \}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_program_8cs_a602eef420817a521ab9857bf938fb964}\index{Program.cs@{Program.cs}!UseWebSockets@{UseWebSockets}}
+\index{UseWebSockets@{UseWebSockets}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{UseWebSockets()}{UseWebSockets()}}
+{\footnotesize\ttfamily \label{_program_8cs_a602eef420817a521ab9857bf938fb964} 
+app. Use\+Web\+Sockets (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{_program_8cs_doc-var-members}
+\Hypertarget{_program_8cs_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d}\index{Program.cs@{Program.cs}!app@{app}}
+\index{app@{app}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily \label{_program_8cs_a7b225fcb720e4d5ed2bbf60e28a25e6d} 
+var app = builder.\+Build()}
+
+
+
+Definition at line \doxymbox{\hyperlink{_program_8cs_source_l00049}{49}} of file \doxymbox{\hyperlink{_program_8cs_source}{Program.\+cs}}.
+
+\Hypertarget{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5}\index{Program.cs@{Program.cs}!builder@{builder}}
+\index{builder@{builder}!Program.cs@{Program.cs}}
+\doxysubsubsection{\texorpdfstring{builder}{builder}}
+{\footnotesize\ttfamily \label{_program_8cs_a2f78352277081c620fd4cf92a5ce15e5} 
+var builder = Web\+Application.\+Create\+Builder(args)}
+
+
+
+Definition at line \doxymbox{\hyperlink{_program_8cs_source_l00007}{7}} of file \doxymbox{\hyperlink{_program_8cs_source}{Program.\+cs}}.
+

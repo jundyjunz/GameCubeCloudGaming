@@ -1,0 +1,34 @@
+\doxysection{Factory.\+cs}
+\hypertarget{_factory_8cs_source}{}\label{_factory_8cs_source}\index{GameCubeOnline/Helpers/Factory.cs@{GameCubeOnline/Helpers/Factory.cs}}
+\doxymbox{\hyperlink{_factory_8cs}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }Microsoft.Extensions.ObjectPool;}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Runtime.CompilerServices;}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00004}00004\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespace_game_cube_online_1_1_helpers}{GameCubeOnline.Helpers}}}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00005}00005\ \{}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00006}\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g}{00006}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a42ffea5848acbb6cfaecbee11d67011a}{Factory}}<T>\ where\ T\ :\ class}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00007}00007\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00008}\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_ad331b07c1b1e6f2409d235894b63aa58}{00008}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a42ffea5848acbb6cfaecbee11d67011a}{Factory<T>}}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_ad331b07c1b1e6f2409d235894b63aa58}{myInstance}}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00009}\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_aa03c9977d52051284d28937a8efcd2bb}{00009}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ Dictionary<string,\ Func<object[],T>>\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_aa03c9977d52051284d28937a8efcd2bb}{myMakers}};\ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00010}\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a6f92315a2ea92e5f0e65af3f55f60765}{00010}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a42ffea5848acbb6cfaecbee11d67011a}{Factory<T>}}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a6f92315a2ea92e5f0e65af3f55f60765}{Instance}}\ \{\ \ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00011}00011\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{get}\ \{\ \ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_ad331b07c1b1e6f2409d235894b63aa58}{myInstance}}\ ==\ \textcolor{keyword}{null})\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_ad331b07c1b1e6f2409d235894b63aa58}{myInstance}}\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a42ffea5848acbb6cfaecbee11d67011a}{Factory<T>}}();\ \ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_ad331b07c1b1e6f2409d235894b63aa58}{myInstance}};}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00015}00015\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00017}\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a42ffea5848acbb6cfaecbee11d67011a}{00017}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a42ffea5848acbb6cfaecbee11d67011a}{Factory}}()\ \{\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_aa03c9977d52051284d28937a8efcd2bb}{myMakers}}=\textcolor{keyword}{new}\ Dictionary<string,\ Func<object[],T>>();\ \}}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00019}\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a0665960bacba0c4e8ad0c3ba69e51627}{00019}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ T\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a0665960bacba0c4e8ad0c3ba69e51627}{make}}(\textcolor{keywordtype}{string}\ aMakerKey,\ params\ \textcolor{keywordtype}{object}[]\ aArgs)\ \{}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a6f92315a2ea92e5f0e65af3f55f60765}{Instance}}.myMakers.ContainsKey(aMakerKey))\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a6f92315a2ea92e5f0e65af3f55f60765}{Instance}}.myMakers[aMakerKey](aArgs);}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Exception(\$\textcolor{stringliteral}{"{}\{aMakerKey\}\ Does\ Not\ Exist\ In\ \{typeof(T).Name\}\ Factory!"{}});}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00024}\doxymbox{\hyperlink{interface_game_cube_online_1_1_helpers_1_1_factory-1-g_1_1_registry-1-g}{00024}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }Registry<U>\ where\ U\ :\ T\{}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00025}\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_aa17f2dba87ccc3d8ba480d861e8b0283}{00025}}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \textcolor{keyword}{register}(Func<object[],T>\ aFunc)\ =>\ \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_factory-1-g_a6f92315a2ea92e5f0e65af3f55f60765}{Instance}}.myMakers.Add(typeof(U).Name,\ aFunc);}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_factory_8cs_source_l00028}00028\ \}}
+
+\end{DoxyCode}

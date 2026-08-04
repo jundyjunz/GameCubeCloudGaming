@@ -1,0 +1,171 @@
+\doxysection{Game\+Cube\+Online.\+Capture.\+Capture\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g}{}\label{class_game_cube_online_1_1_capture_1_1_capture-1-g}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+Inheritance diagram for Game\+Cube\+Online.\+Capture.\+Capture\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_cube_online_1_1_capture_1_1_capture-1-g}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a69fd945c20179261d4304f45450d3c08}{subscribe\+To\+Buffer}} ()
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ac1ab5b7511249f2b38979b10b60ba573}{unsubscribe\+From\+Buffer}} (int a\+Client\+Id)
+\item 
+void \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2773105b6f55491d5917f07116a79357}{publish\+To\+Buffer}} (Int\+Ptr a\+Ptr)
+\item 
+Read\+Only\+Memory$<$ byte $>$? \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2089fa62ddd900202fba44f49d2786ef}{read\+From\+Buffer}} (int a\+Client\+Id)
+\item 
+T \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a4482da75a2b9ddcb09f6f09339e3033c}{build\+Frame\+Rate}} (int a\+Frame\+Rate\+In\+Ms)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a9f40e1bc4623a492d44b8b46c9112d5c}{Capture}} (int a\+Element\+Byte\+Size, int a\+Element\+Count)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{Circular\+Byte\+Buffer}} \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}{my\+Circular\+Byte\+Buffer}}
+\item 
+Dictionary$<$ int, \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}} $>$ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}{my\+Subscribers}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}{my\+Newest\+Client\+Id}}
+\item 
+int \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_a428af61ca3d5610ab20678771bc22d36}{my\+Frame\+Rate}}
+\item 
+byte\+[$\,$]\+ \doxymbox{\hyperlink{class_game_cube_online_1_1_capture_1_1_capture-1-g_ad0983380043c7974c03085942456fbdf}{my\+Temp\+Buffer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em class}]\end{description}
+\end{Desc}
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00004}{4}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_capture-1-g_doc-func-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a4482da75a2b9ddcb09f6f09339e3033c}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!buildFrameRate@{buildFrameRate}}
+\index{buildFrameRate@{buildFrameRate}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{buildFrameRate()}{buildFrameRate()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a4482da75a2b9ddcb09f6f09339e3033c} 
+T Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.build\+Frame\+Rate (\begin{DoxyParamCaption}\item[{int}]{a\+Frame\+Rate\+In\+Ms}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00037}{37}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a9f40e1bc4623a492d44b8b46c9112d5c}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!Capture@{Capture}}
+\index{Capture@{Capture}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Capture()}{Capture()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a9f40e1bc4623a492d44b8b46c9112d5c} 
+Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.Capture (\begin{DoxyParamCaption}\item[{int}]{a\+Element\+Byte\+Size}{, }\item[{int}]{a\+Element\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00012}{12}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2773105b6f55491d5917f07116a79357}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!publishToBuffer@{publishToBuffer}}
+\index{publishToBuffer@{publishToBuffer}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{publishToBuffer()}{publishToBuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2773105b6f55491d5917f07116a79357} 
+void Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.publish\+To\+Buffer (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{a\+Ptr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2089fa62ddd900202fba44f49d2786ef}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!readFromBuffer@{readFromBuffer}}
+\index{readFromBuffer@{readFromBuffer}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{readFromBuffer()}{readFromBuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a2089fa62ddd900202fba44f49d2786ef} 
+Read\+Only\+Memory$<$ byte $>$? Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.read\+From\+Buffer (\begin{DoxyParamCaption}\item[{int}]{a\+Client\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00035}{35}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a69fd945c20179261d4304f45450d3c08}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!subscribeToBuffer@{subscribeToBuffer}}
+\index{subscribeToBuffer@{subscribeToBuffer}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{subscribeToBuffer()}{subscribeToBuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a69fd945c20179261d4304f45450d3c08} 
+int Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.subscribe\+To\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00021}{21}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_ac1ab5b7511249f2b38979b10b60ba573}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!unsubscribeFromBuffer@{unsubscribeFromBuffer}}
+\index{unsubscribeFromBuffer@{unsubscribeFromBuffer}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{unsubscribeFromBuffer()}{unsubscribeFromBuffer()}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_ac1ab5b7511249f2b38979b10b60ba573} 
+int Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.unsubscribe\+From\+Buffer (\begin{DoxyParamCaption}\item[{int}]{a\+Client\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00028}{28}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+
+
+\label{class_game_cube_online_1_1_capture_1_1_capture-1-g_doc-variable-members}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!myCircularByteBuffer@{myCircularByteBuffer}}
+\index{myCircularByteBuffer@{myCircularByteBuffer}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{myCircularByteBuffer}{myCircularByteBuffer}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a0dffd70b9545be3e43b6690232268fa0} 
+\doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_byte_buffer}{Circular\+Byte\+Buffer}} Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.my\+Circular\+Byte\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00006}{6}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a428af61ca3d5610ab20678771bc22d36}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!myFrameRate@{myFrameRate}}
+\index{myFrameRate@{myFrameRate}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{myFrameRate}{myFrameRate}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a428af61ca3d5610ab20678771bc22d36} 
+int Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.my\+Frame\+Rate\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00009}{9}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!myNewestClientId@{myNewestClientId}}
+\index{myNewestClientId@{myNewestClientId}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{myNewestClientId}{myNewestClientId}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_a756cfe74fc13acff4644a63b4dc210c8} 
+int Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.my\+Newest\+Client\+Id\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00008}{8}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!mySubscribers@{mySubscribers}}
+\index{mySubscribers@{mySubscribers}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{mySubscribers}{mySubscribers}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_ab127e7055bb0cad48fca3540df327f3a} 
+Dictionary$<$int, \doxymbox{\hyperlink{class_game_cube_online_1_1_helpers_1_1_circular_counter}{Circular\+Counter}}$>$ Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.my\+Subscribers\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00007}{7}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+\Hypertarget{class_game_cube_online_1_1_capture_1_1_capture-1-g_ad0983380043c7974c03085942456fbdf}\index{GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}!myTempBuffer@{myTempBuffer}}
+\index{myTempBuffer@{myTempBuffer}!GameCubeOnline.Capture.Capture$<$ T $>$@{GameCubeOnline.Capture.Capture$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{myTempBuffer}{myTempBuffer}}
+{\footnotesize\ttfamily \label{class_game_cube_online_1_1_capture_1_1_capture-1-g_ad0983380043c7974c03085942456fbdf} 
+byte \+[$\,$]\+ Game\+Cube\+Online.\+Capture.\+Capture$<$ T $>$.my\+Temp\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{_capture_8cs_source_l00010}{10}} of file \doxymbox{\hyperlink{_capture_8cs_source}{Capture.\+cs}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Game\+Cube\+Online/\+\+Capture/\+\doxymbox{\hyperlink{_capture_8cs}{Capture.\+cs}}\end{DoxyCompactItemize}
