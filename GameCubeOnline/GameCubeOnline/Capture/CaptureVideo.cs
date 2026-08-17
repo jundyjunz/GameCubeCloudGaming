@@ -47,9 +47,9 @@ namespace GameCubeOnline.Capture
             return this;
         }
 
-        protected void processFrame( Mat aDestFrame, Size aSize, CircularByteBuffer aBufferDest) {
+        protected void processFrame( Mat aDestFrame, Size aSize, CircularByteBuffer aBufferDest, ImageEncodingParam[] aVideoQuality) {
             Cv2.Resize(myFrame, aDestFrame, aSize);
-            ReadOnlyMemory<byte> theFrameBytesLowRes = new ReadOnlyMemory<byte>(aDestFrame.ImEncode(".jpg", myVideoQuality));
+            ReadOnlyMemory<byte> theFrameBytesLowRes = new ReadOnlyMemory<byte>(aDestFrame.ImEncode(".jpg", aVideoQuality));
             aBufferDest.put(theFrameBytesLowRes, theFrameBytesLowRes.Length);
         }
 
@@ -58,8 +58,8 @@ namespace GameCubeOnline.Capture
             {
                 if (myVideoCapture.Read(myFrame))
                 {
-                    processFrame(myResizedFrame, mySize, myCircularByteBuffer);
-                    if (myLowResCircularByteBuffer != null) processFrame(myLowResResizedFrame, myLowResSize, myLowResCircularByteBuffer);
+                    processFrame(myResizedFrame, mySize, myCircularByteBuffer, myVideoQuality);
+                    if (myLowResCircularByteBuffer != null) processFrame(myLowResResizedFrame, myLowResSize, myLowResCircularByteBuffer, myLowResVideoQuality);
                 }
                 Thread.Sleep(myFrameRate); // 16 ms is 60fps
             }

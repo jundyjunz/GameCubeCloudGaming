@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\static\\gamecubeonlinesettingsjson.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\static\\gamecubeonlinesettingsjson.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\capture\\capturevideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\capture\\capturevideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,16 +19,8 @@
       "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\gamecubeonlinesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\static\\gamecubeonlinesettingsjson.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\static\\gamecubeonlinesettingsjson.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\static\\javascript\\pagelocksingleton.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\static\\javascript\\pagelocksingleton.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\capture\\capturevideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|solutionrelative:gamecubeonline\\capture\\capturevideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BBB75763-FBCE-12DB-E336-D99472D1139B}|GameCubeOnline\\GameCubeOnline.csproj|c:\\users\\rjirw\\onedrive\\documents\\mycodingprojects\\pc2gc_adaptor_project\\gamecubeonline\\gamecubeonline\\gamecubeonline.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -85,20 +85,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "CircularBuffer.cs",
-              "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Helpers\\CircularBuffer.cs",
-              "RelativeDocumentMoniker": "GameCubeOnline\\Helpers\\CircularBuffer.cs",
-              "ToolTip": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Helpers\\CircularBuffer.cs",
-              "RelativeToolTip": "GameCubeOnline\\Helpers\\CircularBuffer.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAawEAAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-29T00:14:41.659Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 9,
@@ -113,20 +101,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "CaptureVideo.cs",
               "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Capture\\CaptureVideo.cs",
               "RelativeDocumentMoniker": "GameCubeOnline\\Capture\\CaptureVideo.cs",
               "ToolTip": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Capture\\CaptureVideo.cs",
               "RelativeToolTip": "GameCubeOnline\\Capture\\CaptureVideo.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAiwEcAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAIwD0AAACfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-09T04:31:20.228Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PageLockSingleton.js",
               "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\static\\Javascript\\PageLockSingleton.js",
               "RelativeDocumentMoniker": "GameCubeOnline\\static\\Javascript\\PageLockSingleton.js",
@@ -134,8 +122,7 @@
               "RelativeToolTip": "GameCubeOnline\\static\\Javascript\\PageLockSingleton.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-08-17T03:04:02.328Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-17T03:04:02.328Z"
             },
             {
               "$type": "Document",
@@ -151,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "GameCubeOnlineSettingsJSON.json",
               "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\static\\GameCubeOnlineSettingsJSON.json",
               "RelativeDocumentMoniker": "GameCubeOnline\\static\\GameCubeOnlineSettingsJSON.json",
@@ -164,7 +151,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Program.cs",
+              "RelativeDocumentMoniker": "GameCubeOnline\\Program.cs",
+              "ToolTip": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Program.cs",
+              "RelativeToolTip": "GameCubeOnline\\Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABkAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-08T08:06:36.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CircularBuffer.cs",
+              "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Helpers\\CircularBuffer.cs",
+              "RelativeDocumentMoniker": "GameCubeOnline\\Helpers\\CircularBuffer.cs",
+              "ToolTip": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Helpers\\CircularBuffer.cs",
+              "RelativeToolTip": "GameCubeOnline\\Helpers\\CircularBuffer.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAawEAAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T00:14:41.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "GameCubeOnlineSettings.cs",
               "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\GameCubeOnlineSettings.cs",
               "RelativeDocumentMoniker": "GameCubeOnline\\GameCubeOnlineSettings.cs",
@@ -172,21 +184,7 @@
               "RelativeToolTip": "GameCubeOnline\\GameCubeOnlineSettings.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAlwCoAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-08T08:09:10.385Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Program.cs",
-              "RelativeDocumentMoniker": "GameCubeOnline\\Program.cs",
-              "ToolTip": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\Program.cs",
-              "RelativeToolTip": "GameCubeOnline\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAB3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-08T08:06:36.449Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-08T08:09:10.385Z"
             },
             {
               "$type": "Document",
@@ -209,8 +207,7 @@
               "ToolTip": "C:\\Users\\rjirw\\OneDrive\\Documents\\MyCodingProjects\\PC2GC_Adaptor_Project\\GameCubeOnline\\GameCubeOnline\\GameCubeOnline.csproj",
               "RelativeToolTip": "GameCubeOnline\\GameCubeOnline.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-08-04T05:30:36.376Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-04T05:30:36.376Z"
             },
             {
               "$type": "Document",
@@ -317,8 +314,7 @@
               "RelativeToolTip": "GameCubeOnline\\GameCubeOnline.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-06-02T07:40:29.92Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T07:40:29.92Z"
             }
           ]
         }
