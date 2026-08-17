@@ -26,7 +26,8 @@ builder.Services.AddSingleton(aService =>(new CaptureVideo(
                                             .buildLowResStream(
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().LowResVideoBufferSize,
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().LowResFrameWidth,
-                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResFrameHeight
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResFrameHeight,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResVideoQuality
                                              )
                                             .buildInit()); 
 

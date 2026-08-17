@@ -13,6 +13,8 @@ namespace GameCubeOnline.Capture
         protected Mat myLowResResizedFrame;
         protected ImageEncodingParam[] myVideoQuality;
 
+        protected ImageEncodingParam[] myLowResVideoQuality;
+
         public CaptureVideo(int aBufferSize, int aFrameWidth, int aFrameHeight) : base(aFrameWidth * aFrameHeight * 3 , aBufferSize) // x3 for each rgb channel
         {
             myVideoQuality = null;
@@ -68,9 +70,15 @@ namespace GameCubeOnline.Capture
             int theBufferSize=(int)aArgs[0];
             int theFrameWidth=(int)aArgs[1];
             int theFrameHeight=(int)aArgs[2];
+            int theFrameQuality = (int)aArgs[3];
             myLowResCircularByteBuffer = new CircularByteBuffer(theFrameWidth * theFrameHeight, theBufferSize);
             myLowResResizedFrame = new Mat();
-            myLowResSize = new Size(theFrameWidth, theFrameHeight);
+            myLowResSize = new Size(theFrameWidth, theFrameHeight); 
+            myLowResVideoQuality = new ImageEncodingParam[] {
+                new ImageEncodingParam(ImwriteFlags.JpegQuality, theFrameQuality),
+                new ImageEncodingParam(ImwriteFlags.JpegOptimize, 0), // locked to no optimization, need fast processing
+                new ImageEncodingParam(ImwriteFlags.JpegProgressive, 0) // locked to no progressive scan, need fast processing
+            };
 
             return this;
         }

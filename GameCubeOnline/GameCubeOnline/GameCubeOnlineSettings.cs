@@ -40,6 +40,8 @@ namespace GameCubeOnline
         public int LowResVideoBufferSize { get=> mySerializedSettings.VideoSettings!["LowResBufferSize"].Deserialize<int>(); } 
         public int LowResFrameWidth { get=> mySerializedSettings.VideoSettings!["LowResFrameWidth"].Deserialize<int>(); } 
         public int LowResFrameHeight { get=> mySerializedSettings.VideoSettings!["LowResFrameHeight"].Deserialize<int>(); }
+        public int LowResVideoQuality { get => mySerializedSettings.VideoSettings!["LowResVideoQuality"].Deserialize<int>(); }
+
 
 
         public int AudioBufferSize  { get => mySerializedSettings.AudioSettings!["BufferSize"].Deserialize<int>(); }

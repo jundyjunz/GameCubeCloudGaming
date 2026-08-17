@@ -14,20 +14,21 @@
     "VideoQuality": 80,
     "VideoSource": 0,
     "ClientFrameRate": 16, 
-    "ServerFrameRate":  1, 
+    "ServerFrameRate":  16, 
     "UseHuffmanOptimization":false,
     "UseProgressiveScan": false,
     "LowResBufferSize":10,
-    "LowResFrameWidth":160, 
-    "LowResFrameHeight":120 
+    "LowResFrameWidth":160,
+    "LowResFrameHeight": 120, 
+    "LowResVideoQuality":  50
   },
   "AudioSettings": {
     "BufferSize": 10,
     "FramesPerBuffer": 4096,
     "ChannelCount": 2,
     "SampleByteSize": 4,
-    "ClientFrameRate":  1,
-    "ServerFrameRate": 1,
+    "ClientFrameRate":  3,
+    "ServerFrameRate": 3,
     "AudioRuleset": "GuermokRuleSet"
   },
   "SerialSettings": {
