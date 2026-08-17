@@ -39,6 +39,10 @@ namespace GameCubeOnline.Capture
             return -1;
         }
 
+        public override CaptureAudio buildLowResStream(params object[] aArgs)
+        {
+            throw new NotImplementedException();
+        }
         public CaptureAudio buildStreamParameters(CaptureAudioRuleSet aRuleSet)
         {
             int theAudioId = findDeviceId(aRuleSet);

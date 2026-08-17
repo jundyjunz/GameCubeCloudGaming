@@ -22,7 +22,12 @@ builder.Services.AddSingleton(aService =>(new CaptureVideo(
                                             .buildVideoQuality( 
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().VideoQuality,  
                                                 aService.GetRequiredService<GameCubeOnlineSettings>().UseHuffmanOptimization,
-                                                aService.GetRequiredService<GameCubeOnlineSettings>().UseProgressiveScan)
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().UseProgressiveScan) 
+                                            .buildLowResStream(
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResVideoBufferSize,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResFrameWidth,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResFrameHeight
+                                             )
                                             .buildInit()); 
 
 builder.Services.AddSingleton(aService=>(new CaptureAudio( 
@@ -90,6 +95,10 @@ app.MapGet("/serial_connections_ct", async (IServiceProvider aService) =>{
 
 app.Map("/frame_data/{aClientId}", async (IServiceProvider aService, int aClientId, HttpContext aContext) => {
     await GameCubeOnlineHelpers.sendFrame<CaptureVideo>(aService, aClientId, aContext);
+});
+
+app.Map("/frame_data_low_res/{aClientId}", async (IServiceProvider aService, int aClientId, HttpContext aContext) => {
+    await GameCubeOnlineHelpers.sendFrame<CaptureVideo>(aService, aClientId, aContext, Capture<CaptureVideo>.CaptureQuality.LOW);
 });
 
 app.Map("/audio_data/{aClientId}", async (IServiceProvider aService, int aClientId, HttpContext aContext) => {

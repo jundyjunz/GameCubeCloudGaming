@@ -7,8 +7,10 @@ namespace GameCubeOnline.Capture
     {
         protected VideoCapture myVideoCapture;
         protected Size mySize;
+        protected Size myLowResSize;
         protected Mat myFrame;
         protected Mat myResizedFrame;
+        protected Mat myLowResResizedFrame;
         protected ImageEncodingParam[] myVideoQuality;
 
         public CaptureVideo(int aBufferSize, int aFrameWidth, int aFrameHeight) : base(aFrameWidth * aFrameHeight * 3 , aBufferSize) // x3 for each rgb channel
@@ -18,6 +20,8 @@ namespace GameCubeOnline.Capture
             mySize = new Size(aFrameWidth, aFrameHeight);
             myFrame = new Mat();
             myResizedFrame = new Mat();
+            myLowResResizedFrame = null;
+            myLowResSize = default;
         }
 
         public CaptureVideo buildVideoSource(int aVideoSource)
@@ -41,17 +45,35 @@ namespace GameCubeOnline.Capture
             return this;
         }
 
-
-        protected void processFrame()
-        {
-            Cv2.Resize(myFrame, myResizedFrame, mySize);
-            ReadOnlyMemory<byte> theFrameBytes = new ReadOnlyMemory<byte>(myResizedFrame.ImEncode(".jpg", myVideoQuality));
-            myCircularByteBuffer.put(theFrameBytes, theFrameBytes.Length);
-            Thread.Sleep(myFrameRate); // 16 ms is 60fps
+        protected void processFrame( Mat aDestFrame, Size aSize, CircularByteBuffer aBufferDest) {
+            Cv2.Resize(myFrame, aDestFrame, aSize);
+            ReadOnlyMemory<byte> theFrameBytesLowRes = new ReadOnlyMemory<byte>(aDestFrame.ImEncode(".jpg", myVideoQuality));
+            aBufferDest.put(theFrameBytesLowRes, theFrameBytesLowRes.Length);
         }
 
-        public override void publishToBuffer(IntPtr aPtr) { while (true) if (myVideoCapture.Read(myFrame)) processFrame(); }
+        public override void publishToBuffer(IntPtr aPtr) {
+            while (true)
+            {
+                if (myVideoCapture.Read(myFrame))
+                {
+                    processFrame(myResizedFrame, mySize, myCircularByteBuffer);
+                    if (myLowResCircularByteBuffer != null) processFrame(myLowResResizedFrame, myLowResSize, myLowResCircularByteBuffer);
+                }
+                Thread.Sleep(myFrameRate); // 16 ms is 60fps
+            }
+        }
 
+        public override CaptureVideo buildLowResStream(params object[] aArgs  /*int aBufferSize, int aFrameWidth, int aFrameHeight*/)
+        {
+            int theBufferSize=(int)aArgs[0];
+            int theFrameWidth=(int)aArgs[1];
+            int theFrameHeight=(int)aArgs[2];
+            myLowResCircularByteBuffer = new CircularByteBuffer(theFrameWidth * theFrameHeight, theBufferSize);
+            myLowResResizedFrame = new Mat();
+            myLowResSize = new Size(theFrameWidth, theFrameHeight);
+
+            return this;
+        }
 
         public CaptureVideo buildInit()
         {

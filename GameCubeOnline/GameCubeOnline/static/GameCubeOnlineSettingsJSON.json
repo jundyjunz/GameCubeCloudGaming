@@ -15,8 +15,11 @@
     "VideoSource": 0,
     "ClientFrameRate": 16, 
     "ServerFrameRate":  1, 
-    "UseHuffmanOptimization":false, 
-    "UseProgressiveScan": false
+    "UseHuffmanOptimization":false,
+    "UseProgressiveScan": false,
+    "LowResBufferSize":10,
+    "LowResFrameWidth":160, 
+    "LowResFrameHeight":120 
   },
   "AudioSettings": {
     "BufferSize": 10,

@@ -8,6 +8,7 @@ namespace GameCubeOnline
 {
     static class GameCubeOnlineHelpers
     {
+        public enum CaptureQuality { LOW, STANDARD, HIGH};
         public record HashObject(string hash);
         public record LockMatrixObject(int[][] lockmatrix);
 
@@ -63,7 +64,7 @@ namespace GameCubeOnline
             Console.WriteLine($"{aConnectionName} {aConnectionId} Disconnected");
         }
        
-        public  async static Task sendFrame<T> (IServiceProvider aService, int aClientId, HttpContext aContext) where T: Capture<T>
+        public  async static Task sendFrame<T> (IServiceProvider aService, int aClientId, HttpContext aContext, Capture<T>.CaptureQuality aQuality= Capture<T>.CaptureQuality.STANDARD) where T: Capture<T>
         {
             WebSocket theWebSocket = await aContext.WebSockets.AcceptWebSocketAsync();
             int theFrameRate = (typeof(T)==typeof(Capture<CaptureVideo>)) ? aService.GetRequiredService<GameCubeOnlineSettings>().ClientVideoFrameRate : aService.GetRequiredService<GameCubeOnlineSettings>().ClientAudioFrameRate;
@@ -75,7 +76,7 @@ namespace GameCubeOnline
             {
                 while (theWebSocket.State == WebSocketState.Open && !theWatchDog.CTS.Token.IsCancellationRequested)
                 {
-                    ReadOnlyMemory<byte>? theFrameBytes = theCapture.readFromBuffer(aClientId);
+                    ReadOnlyMemory<byte>? theFrameBytes = theCapture.readFromBuffer(aClientId, aQuality);
                     if (theFrameBytes.HasValue) await theWebSocket.SendAsync(theFrameBytes.Value, WebSocketMessageType.Binary, true, theWatchDog.CTS.Token);
                     await Task.Delay(theFrameRate); 
                 }
