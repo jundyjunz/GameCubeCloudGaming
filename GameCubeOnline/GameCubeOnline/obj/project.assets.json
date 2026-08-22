@@ -1262,7 +1262,7 @@
         }
       }
     },
-    "net10.0/linux-x64": {
+    "net10.0/win-x64": {
       "Microsoft.NET.ILLink.Tasks/10.0.11": {
         "type": "package",
         "build": {
@@ -1283,13 +1283,14 @@
         }
       },
       "OpenCvSharp4.official.runtime.linux-x64/4.13.0.20260531": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/libOpenCvSharpExtern.so": {}
-        }
+        "type": "package"
       },
       "OpenCvSharp4.runtime.win/4.13.0.20260302": {
         "type": "package",
+        "native": {
+          "runtimes/win-x64/native/OpenCvSharpExtern.dll": {},
+          "runtimes/win-x64/native/opencv_videoio_ffmpeg4130_64.dll": {}
+        },
         "build": {
           "build/net8.0/OpenCvSharp4.runtime.win.props": {}
         }
@@ -1298,10 +1299,7 @@
         "type": "package"
       },
       "org.k2fsa.portaudio.runtime.linux-x64/1.0.6": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/libportaudio.so": {}
-        }
+        "type": "package"
       },
       "org.k2fsa.portaudio.runtime.osx-arm64/1.0.6": {
         "type": "package"
@@ -1310,7 +1308,10 @@
         "type": "package"
       },
       "org.k2fsa.portaudio.runtime.win-x64/1.0.6": {
-        "type": "package"
+        "type": "package",
+        "native": {
+          "runtimes/win-x64/native/portaudio.dll": {}
+        }
       },
       "PortAudioSharp2/1.0.6": {
         "type": "package",
@@ -1329,88 +1330,46 @@
         }
       },
       "runtime.android-arm.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.android-arm64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.android-x64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.android-x86.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-arm.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-arm64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-bionic-arm64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-bionic-x64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-musl-arm.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-musl-arm64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-musl-x64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.linux-x64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/libSystem.IO.Ports.Native.so": {}
-        }
+        "type": "package"
       },
       "runtime.maccatalyst-arm64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.maccatalyst-x64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.native.System.IO.Ports/10.0.7": {
         "type": "package",
@@ -1434,16 +1393,10 @@
         }
       },
       "runtime.osx-arm64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "runtime.osx-x64.runtime.native.System.IO.Ports/10.0.7": {
-        "type": "package",
-        "native": {
-          "runtimes/linux-x64/native/_._": {}
-        }
+        "type": "package"
       },
       "System.IO.Ports/10.0.7": {
         "type": "package",
@@ -1456,7 +1409,7 @@
           }
         },
         "runtime": {
-          "runtimes/unix/lib/net10.0/System.IO.Ports.dll": {
+          "runtimes/win/lib/net10.0/System.IO.Ports.dll": {
             "related": ".xml"
           }
         },
@@ -2306,15 +2259,15 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
             "version": "[10.0.11, 10.0.11]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
             "version": "[10.0.11, 10.0.11]"
           },
           {
-            "name": "Microsoft.NETCore.App.Runtime.linux-x64",
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
             "version": "[10.0.11, 10.0.11]"
           }
         ],
@@ -2744,7 +2697,7 @@
       }
     },
     "runtimes": {
-      "linux-x64": {
+      "win-x64": {
         "#import": []
       }
     }

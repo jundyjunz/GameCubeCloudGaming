@@ -19,7 +19,6 @@ namespace GameCubeOnline
     }
     class GameCubeOnlineSettings : Builder<GameCubeOnlineSettings>
     {
-
         protected PhysicalFileProvider myStaticFiles;
         public PhysicalFileProvider StaticFiles { get => myStaticFiles; }
 
@@ -51,17 +50,18 @@ namespace GameCubeOnline
         public int ServerAudioFrameRate   { get => mySerializedSettings.AudioSettings!["ServerFrameRate"].Deserialize<int>(); }
         public int ClientAudioFrameRate { get => mySerializedSettings.AudioSettings!["ClientFrameRate"].Deserialize<int>(); }
         public CaptureAudioRuleSet AudioRuleSet  { get => Factory<CaptureAudioRuleSet>.make(mySerializedSettings.AudioSettings!["AudioRuleset"].Deserialize<string>()!); }
+        public int LowResAudioBufferSize { get => mySerializedSettings.AudioSettings!["LowResBufferSize"].Deserialize<int>(); }
+        public int LowResChannelCount { get => mySerializedSettings.AudioSettings!["LowResChannelCount"].Deserialize<int>(); }
+
+
+
         public int BaudRate         { get => mySerializedSettings.SerialSettings!["BaudRate"].Deserialize<int>(); }
         public int ReadTimeout      { get => mySerializedSettings.SerialSettings!["ReadTimeout"].Deserialize<int>(); }
         public int WriteTimeout     { get => mySerializedSettings.SerialSettings!["WriteTimeout"].Deserialize<int>(); }
         public byte ConnectCode     { get => mySerializedSettings.SerialSettings!["ConnectCode"].Deserialize<byte>(); }
-        public int CommandByteLen   { get => mySerializedSettings.SerialSettings!["CommandByteLen"].Deserialize<int>(); } 
-
+        public int CommandByteLen   { get => mySerializedSettings.SerialSettings!["CommandByteLen"].Deserialize<int>(); }
         public int CommandSendSleepTime { get => mySerializedSettings.SerialSettings!["CommandSendSleepTime"].Deserialize<int>(); }
         public int ReadBytesFromClientTimeout { get => mySerializedSettings.SerialSettings!["ReadBytesFromClientTimeout"].Deserialize<int>(); }
-
-        
-
 
         public GameCubeOnlineSettings() {
             GCSettings.LatencyMode = GCLatencyMode.LowLatency;
@@ -70,11 +70,7 @@ namespace GameCubeOnline
             Hashes = new List<string>();
         }
 
-
         public string getFileAt(string aSubPath) => StaticFiles.GetFileInfo(aSubPath).PhysicalPath!;
-       
-
-        
 
         public GameCubeOnlineSettings buildStaticFiles(WebApplicationBuilder aBuilder, string aFileDirectory) {
             myStaticFiles = new PhysicalFileProvider(Path.Combine(aBuilder.Environment.ContentRootPath, aFileDirectory));
@@ -92,8 +88,6 @@ namespace GameCubeOnline
             // we then do .All to see if they are all true.
             return (mySerializedSettings.PageLockMatrix!.Length == aMatrix.Length) && mySerializedSettings.PageLockMatrix!.Zip(aMatrix, (myMatrixRow, aMatrixRow) => myMatrixRow.SequenceEqual(aMatrixRow)).All(aIsEqual=>aIsEqual);
         }
-
-       
 
         public GameCubeOnlineSettings buildInit() {
             (new BuilderWarning<GameCubeOnlineSettings>())

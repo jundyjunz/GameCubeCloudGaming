@@ -29,7 +29,9 @@
     "SampleByteSize": 4,
     "ClientFrameRate":  3,
     "ServerFrameRate": 3,
-    "AudioRuleset": "GuermokRuleSet"
+    "AudioRuleset": "GuermokRuleSet",
+    "LowResBufferSize": 10,
+    "LowResChannelCount":1
   },
   "SerialSettings": {
     "BaudRate": 250000,

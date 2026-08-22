@@ -39,7 +39,11 @@ builder.Services.AddSingleton(aService=>(new CaptureAudio(
                                              ))
                                             .buildFrameRate(aService.GetRequiredService<GameCubeOnlineSettings>().ServerAudioFrameRate)
                                             .buildStreamParameters(aService.GetRequiredService<GameCubeOnlineSettings>().AudioRuleSet)
-                                            .buildStream()
+                                            .buildStream() 
+                                            .buildLowResStream( 
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResAudioBufferSize,
+                                                aService.GetRequiredService<GameCubeOnlineSettings>().LowResChannelCount
+                                            )
                                             .buildInit()); 
 
 builder.Services.AddSingleton(aService => (new ReleaseSerial())
@@ -103,7 +107,11 @@ app.Map("/frame_data_low_res/{aClientId}", async (IServiceProvider aService, int
 });
 
 app.Map("/audio_data/{aClientId}", async (IServiceProvider aService, int aClientId, HttpContext aContext) => {
-    await GameCubeOnlineHelpers.sendFrame<CaptureAudio>(aService, aClientId, aContext);
+    await GameCubeOnlineHelpers.sendFrame<CaptureAudio>(aService, aClientId, aContext); 
+});
+
+app.Map("/audio_data_low_res/{aClientId}", async (IServiceProvider aService, int aClientId, HttpContext aContext) => {
+    await GameCubeOnlineHelpers.sendFrame<CaptureAudio>(aService, aClientId, aContext, Capture<CaptureAudio>.CaptureQuality.LOW);
 });
 
 app.Map("/serial_post/{aId}/{aClientId}", async (IServiceProvider aService, int aId, int aClientId, HttpContext aContext) =>{
