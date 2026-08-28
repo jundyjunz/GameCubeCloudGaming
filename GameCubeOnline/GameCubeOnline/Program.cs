@@ -84,7 +84,7 @@ app.MapGet("/subscribe_audio", async (IServiceProvider aService) =>{
 
 app.MapGet("/subscribe_video", async (IServiceProvider aService) =>{
     return Results.Json(new { videoClientId = aService.GetRequiredService<CaptureVideo>().subscribeToBuffer() });
-});
+}); 
 
 app.MapGet("/subscribe_port/{aId}", async (IServiceProvider aService, int aId) =>{
     return Results.Json(new { portClientId = aService.GetRequiredService<ReleaseSerial>()[aId].subscribeToPort() });
@@ -92,6 +92,14 @@ app.MapGet("/subscribe_port/{aId}", async (IServiceProvider aService, int aId) =
 
 app.MapGet("/audio_metadata", async (IServiceProvider aService) => {
     return Results.Json(new { sampleRate = aService.GetRequiredService<CaptureAudio>().SampleRate, channels =  aService.GetRequiredService<CaptureAudio>().ChannelCount }); 
+});
+
+app.MapGet("/audio_metadata_low_res", async (IServiceProvider aService) => {
+    return Results.Json(new{ sampleRate = aService.GetRequiredService<CaptureAudio>().SampleRate, framesPerBuffer = aService.GetRequiredService<CaptureAudio>().LowResFramesPerBuffer });
+});
+
+app.MapGet("/video_metadata_low_res", async (IServiceProvider aService) => {
+    return Results.Json(new{ width = aService.GetRequiredService<CaptureVideo>().LowResWidth, height = aService.GetRequiredService<CaptureVideo>().LowResHeight });
 });
 
 app.MapGet("/serial_connections_ct", async (IServiceProvider aService) =>{

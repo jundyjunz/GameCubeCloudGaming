@@ -7,14 +7,16 @@ namespace GameCubeOnline.Capture
     {
         protected VideoCapture myVideoCapture;
         protected Size mySize;
+        protected int myLowResWidth;
+        protected int myLowResHeight;
         protected Size myLowResSize;
         protected Mat myFrame;
         protected Mat myResizedFrame;
         protected Mat myLowResResizedFrame;
         protected ImageEncodingParam[] myVideoQuality;
-
-        protected ImageEncodingParam[] myLowResVideoQuality;
-
+        protected ImageEncodingParam[] myLowResVideoQuality; 
+        public int LowResWidth { get => myLowResWidth; } 
+        public int LowResHeight { get => myLowResHeight; }
         public CaptureVideo(int aBufferSize, int aFrameWidth, int aFrameHeight) : base(aFrameWidth * aFrameHeight * 3 , aBufferSize) // x3 for each rgb channel
         {
             myVideoQuality = null;
@@ -71,6 +73,8 @@ namespace GameCubeOnline.Capture
             int theFrameWidth=(int)aArgs[1];
             int theFrameHeight=(int)aArgs[2];
             int theFrameQuality = (int)aArgs[3];
+            myLowResWidth = theFrameWidth;
+            myLowResHeight = theFrameHeight;
             myLowResCircularByteBuffer = new CircularByteBuffer(theFrameWidth * theFrameHeight, theBufferSize);
             myLowResResizedFrame = new Mat();
             myLowResSize = new Size(theFrameWidth, theFrameHeight); 
