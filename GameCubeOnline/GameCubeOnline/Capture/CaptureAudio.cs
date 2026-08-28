@@ -19,7 +19,7 @@ namespace GameCubeOnline.Capture
         protected int myLowResScalingFactor;
         public int ChannelCount { get => myChannelCount; }
         public double SampleRate { get => mySampleRate; } 
-        public int LowResFramesPerBuffer { get => (int)(myFramesPerBuffer / myLowResScalingFactor); }
+        public int LowResFramesPerBuffer { get => (int)((myFramesPerBuffer * myChannelCount * mySampleByteSize) / myLowResScalingFactor); }
         public CaptureAudio(int aBufferSize, uint aFramesPerBuffer, int aChannelCount, int aSampleByteSize) : base((int)aFramesPerBuffer * aChannelCount * aSampleByteSize, aBufferSize)
         { // see build stream parameters for where magic numbers come from,
             PortAudio.Initialize();
