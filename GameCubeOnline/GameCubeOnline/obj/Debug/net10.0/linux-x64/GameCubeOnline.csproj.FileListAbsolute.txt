@@ -1,8 +1,8 @@
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\appsettings.Development.json
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\appsettings.json
-C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\static\GameCubeOnlineSettingsJSON.json
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\GameCubeOnline.staticwebassets.endpoints.json
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\GameCubeOnline
+C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\static\GameCubeOnlineSettingsJSON.json
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\static\CSS\GameCubeOnline.css
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\static\DEPRECATED\CaptureCollection.py
 C:\Users\rjirw\OneDrive\Documents\MyCodingProjects\PC2GC_Adaptor_Project\GameCubeOnline\GameCubeOnline\bin\Debug\net10.0\linux-x64\static\DEPRECATED\GameController\GameController.js
