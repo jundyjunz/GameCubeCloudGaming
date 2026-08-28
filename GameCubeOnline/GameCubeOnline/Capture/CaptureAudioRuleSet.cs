@@ -39,7 +39,7 @@ namespace GameCubeOnline.Capture
 
             myName = (thePlatform == OSPlatform.Windows) ? "Digital Audio Interface (USB3 Digital Audio)"
                      : (thePlatform == OSPlatform.OSX) ? "" // TODO: find out what the equivalent on mac is. 
-                     : (thePlatform == OSPlatform.Linux) ? "Guermok USB3 Video: Audio" : "";
+                     : (thePlatform == OSPlatform.Linux) ? "Guermok" : "";
 
             myRealName = "Guermok";
             myDefaultSampleRate = 48000.0;
